@@ -9,6 +9,7 @@ git status
 
 git add example.txt
 ::
+:: add . commit alle bestanden
 :: Commit een specifiek bestand. (hij is nu dus nog niet gepushed en staat
 :: nog niet online)
 
@@ -20,6 +21,10 @@ git commit -m "Message"
 git push
 ::
 :: Zend alle commits naar github, ze komen online te staan.
+
+git pull
+::
+:: Haal alles op van github en zet het in je eigen repository
 
 
 
