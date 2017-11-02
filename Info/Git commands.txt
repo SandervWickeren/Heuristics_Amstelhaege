@@ -1,0 +1,31 @@
+git clone git@github.com:SandervWickeren/Heuristics_Amstelhaege.git
+::
+:: Verkrijg een clone van de repository
+
+git status
+::
+:: (Git bash moet in de folder zitten van het project)
+:: Vergelijk je huidige code met dat wat er nu online staat.
+
+git add example.txt
+::
+:: Commit een specifiek bestand. (hij is nu dus nog niet gepushed en staat
+:: nog niet online)
+
+git commit -m "Message"
+::
+:: Voeg een message toe aan de commit die omschrijft wat je hebt veranderd.
+:: (het staat nog steeds allemaal op je lokale repository)
+
+git push
+::
+:: Zend alle commits naar github, ze komen online te staan.
+
+
+
+
+
+
+
+
+
