@@ -49,6 +49,21 @@ def main():
 				gameRun = False
 
 
+	# Functies die geschreven kunne worden
+	def genMap(length, width):
+		return 0
+
+	def checkValidity(map):
+		return 0
+
+	def addHouse(map):
+		return 0
+
+	def calcScore(map):
+		return 0
+		
+
+
 
 
 
