@@ -3,7 +3,7 @@ Project of the course heuristics, trying to solve the Amstelhaege project. Goal 
 
 # Contributors:
 - Tom Dekker ()
-- Laura Geerars ()
+- Laura Geerars (11007699)
 - Sander van Wickeren (11060999)
 
 # Progression:
