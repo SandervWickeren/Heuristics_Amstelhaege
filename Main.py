@@ -1,7 +1,7 @@
 """Teamname: Sandy & Co
 Names and StudentID:
 -
--
+- Laura Geerars (11007699)
 - Sander van Wickeren (11060999)
 
 Description:
