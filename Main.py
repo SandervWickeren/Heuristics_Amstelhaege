@@ -121,24 +121,38 @@ def main():
 		start_x = x_cor - freespace
 
 		# Generate the houses.
+		# For every possible Y value
 		for l in range(length + 2 * freespace):
 
+			# For every possible X value
 			for w in range(width + 2 * freespace):
 
+				# Try placing the house
 				try:
+
+					# First Y freespace meters and last Y freespace
+					# meters get ID 5.
 					if l < freespace:
 						newgrid[start_y + l][start_x + w] = 5
 					elif l > (length + freespace - 1) and l < (length + 2 * freespace):
 						newgrid[start_y + l][start_x + w] = 5
 
 					else:
+
+						# First X freespace meters and last X freespace
+						# meters get ID 5.
 						if w < freespace:
 							newgrid[start_y + l][start_x + w] = 5
 						elif w > (length + freespace - 1) and w < (length + 2 * freespace):
 							newgrid[start_y + l][start_x + w] = 5
+						
+						# Otherwise it's part of the house and
+						# gets given ID.
 						else:
 							newgrid[start_y + l][start_x + w] = ID
 				except:
+					
+					# When error return previous correct grid.
 					return grid
 		
 		return newgrid
