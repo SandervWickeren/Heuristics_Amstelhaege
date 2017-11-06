@@ -27,17 +27,21 @@ def main():
 
 		return [width * [0] for i in range(length)]
 
-	def genY(grid):
+	def genY(grid, freespace, height):
 		"""
-		Input is a grid, output a random Y value from the grid.
+		Input is a grid, the amount of freespace and the
+		height of the dedicated house.
+		Output a random Y value from the grid.
 		"""
-		return random.randint(0, len(grid))
+		return random.randint(freespace, len(grid) - freespace - height)
 
-	def genX(grid):
+	def genX(grid, freespace, length):
 		"""
-		Input is a grid, output a random X value from the grid.
+		Input is a grid, the amount of freespace and the
+		length of the dedicated house.
+		Output a random Y value from the grid.
 		"""
-		return random.randint(0, len(grid[0]))
+		return random.randint(freespace, len(grid[0]) - freespace - length)
 
 	def placeHouse(width, length, freespace, y_cor, x_cor, grid):
 		"""
@@ -90,6 +94,8 @@ def main():
 					newgrid[y_cor + length + f - 1][x_cor + w] = 5
 
 			except:
+				print "Unexpected error:", sys.exc_info()[0]
+				print "Retry."
 				return grid
 				
 		return newgrid
@@ -112,9 +118,9 @@ def main():
 		newgrid = copy.deepcopy(grid)
 
 		# Remove the .5 problem
-		width = int(2 * width)
-		length = int(2 * length)
-		freespace = int(2 * freespace)
+		# width = int(2 * width)
+		# length = int(2 * length)
+		# freespace = int(2 * freespace)
 
 		# Define start coordinates:
 		start_y = y_cor - freespace
@@ -195,18 +201,27 @@ def main():
 		"""
 		gr = genMap(50, 50)
 
+		# House information:
+		# Should be 2 times the original size
+		length = 8
+		width = 8
+		freespace = 2
+
 		# Place 5 house test:
 		t = 0
 		while t != 10:
 
 			#ah = placeHouse(4, 4, 1, genY(gr), genX(gr), gr)
-			ah = placeHouse2(1, 4, 4, 1, genY(gr), genX(gr), gr)
+			ah = placeHouse2(1, width, length, freespace, 
+							 genY(gr, freespace, length), 
+							 genX(gr, freespace, width),
+							  gr)
 
 			if ah != gr:
 				gr = list(ah)
 				t += 1
 			else:
-				print "Retry."
+				print "What is causing it?"
 		
 		visualizeGrid(ah)
 		return 0
