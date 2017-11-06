@@ -94,6 +94,56 @@ def main():
 				
 		return newgrid
 
+	def placeHouse2(ID, width, length, freespace, y_cor, x_cor, grid):
+		"""
+		Takes as input:
+		- A unique ID that indicates the house.
+		- Length of the house in meters
+		- Width of the house in meters
+		- The amount of freespace in meters
+		- y_cor from where it should be generated
+		- x_cor from where it should be generated
+		- The current grid
+
+		Output:
+		- Grid with the new house added.
+		"""
+		# Assign variabele:
+		newgrid = copy.deepcopy(grid)
+
+		# Remove the .5 problem
+		width = int(2 * width)
+		length = int(2 * length)
+		freespace = int(2 * freespace)
+
+		# Define start coordinates:
+		start_y = y_cor - freespace
+		start_x = x_cor - freespace
+
+		# Generate the houses.
+		for l in range(length + 2 * freespace):
+
+			for w in range(width + 2 * freespace):
+
+				try:
+					if l < freespace:
+						newgrid[start_y + l][start_x + w] = 5
+					elif l > (length + freespace - 1) and l < (length + 2 * freespace):
+						newgrid[start_y + l][start_x + w] = 5
+
+					else:
+						if w < freespace:
+							newgrid[start_y + l][start_x + w] = 5
+						elif w > (length + freespace - 1) and w < (length + 2 * freespace):
+							newgrid[start_y + l][start_x + w] = 5
+						else:
+							newgrid[start_y + l][start_x + w] = ID
+				except:
+					return grid
+		
+		return newgrid
+
+
 
 	def visualizeGrid(grid):
 		"""
@@ -135,7 +185,8 @@ def main():
 		t = 0
 		while t != 10:
 
-			ah = placeHouse(4, 4, 1, genY(gr), genX(gr), gr)
+			#ah = placeHouse(4, 4, 1, genY(gr), genX(gr), gr)
+			ah = placeHouse2(1, 4, 4, 1, genY(gr), genX(gr), gr)
 
 			if ah != gr:
 				gr = list(ah)
