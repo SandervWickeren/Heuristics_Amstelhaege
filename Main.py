@@ -94,8 +94,8 @@ def main():
 					newgrid[y_cor + length + f - 1][x_cor + w] = 5
 
 			except:
-				print "Unexpected error:", sys.exc_info()[0]
-				print "Retry."
+				print ("Unexpected error:", sys.exc_info()[0])
+				print ("Retry.")
 				return grid
 				
 		return newgrid
@@ -221,7 +221,7 @@ def main():
 				gr = list(ah)
 				t += 1
 			else:
-				print "What is causing it?"
+				print ("What is causing it?")
 		
 		visualizeGrid(ah)
 		return 0
