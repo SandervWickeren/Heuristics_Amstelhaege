@@ -163,27 +163,27 @@ def main():
 		return newgrid
 
 	def placeFamilyhome(grid):
-		length = 8
-		width = 8
-		freespace = 2
+		length = int(2 * 8)
+		width = int(2 * 8)
+		freespace = int(2 * 2)
 		ID = 1 
 		y = genY(grid, freespace, length)
 		x = genX(grid, freespace, width)
 		return placeHouse2(ID, width, length, freespace, y, x, grid)
 
 	def placeMaison(grid):
-		length = 10.5
-		width = 11
-		freespace = 6
+		length = int(2 * 10.5)
+		width = int( 2 * 11)
+		freespace = int(2 * 6)
 		ID = 2 
 		y = genY(grid, freespace, length)
 		x = genX(grid, freespace, width)		
 		return placeHouse2(ID, width, length, freespace, y, x, grid)
 
 	def placeBungalow(grid):
-		length = 7.5
-		width = 10
-		freespace = 3
+		length = int(2 * 7.5)
+		width = int(2 * 10)
+		freespace = int(2 * 3)
 		ID = 3
 		y = genY(grid, freespace, length)
 		x = genX(grid, freespace, width)
@@ -201,10 +201,10 @@ def main():
 		from matplotlib import colors
 
 		# Define colors [Background, House1, freespace]
-		colormap = colors.ListedColormap(["#FFFFFF", "#D50000", "#FF8A80"])
+		colormap = colors.ListedColormap(["#FFFFFF", "#3F51B5", "#009688", "#4CAF50", "#FFCDD2"])
 		
 		# 0-1: white, 1-5: red etc.
-		bounds = [0, 1, 5, 8]
+		bounds = [0, 1, 2, 3, 5, 8]
 		norm = colors.BoundaryNorm(bounds, colormap.N)
 
 		# Make plot
@@ -246,6 +246,7 @@ def main():
 			if ngrid == gr:
 				print ("No succesfull placement Maison")
 			else:
+				print ("Maison {0} placed!".format(M))
 				gr = list(ngrid)
 				M += 1
 
@@ -259,6 +260,7 @@ def main():
 			if ngrid == gr:
 				print ("No succesfull placement Bungalow")
 			else:
+				print ("Bungalow {0} placed!".format(B))
 				gr = list(ngrid)
 				B += 1 
 
@@ -266,16 +268,18 @@ def main():
 		F = 0
 		while F != familyHome:
 
-			ngrid = placeFamilyhome
+			ngrid = placeFamilyhome(gr)
 
 			# Check for succes:
 			if ngrid == gr:
 				print ("No succesfull placement Bungalow")
 			else:
+				print ("Family home {0} placed!".format(F))
 				gr = list(ngrid)
 				F += 1 
 
 		# Visualize the grid
+		print ("Generating map..")
 		visualizeGrid(gr)
 
 
@@ -314,7 +318,7 @@ def main():
 		visualizeGrid(ah)
 		return 0
 
-	test()
+	startGeneration(20)
 	
 
 
