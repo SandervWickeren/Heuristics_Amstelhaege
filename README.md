@@ -8,4 +8,11 @@ Project of the course heuristics, trying to solve the Amstelhaege project. Goal 
 
 # Progression:
 Week 1:
-- Initial try with pygame, and random generation of houses
+- Initial try with pygame, and random generation of houses.
+
+Week 2:
+- Now using matplotlib package for visualization.
+- Layed the basis functions like; house generation, map generation,
+random number generation.
+- Transformation to python 3.
+- Call the program from one function with variant(20/40/60) as input.
