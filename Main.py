@@ -160,10 +160,37 @@ def main():
 					
 					# When error return previous correct grid.
 					return grid
-		
 		return newgrid
 
+	def placeFamilyhome(grid):
+		length = 8
+		width = 8
+		freespace = 2
+		ID = 1 
+		y = genY(grid, freespace, length)
+		x = genX(grid, freespace, width)
+		return placeHouse2(ID, width, length, freespace, y, x, grid)
 
+	def placeMaison(grid):
+		length = 10.5
+		width = 11
+		freespace = 6
+		ID = 2 
+		y = genY(grid, freespace, length)
+		x = genX(grid, freespace, width)		
+		return placeHouse2(ID, width, length, freespace, y, x, grid)
+
+	def placeBungalow(grid):
+		length = 7.5
+		width = 10
+		freespace = 3
+		ID = 3
+		y = genY(grid, freespace, length)
+		x = genX(grid, freespace, width)
+		return placeHouse2(ID, width, length, freespace, y, x, grid)
+
+	def placeWater():
+		return 0
 
 	def visualizeGrid(grid):
 		"""
@@ -193,6 +220,67 @@ def main():
 
 	def calcScore(grid):
 		return 0
+
+
+	def startGeneration(variant):
+		"""
+		Variant is the number of houses that has
+		to be placed		
+		"""
+
+		# House distirbution:
+		familyHome = 0.60 * variant
+		bungalow = 0.25 * variant
+		maison = 0.15 * variant
+
+		# Initialize grid
+		gr = genMap(180, 160)
+
+		# Start with maisons
+		M = 0
+		while M != maison:
+
+			ngrid = placeMaison(gr)
+
+			# Check if house succsfully placed:
+			if ngrid == gr:
+				print ("No succesfull placement Maison")
+			else:
+				gr = list(ngrid)
+				M += 1
+
+		# Then bungalows
+		B = 0
+		while B != bungalow:
+
+			ngrid = placeBungalow(gr)
+
+			# Check for succes:
+			if ngrid == gr:
+				print ("No succesfull placement Bungalow")
+			else:
+				gr = list(ngrid)
+				B += 1 
+
+		# Then Family homes
+		F = 0
+		while F != familyHome:
+
+			ngrid = placeFamilyhome
+
+			# Check for succes:
+			if ngrid == gr:
+				print ("No succesfull placement Bungalow")
+			else:
+				gr = list(ngrid)
+				F += 1 
+
+		# Visualize the grid
+		visualizeGrid(gr)
+
+
+
+
 
 
 	def test():
