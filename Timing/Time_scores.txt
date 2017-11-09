@@ -7,3 +7,12 @@ Vaste computer zonder andere programma's runnende:
 Geen snelheidsverbetering na initialiseren variabelen ipv
 constant uitrekenen
 -----------
+
+- 9/11/17 -
+Vaste computer zonder andere pogramma's runnende:
+
+100x -- oud -- 161 seconde
+100x -- nieuw -- 0.587 seconde
+
+~ 274x sneller!
+------------
