@@ -84,7 +84,7 @@ def main():
 						# meters get ID 5.
 						if w < freespace:
 							newgrid[start_y + l][start_x + w] = 5
-						elif w > (length + freespace - 1) and w < (length + 2 * freespace):
+						elif w > (width + freespace - 1) and w < (width + 2 * freespace):
 							newgrid[start_y + l][start_x + w] = 5
 						
 						# Otherwise it's part of the house and
