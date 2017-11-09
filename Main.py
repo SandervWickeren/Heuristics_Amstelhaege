@@ -54,9 +54,6 @@ def main():
 		Output:
 		- Grid with the new house added.
 		"""
-		# Assign variabele:
-		newgrid = copy.deepcopy(grid)
-
 		# Define start coordinates:
 		start_y = y_cor - freespace
 		start_x = x_cor - freespace
@@ -74,28 +71,28 @@ def main():
 					# First Y freespace meters and last Y freespace
 					# meters get ID 5.
 					if l < freespace:
-						newgrid[start_y + l][start_x + w] = 5
+						grid[start_y + l][start_x + w] = 5
 					elif l > (length + freespace - 1) and l < (length + 2 * freespace):
-						newgrid[start_y + l][start_x + w] = 5
+						grid[start_y + l][start_x + w] = 5
 
 					else:
 
 						# First X freespace meters and last X freespace
 						# meters get ID 5.
 						if w < freespace:
-							newgrid[start_y + l][start_x + w] = 5
+							grid[start_y + l][start_x + w] = 5
 						elif w > (width + freespace - 1) and w < (width + 2 * freespace):
-							newgrid[start_y + l][start_x + w] = 5
+							grid[start_y + l][start_x + w] = 5
 						
 						# Otherwise it's part of the house and
 						# gets given ID.
 						else:
-							newgrid[start_y + l][start_x + w] = ID
+							grid[start_y + l][start_x + w] = ID
 				except:
 					
 					# When error return previous correct grid.
-					return grid
-		return newgrid
+					return False
+		return grid
 
 	def genHome(grid, length, width, freespace, ID):
 		y = genY(grid, freespace, length)
@@ -171,7 +168,7 @@ def main():
 			ngrid = genHome(gr, mais_length, mais_width, mais_freespace, 1)
 
 			# Check if house succsfully placed:
-			if ngrid == gr:
+			if ngrid == False:
 				print ("No succesfull placement Maison")
 			else:
 				print ("Maison {0} placed!".format(M))
@@ -185,7 +182,7 @@ def main():
 			ngrid = genHome(gr, bung_length, bung_width, bung_freespace, 2)
 
 			# Check for succes:
-			if ngrid == gr:
+			if ngrid == False:
 				print ("No succesfull placement Bungalow")
 			else:
 				print ("Bungalow {0} placed!".format(B))
@@ -199,7 +196,7 @@ def main():
 			ngrid = genHome(gr, fam_length, fam_width, fam_freespace, 3)
 
 			# Check for succes:
-			if ngrid == gr:
+			if ngrid == False:
 				print ("No succesfull placement Bungalow")
 			else:
 				print ("Family home {0} placed!".format(F))
