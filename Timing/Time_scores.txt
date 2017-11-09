@@ -1,3 +1,12 @@
+------------
+Commandline code:
+------------
+python -m cProfile -s time Main.py
+
+
+-------------
+Via Ipython (%timit)
+-------------
 - 9/11/17 -
 Vaste computer zonder andere programma's runnende:
 

@@ -5,7 +5,7 @@ Names and StudentID:
 - Sander van Wickeren (11060999)
 
 Description:
-~"""
+"""
 
 def main():
 	"""
