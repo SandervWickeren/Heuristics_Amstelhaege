@@ -1,3 +1,9 @@
 - 9/11/17 -
-10 map generations --> 14.8 seconds
-Average 1.48 seconde per map.
+Vaste computer zonder andere programma's runnende:
+
+100x -- oud -- 161 seconde
+100x -- nieuw -- 161 seconde
+
+Geen snelheidsverbetering na initialiseren variabelen ipv
+constant uitrekenen
+-----------
