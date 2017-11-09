@@ -21,10 +21,6 @@ def main():
 		[[0, 0, 0, 0],
 		 [0, 0, 0, 0]]
 		"""
-		# Fixes .5
-		width = 2 * width
-		length = 2 * length
-
 		return [width * [0] for i in range(length)]
 
 	def genY(grid, freespace, height):
@@ -43,64 +39,8 @@ def main():
 		"""
 		return random.randint(freespace, len(grid[0]) - freespace - length)
 
-	def placeHouse(width, length, freespace, y_cor, x_cor, grid):
-		"""
-		Takes as input:
-		- Length of the house in meters
-		- Width of the house in meters
-		- The amount of freespace in meters
-		- y_cor from where it should be generated
-		- x_cor from where it should be generated
-		- The current grid
 
-		Output:
-		- Grid with the new house added.
-		"""
-		# Assign variabele:
-		newgrid = copy.deepcopy(grid)
-
-		# Remove the .5 problem
-		width = int(2 * width)
-		length = int(2 * length)
-		freespace = int(2 * freespace)
-
-		# Place house
-		for l in range(length):
-			try:
-				
-				# Internal house
-				for w in range(width):
-					newgrid[y_cor + l][x_cor + w] = 1
-
-				# Freespace
-				for f in range(1, freespace + 1):
-					
-					# At the sides
-					newgrid[y_cor + l][x_cor - f] = 5
-					newgrid[y_cor + l][x_cor + width + f - 1] = 5
-
-			except:
-				# False placement:
-				return grid
-				
-
-		# Partial freespace
-		for w in range(width):
-			try:
-				for f in range(1, freespace + 1):
-
-					# At top/bottom
-					newgrid[y_cor - f][x_cor + w] = 5
-					newgrid[y_cor + length + f - 1][x_cor + w] = 5
-
-			except:
-				print ("Unexpected error:", sys.exc_info()[0])
-				print ("Retry.")
-				return grid
-				
-		return newgrid
-
-	def placeHouse2(ID, width, length, freespace, y_cor, x_cor, grid):
+	def placeHouse(ID, width, length, freespace, y_cor, x_cor, grid):
 		"""
 		Takes as input:
 		- A unique ID that indicates the house.
@@ -116,11 +56,6 @@ def main():
 		"""
 		# Assign variabele:
 		newgrid = copy.deepcopy(grid)
-
-		# Remove the .5 problem
-		# width = int(2 * width)
-		# length = int(2 * length)
-		# freespace = int(2 * freespace)
 
 		# Define start coordinates:
 		start_y = y_cor - freespace
@@ -162,32 +97,10 @@ def main():
 					return grid
 		return newgrid
 
-	def placeFamilyhome(grid):
-		length = int(2 * 8)
-		width = int(2 * 8)
-		freespace = int(2 * 2)
-		ID = 1 
+	def genHome(grid, length, width, freespace, ID):
 		y = genY(grid, freespace, length)
 		x = genX(grid, freespace, width)
-		return placeHouse2(ID, width, length, freespace, y, x, grid)
-
-	def placeMaison(grid):
-		length = int(2 * 10.5)
-		width = int( 2 * 11)
-		freespace = int(2 * 6)
-		ID = 2 
-		y = genY(grid, freespace, length)
-		x = genX(grid, freespace, width)		
-		return placeHouse2(ID, width, length, freespace, y, x, grid)
-
-	def placeBungalow(grid):
-		length = int(2 * 7.5)
-		width = int(2 * 10)
-		freespace = int(2 * 3)
-		ID = 3
-		y = genY(grid, freespace, length)
-		x = genX(grid, freespace, width)
-		return placeHouse2(ID, width, length, freespace, y, x, grid)
+		return placeHouse(ID, width, length, freespace, y, x, grid)
 
 	def placeWater():
 		return 0
@@ -211,7 +124,6 @@ def main():
 		fig, ax = plt.subplots()
 		ax.imshow(grid, cmap=colormap, norm=norm)
 
-
 		# Show plot
 		plt.show()
 
@@ -222,25 +134,41 @@ def main():
 		return 0
 
 
-	def startGeneration(variant):
+	def startGeneration(variant, resolution):
 		"""
 		Variant is the number of houses that has
 		to be placed		
 		"""
+		# Check for valid resolution
+		if resolution % 2 != 0:
+			print ("Resolution should be an even integer.")
+			return 
 
 		# House distirbution:
 		familyHome = 0.60 * variant
 		bungalow = 0.25 * variant
 		maison = 0.15 * variant
 
-		# Initialize grid
-		gr = genMap(180, 160)
+		# Initialize values
+		gr = genMap(180 * resolution, 160 * resolution)
+
+		fam_length = int(resolution * 8)
+		fam_width = int(resolution * 8)
+		fam_freespace = int(resolution * 2) 
+
+		bung_length = int(resolution * 7.5)
+		bung_width = int(resolution * 10)
+		bung_freespace = int(resolution * 3) 
+
+		mais_length = int(resolution * 10.5)
+		mais_width = int(resolution * 11)
+		mais_freespace = int(resolution * 6)
 
 		# Start with maisons
 		M = 0
 		while M != maison:
 
-			ngrid = placeMaison(gr)
+			ngrid = genHome(gr, mais_length, mais_width, mais_freespace, 1)
 
 			# Check if house succsfully placed:
 			if ngrid == gr:
@@ -254,7 +182,7 @@ def main():
 		B = 0
 		while B != bungalow:
 
-			ngrid = placeBungalow(gr)
+			ngrid = genHome(gr, bung_length, bung_width, bung_freespace, 2)
 
 			# Check for succes:
 			if ngrid == gr:
@@ -268,7 +196,7 @@ def main():
 		F = 0
 		while F != familyHome:
 
-			ngrid = placeFamilyhome(gr)
+			ngrid = genHome(gr, fam_length, fam_width, fam_freespace, 3)
 
 			# Check for succes:
 			if ngrid == gr:
@@ -304,7 +232,7 @@ def main():
 		while t != 10:
 
 			#ah = placeHouse(4, 4, 1, genY(gr), genX(gr), gr)
-			ah = placeHouse2(1, width, length, freespace, 
+			ah = placeHouse(1, width, length, freespace, 
 							 genY(gr, freespace, length), 
 							 genX(gr, freespace, width),
 							  gr)
@@ -318,7 +246,7 @@ def main():
 		visualizeGrid(ah)
 		return 0
 
-	startGeneration(20)
+	startGeneration(20, 2)
 	
 
 
