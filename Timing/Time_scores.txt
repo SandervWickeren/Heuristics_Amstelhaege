@@ -1,0 +1,3 @@
+- 9/11/17 -
+10 map generations --> 14.8 seconds
+Average 1.48 seconde per map.
