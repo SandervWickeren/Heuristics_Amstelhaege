@@ -39,6 +39,70 @@ def main():
 		"""
 		return random.randint(freespace, len(grid[0]) - freespace - length)
 
+	def checkOverlap(grid, start_y, start_x, width, length, freespace):
+		
+		# Using a small number of significant points to check if overlap
+		# occurs saves instructions.
+		allowed = [0, 5]
+
+		# Center
+		if grid[start_y + round(length / 2)][start_x  + round(width / 2)] not in allowed:
+			return False
+
+		# North-west
+		if grid[start_y][start_x] not in allowed:
+			return False
+
+		# North-east
+		elif grid[start_y][start_x + freespace + width] not in allowed:
+			return False
+
+		# South-east
+		elif grid[start_y + length + freespace][start_x + width + freespace] not in allowed:
+			return False
+
+		# North
+		elif grid[start_y][start_x + freespace + round(width / 2)] not in allowed:
+			return False
+
+		# South-west
+		elif grid[start_y + length + freespace][start_x] not in allowed:
+			return False
+
+		# East
+		elif grid[start_y + round(length / 2)][start_x + freespace + width] not in allowed:
+			return False
+
+		# South
+		elif grid[start_y + length + freespace][start_x + round(width / 2)] not in allowed:
+			return False
+
+		# West
+		elif grid[start_y + round(length / 2)][start_x] not in allowed:
+			return False
+
+		# Because there are differen sizes of freespace it is possible that part of a new house is
+		# in the freespace of a bigger house. By checking the inner SW, SE, NE and NW it 
+		# can be prevented
+		# ISW
+		elif grid[start_y + length + freespace][start_x + freespace] != 0:
+			return False
+
+		# ISE
+		elif grid[start_y + length + freespace][start_x + width + freespace] != 0:
+			return False
+
+		# INE
+		elif grid[start_y + freespace][start_x + width + freespace] != 0:
+			return False
+
+		# INW
+		elif grid[start_y + freespace][start_x + freespace] != 0:
+			return False
+
+		else:
+			return True
+
 
 	def placeHouse(ID, width, length, freespace, y_cor, x_cor, grid):
 		"""
@@ -58,40 +122,46 @@ def main():
 		start_y = y_cor - freespace
 		start_x = x_cor - freespace
 
-		# Generate the houses.
-		# For every possible Y value
-		for l in range(length + 2 * freespace):
+		# Placement checking
+		if checkOverlap(grid, start_y, start_x, width, length, freespace):
 
-			# For every possible X value
-			for w in range(width + 2 * freespace):
+			# Generate the houses.
+			# For every possible Y value
+			for l in range(length + 2 * freespace):
 
-				# Try placing the house
-				try:
+				# For every possible X value
+				for w in range(width + 2 * freespace):
 
-					# First Y freespace meters and last Y freespace
-					# meters get ID 5.
-					if l < freespace:
-						grid[start_y + l][start_x + w] = 5
-					elif l > (length + freespace - 1) and l < (length + 2 * freespace):
-						grid[start_y + l][start_x + w] = 5
+					# Try placing the house
+					try:
 
-					else:
-
-						# First X freespace meters and last X freespace
+						# First Y freespace meters and last Y freespace
 						# meters get ID 5.
-						if w < freespace:
+						if l < freespace:
 							grid[start_y + l][start_x + w] = 5
-						elif w > (width + freespace - 1) and w < (width + 2 * freespace):
+						elif l > (length + freespace - 1) and l < (length + 2 * freespace):
 							grid[start_y + l][start_x + w] = 5
-						
-						# Otherwise it's part of the house and
-						# gets given ID.
+
 						else:
-							grid[start_y + l][start_x + w] = ID
-				except:
-					
-					# When error return previous correct grid.
-					return False
+
+							# First X freespace meters and last X freespace
+							# meters get ID 5.
+							if w < freespace:
+								grid[start_y + l][start_x + w] = 5
+							elif w > (width + freespace - 1) and w < (width + 2 * freespace):
+								grid[start_y + l][start_x + w] = 5
+							
+							# Otherwise it's part of the house and
+							# gets given ID.
+							else:
+								grid[start_y + l][start_x + w] = ID
+					except:
+						
+						# When error return previous correct grid.
+						return False
+		else:
+			print ("Incorrect placement, check overlap.")
+			return False
 		return grid
 
 	def genHome(grid, length, width, freespace, ID):
@@ -197,7 +267,7 @@ def main():
 
 			# Check for succes:
 			if ngrid == False:
-				print ("No succesfull placement Bungalow")
+				print ("No succesfull placement Family Home")
 			else:
 				print ("Family home {0} placed!".format(F))
 				gr = list(ngrid)
@@ -243,7 +313,7 @@ def main():
 		visualizeGrid(ah)
 		return 0
 
-	startGeneration(20, 2)
+	startGeneration(20, 10)
 	
 
 
