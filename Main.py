@@ -169,8 +169,76 @@ def main():
 		x = genX(grid, freespace, width)
 		return placeHouse(ID, width, length, freespace, y, x, grid)
 
+	def genWater(grid):
+		"""
+		Current problems:
+		 - Priemgetallen zorgen voor extra loops 
+		 	--> misschien eerst testen?
+		 - Als eerste getal groot is heb je veel loops
+		 - Functie is nog wat rommelig.
+		"""
+
+		grid_surface = len(grid) * len(grid[0])
+
+		# Amount of surface for the water.
+		allowed_surface = round(0.2 * grid_surface)
+
+		# Collection of the created surfaces
+		water_surfaces = []
+
+		# Min size of one water piece.
+		min_single_size = 4
+
+		run = 0
+
+		# Loop until 4 and enough surface:
+		while allowed_surface != 0:
+			run += 1
+			print (allowed_surface)
+			w = 0
+			l = 0
+
+			# Only generate random if we have more then 1 option left.
+			if len(water_surfaces) < 3 and min_single_size != allowed_surface and allowed_surface > 5:
+				size = random.randint(min_single_size, allowed_surface)
+
+			
+			# Otherwise the size is the allowed surface
+			else:
+				size = allowed_surface
+
+			
+			# Shouldn't go below 0
+			if allowed_surface - size >= 0:
+			
+				# Calculate width and length if possible.
+				init = round(math.sqrt(size))
+				for i in range(init, 1, -1):
+					if size % i == 0 and 1 <= math.ceil((size / i) / i) <= 4:
+						w = i
+						l = size / w
+
+						# Reinit allowed surface
+						allowed_surface -= size
+						water_surfaces.append((w, int(l), round(l / w, 2), size))
+						break
+						
+			if run > 4:
+				# Drop last try and remake the surface.
+				print ("Drop")
+				try:
+					run = 2
+					allowed_surface += water_surfaces[-1][3]
+					water_surfaces = water_surfaces[:-1]
+				except:
+					print ("wat")
+
+		return water_surfaces
+
 	def placeWater():
-		return 0
+		# Actually places water on the map.
+		return
+
 
 	def visualizeGrid(grid):
 		"""
@@ -278,10 +346,6 @@ def main():
 		visualizeGrid(gr)
 
 
-
-
-
-
 	def test():
 		"""
 		Temporarily test function.
@@ -313,7 +377,10 @@ def main():
 		visualizeGrid(ah)
 		return 0
 
-	startGeneration(20, 10)
+	#startGeneration(60, 10)
+	gr = genMap(160, 180)
+	print (placeWater(gr))
+	
 	
 
 
@@ -321,6 +388,7 @@ if __name__ == "__main__":
 	#import pygame
 	import random
 	import copy
+	import math
 	main()
 
 
