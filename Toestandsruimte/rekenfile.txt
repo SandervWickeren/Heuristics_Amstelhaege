@@ -1,6 +1,6 @@
 Algemene grootte Toestandsruimte:
 Stuk land van 160x180m. Onderverdeeld in 1 blokje = 1m. 
-Grid van: 160x180 = 28.800 blokjes van 1 bij 1 meter.
+Grid van: 160x180 = 28.800 blokjes van 1 bij 1 meter (vierkante meter).
 
 Het aantal woningen in de wijk bestaat voor 60% uit eengezinswoningen, 25% uit bungalows en 15% uit maisons.
 
@@ -36,4 +36,12 @@ Maison:
 - Waarde van 610.000€
 - 6 meter verplichte vrijstand rondom woning
 - Iedere extra meter levert prijsverbetering op van 6%
+
+Water:
+- De wijk bestaat voor 20% uit oppervlaktewater.
+- Opgedeeld in niet meer dan vier lichamen die rechthoekig of ovaal van vorm zijn.
+- Hoogte-breedteverhoudingen tussen de 1 en 4.
+- 20% van 28.800 vierkante meter = 5.760 vierkante meter.
+- Als we deze vierkante meters moeten onderverdelen in maximaal vier lichamen,
+  wordt dit dus maximaal 5.760 / 4 = 1.440 vierkante meter per lichaam.
 
