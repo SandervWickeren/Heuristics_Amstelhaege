@@ -1,0 +1,39 @@
+Algemene grootte Toestandsruimte:
+Stuk land van 160x180m. Onderverdeeld in 1 blokje = 1m. 
+Grid van: 160x180 = 28.800 blokjes van 1 bij 1 meter.
+
+Het aantal woningen in de wijk bestaat voor 60% uit eengezinswoningen, 25% uit bungalows en 15% uit maisons.
+
+20-huizen variant:
+12 huizen eengezinswoningen
+5 huizen bungalows
+3 huizen maisons
+
+40-huizen variant:
+24 huizen eengezinswoningen
+10 huizen bungalows
+6 huizen maisons
+
+60-huizen variant:
+36 huizen eengezinswoningen
+15 huizen bungalows
+9 huizen maisons
+
+Eengezinswoning:
+- 8x8m
+- Waarde van 285.000€
+- 2 meter verplichte vrijstand rondom woning
+- Iedere extra meter levert prijsverbetering op van 3%
+
+Bungalow:
+- 10x7.5m
+- Waarde van 399.000€
+- 3 meter verplichte vrijstand rondom woning
+- Iedere extra meter levert prijsverbetering op van 4%
+
+Maison:
+- 11x10.5m
+- Waarde van 610.000€
+- 6 meter verplichte vrijstand rondom woning
+- Iedere extra meter levert prijsverbetering op van 6%
+
