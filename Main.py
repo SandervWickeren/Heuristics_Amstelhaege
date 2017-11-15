@@ -212,6 +212,8 @@ def main():
 			if allowed_surface - size >= 0:
 			
 				# Calculate width and length if possible.
+				# Starting from the square root causes the part to 
+				# be more square instead of a straight line.
 				init = round(math.sqrt(size))
 				for i in range(init, 1, -1):
 					if size % i == 0 and 1 <= math.ceil((size / i) / i) <= 4:
@@ -235,9 +237,12 @@ def main():
 
 		return water_surfaces
 
-	def placeWater():
+	def placeWater(surfaces, grid):
 		# Actually places water on the map.
-		return
+		return 0
+		
+
+		
 
 
 	def visualizeGrid(grid):
@@ -249,10 +254,10 @@ def main():
 		from matplotlib import colors
 
 		# Define colors [Background, House1, freespace]
-		colormap = colors.ListedColormap(["#FFFFFF", "#3F51B5", "#009688", "#4CAF50", "#FFCDD2"])
+		colormap = colors.ListedColormap(["#FFFFFF", "#3F51B5", "#009688", "#4CAF50", "#2196F3", "#FFCDD2"])
 		
 		# 0-1: white, 1-5: red etc.
-		bounds = [0, 1, 2, 3, 5, 8]
+		bounds = [0, 1, 2, 3, 4, 5, 8]
 		norm = colors.BoundaryNorm(bounds, colormap.N)
 
 		# Make plot
@@ -266,6 +271,8 @@ def main():
 
 
 	def calcScore(grid):
+
+
 		return 0
 
 
@@ -299,7 +306,29 @@ def main():
 		mais_width = int(resolution * 11)
 		mais_freespace = int(resolution * 6)
 
-		# Start with maisons
+		# Water
+		# Generate water parts
+		water_parts = genWater(gr)
+
+		# Place water parts in grid:
+		for part in range(len(water_parts)):
+			W = 0
+
+			# Loop until correctly placed.
+			while W != 1:
+
+				ngrid = genHome(gr, water_parts[part][1], water_parts[part][0], 0, 4)
+
+				# Check for success:
+				if ngrid == False:
+					print ("No succesfull placement Water")
+				else:
+					print ("Water {0} placed!".format(W))
+					gr = list(ngrid)
+					W = 1
+
+
+		# Maisons
 		M = 0
 		while M != maison:
 
@@ -345,6 +374,8 @@ def main():
 		print ("Generating map..")
 		visualizeGrid(gr)
 
+		
+
 
 	def test():
 		"""
@@ -377,9 +408,9 @@ def main():
 		visualizeGrid(ah)
 		return 0
 
-	#startGeneration(60, 10)
-	gr = genMap(160, 180)
-	print (placeWater(gr))
+	startGeneration(60, 10)
+	#gr = genMap(160, 180)
+	#print (placeWater(gr))
 	
 	
 
