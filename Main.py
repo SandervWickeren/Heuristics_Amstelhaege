@@ -243,8 +243,6 @@ def main():
 		
 
 		
-
-
 	def visualizeGrid(grid):
 		"""
 		Take in a grid and outputs a mapping of
@@ -269,8 +267,142 @@ def main():
 
 		return 0
 
+	def checkOverlap2(grid, start_y, start_x, width, length, freespace, allowed):
+		
+		# Using a small number of significant points to check if overlap
+		# occurs saves instructions.
+		#allowed = [0, 5]
+		isAllowed = False
+
+		# Center
+		if grid[start_y + round(length / 2)][start_x  + round(width / 2)] in allowed:
+			isAllowed = True
+		else:
+			return False
+
+		# North-west
+		if grid[start_y][start_x] in allowed:
+			isAllowed = True
+		else:
+			return False
+
+		# North-east
+		if grid[start_y][start_x + freespace + width] in allowed:
+			isAllowed = True
+		else:
+			return False
+
+		# South-east
+		if grid[start_y + length + freespace][start_x + width + freespace] in allowed:
+			isAllowed = True
+		else:
+			return False
+
+		# North
+		if grid[start_y][start_x + freespace + round(width / 2)] in allowed:
+			isAllowed = True
+		else:
+			return False
+
+		# South-west
+		if grid[start_y + length + freespace][start_x] in allowed:
+			isAllowed = True
+		else:
+			return False
+
+		# East
+		if grid[start_y + round(length / 2)][start_x + freespace + width] in allowed:
+			isAllowed = True
+		else:
+			return False
+
+		# South
+		if grid[start_y + length + freespace][start_x + round(width / 2)] in allowed:
+			isAllowed = True
+		else:
+			return False
+
+		# West
+		if grid[start_y + round(length / 2)][start_x] in allowed:
+			isAllowed = True
+		else:
+			return False
+
+		# Because there are differen sizes of freespace it is possible that part of a new house is
+		# in the freespace of a bigger house. By checking the inner SW, SE, NE and NW it 
+		# can be prevented
+		# ISW
+		# if grid[start_y + length + freespace][start_x + freespace] == 0:
+		# 	isAllowed = True
+
+		# # ISE
+		# if grid[start_y + length + freespace][start_x + width + freespace] == 0:
+		# 	isAllowed = True
+
+		# # INE
+		# if grid[start_y + freespace][start_x + width + freespace] == 0:
+		# 	isAllowed = True
+
+		# # INW
+		# if grid[start_y + freespace][start_x + freespace] == 0:
+		# 	isAllowed = True
+
+	
+
+
 
 	def calcScore(grid):
+
+		# Temp test grid
+		tmp = [[0, 0, 0, 0, 0, 0, 0, 0],
+			   [5, 5, 5, 5, 0, 0, 0, 0],
+			   [5, 1, 1, 5, 0, 0, 0, 0],
+			   [5, 1, 1, 5, 0, 0, 0, 0],
+			   [5, 5, 5, 5, 0, 0, 0, 0],
+			   [0, 0, 0, 5, 5, 5, 5, 5],
+			   [0, 0, 0, 5, 2, 2, 2, 5],
+			   [0, 0, 0, 5, 2, 2, 2, 5],
+			   [0, 0, 0, 5, 5, 5, 5, 5]]
+
+		# Temp dict with coordinates
+		tmpdict = {"M":[(2,1)], "B": [(4, 6)]}
+
+		# For every housetype
+		for housetypes in tmpdict.keys():
+			print (housetypes)
+
+			# For every coordinate:
+			for coordinates in tmpdict[housetypes]:
+				print (coordinates[0], coordinates[1])
+
+				#
+				if tmpdict[housetypes] == "M":
+					width = 2
+					length = 2
+					freespace = 1
+				else:
+					width = 3
+					length = 2
+					freespace = 1
+
+				allowed = [0, 5, 4]
+
+				check = False
+				distance = 0
+				while not check:
+					check = checkOverlap2(tmp, coordinates[1], coordinates[0], width, length, freespace, allowed)
+					freespace += 1
+					distance += 1
+
+				print ("Gevonden afstand {0}".format(distance))
+
+
+
+
+
+				#checkOverlap(tmp, coordinates[1], coordinates[0], width, length, freespace)
+
+
 
 
 		return 0
@@ -408,10 +540,10 @@ def main():
 		visualizeGrid(ah)
 		return 0
 
-	startGeneration(60, 10)
+	#startGeneration(60, 10)
 	#gr = genMap(160, 180)
 	#print (placeWater(gr))
-	
+	calcScore("ja");
 	
 
 
