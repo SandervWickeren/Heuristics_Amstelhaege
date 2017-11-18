@@ -17,7 +17,6 @@ random number generation.
 - Transformation to python 3.
 - Call the program from one function with variant(20/40/60) as input.
 
-
 # Planning:
 Week 2:
 - Presentation preparation.
@@ -39,4 +38,5 @@ Week 4:
 Week 5:
 - Third algorithm.
 - Experiment: comparing algorithms.
+
 
