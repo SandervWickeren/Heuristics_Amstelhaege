@@ -277,31 +277,73 @@ def main():
 
 		# Generate list with all coordinates:
 		# Following the order from NE-SE-SW-NW
-		check_coor = [(y - freespace, x + width + freespace - 2),
-					  (y + length + freespace - 1, x + width + freespace - 1),
-					  (y + length + freespace - 1, x - freespace),
-					  (y - freespace, x - freespace)]
+		# check_coor = [(y - freespace, x + width + freespace - 2),
+		# 			  (y + length + freespace - 1, x + width + freespace - 1),
+		# 			  (y + length + freespace - 1, x - freespace),
+		# 			  (y - freespace, x - freespace)]
 
+		# print (check_coor)
+
+		# # Draw line between each direction:
+		# # NE-SE
+		# for nese in range(check_coor[0][0], check_coor[1][0]):
+		# 	print (check_coor[0][0] + nese, check_coor[1][0])
+
+		# # SW-SE
+		# for sezw in range(check_coor[2][1], check_coor[1][1]):
+		# 	print (check_coor[2][1] + sezw, check_coor[1][1])
+
+		# # NW-SW
+		# for swnw in range(check_coor[3][0], check_coor[2][0]):
+		# 	print (check_coor[3][0] + swnw, check_coor[2][0])
+
+		# # NW-NE
+		# for nwne in range(check_coor[3][1], check_coor[0][1]):
+		# 	print (check_coor[3][1] + nwne, check_coor[0][1])
+		# return False
+		print (length, width, freespace)
+		NW = ((y - freespace, x - freespace))
+		check_coor = [(NW[0], NW[1]), #NW
+					  (NW[0], NW[1] + width + freespace), #NE
+					  (NW[0] + length + freespace, NW[1]), #SW
+					  (NW[0] + length + freespace, NW[1] + width + freespace)] #SE
 		print (check_coor)
+		print ("------------", freespace, "------------")
 
 
-		# Draw line between each direction:
-		# NE-SE
-		for nese in range(check_coor[0][0], check_coor[1][0]):
-			print (check_coor[0][0] + nese, check_coor[1][0])
+
+		# Checks all points from NW-NE:
+		for x in range(check_coor[0][1], check_coor[1][1]):
+			print ("Checked cor: ", check_coor[0][1], check_coor[0][1] + x)
+			if checkPoint(check_coor[0][0], check_coor[0][1] + x, grid, allowed) == False:
+				return False
 
 		# SW-SE
-		for sezw in range(check_coor[2][1], check_coor[1][1]):
-			print (check_coor[2][1] + sezw, check_coor[1][1])
+		for x in range(check_coor[2][1], check_coor[3][1]):
+			print ("Checked cor: ", check_coor[2][0], check_coor[2][1] + x)
+			if checkPoint(check_coor[2][0], check_coor[2][1] + x, grid, allowed) == False:
+				return False
 
-		# NW-SW
-		for swnw in range(check_coor[3][0], check_coor[2][0]):
-			print (check_coor[3][0] + swnw, check_coor[2][0])
+		# Check all Points from NE-SE:
+		for y in range(check_coor[1][0], check_coor[3][0]):
+			print ("Checked cor: ", check_coor[1][0] + y, check_coor[1][1])
+			if checkPoint(check_coor[1][0] + y, check_coor[1][1], grid, allowed) == False:
+				return False
 
-		# NW-NE
-		for nwne in range(check_coor[3][1], check_coor[0][1]):
-			print (check_coor[3][1] + nwne, check_coor[0][1])
-		return False
+		#NW-SW
+		for y in range(check_coor[0][0], check_coor[2][0]):
+			print ("Checked cor: ", check_coor[0][0] + y, check_coor[0][1])
+			if checkPoint(check_coor[0][0] + y, check_coor[0][1], grid, allowed) == False:
+				return False
+
+		# Check all points from SW-SE:
+		return True
+
+
+
+
+
+
 
 
 
@@ -330,6 +372,24 @@ def main():
 		# # If everything went fine, return
 		return True
 
+	def checkPoint(y, x, grid, allowed):
+		try:
+			# Check if selected coordinated is allowed
+			if grid[y][x] in allowed:
+				return True
+			else:
+				return False
+		
+
+		# Out of index errors should be ignored, because the space
+		# outside the grid does count to extra freespace.
+		except IndexError:
+			return True
+		except:
+			return False
+
+
+
 
 	def calcScore(grid):
 
@@ -354,6 +414,9 @@ def main():
 			    [0, 0, 0, 0, 0, 0, 0, 0],
 			    [0, 0, 0, 0, 0, 0, 0, 0]]
 
+		# (0,0), (0,3), (3,3), (3, 0)
+		# (5, 3), (5, 7), (8, 7), (8, 3)
+
 
 		# Temp dict with coordinates
 		tmpdict = {"M":[(1,1)], "B": [(4, 6)]}
@@ -367,7 +430,7 @@ def main():
 				print ("Ind tmpdict:" + str(coordinates[0]), str(coordinates[1]))
 
 				#
-				if tmpdict[housetypes] == "M":
+				if housetypes == "M":
 					width = 2
 					length = 2
 					freespace = 1
