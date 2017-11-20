@@ -267,105 +267,96 @@ def main():
 
 		return 0
 
-	def checkOverlap2(grid, start_y, start_x, width, length, freespace, allowed):
-		
-		# Using a small number of significant points to check if overlap
-		# occurs saves instructions.
-		#allowed = [0, 5]
-		isAllowed = False
+	def checkOverlap2(grid, y, x, width, length, freespace, allowed):
+		"""
+		y and x are furthest north-west corner of the house (not the freespace included!).
 
-		# Center
-		if grid[start_y + round(length / 2)][start_x  + round(width / 2)] in allowed:
-			isAllowed = True
-		else:
-			return False
+		"""
+		# Using a small number of significant points to check how much extra freespace there
+		# is available.
 
-		# North-west
-		if grid[start_y][start_x] in allowed:
-			isAllowed = True
-		else:
-			return False
+		# Generate list with all coordinates:
+		# Following the order from NE-SE-SW-NW
+		check_coor = [(y - freespace, x + width + freespace - 2),
+					  (y + length + freespace - 1, x + width + freespace - 1),
+					  (y + length + freespace - 1, x - freespace),
+					  (y - freespace, x - freespace)]
 
-		# North-east
-		if grid[start_y][start_x + freespace + width] in allowed:
-			isAllowed = True
-		else:
-			return False
+		print (check_coor)
 
-		# South-east
-		if grid[start_y + length + freespace][start_x + width + freespace] in allowed:
-			isAllowed = True
-		else:
-			return False
 
-		# North
-		if grid[start_y][start_x + freespace + round(width / 2)] in allowed:
-			isAllowed = True
-		else:
-			return False
+		# Draw line between each direction:
+		# NE-SE
+		for nese in range(check_coor[0][0], check_coor[1][0]):
+			print (check_coor[0][0] + nese, check_coor[1][0])
 
-		# South-west
-		if grid[start_y + length + freespace][start_x] in allowed:
-			isAllowed = True
-		else:
-			return False
+		# SW-SE
+		for sezw in range(check_coor[2][1], check_coor[1][1]):
+			print (check_coor[2][1] + sezw, check_coor[1][1])
 
-		# East
-		if grid[start_y + round(length / 2)][start_x + freespace + width] in allowed:
-			isAllowed = True
-		else:
-			return False
+		# NW-SW
+		for swnw in range(check_coor[3][0], check_coor[2][0]):
+			print (check_coor[3][0] + swnw, check_coor[2][0])
 
-		# South
-		if grid[start_y + length + freespace][start_x + round(width / 2)] in allowed:
-			isAllowed = True
-		else:
-			return False
+		# NW-NE
+		for nwne in range(check_coor[3][1], check_coor[0][1]):
+			print (check_coor[3][1] + nwne, check_coor[0][1])
+		return False
 
-		# West
-		if grid[start_y + round(length / 2)][start_x] in allowed:
-			isAllowed = True
-		else:
-			return False
 
-		# Because there are differen sizes of freespace it is possible that part of a new house is
-		# in the freespace of a bigger house. By checking the inner SW, SE, NE and NW it 
-		# can be prevented
-		# ISW
-		# if grid[start_y + length + freespace][start_x + freespace] == 0:
-		# 	isAllowed = True
 
-		# # ISE
-		# if grid[start_y + length + freespace][start_x + width + freespace] == 0:
-		# 	isAllowed = True
 
-		# # INE
-		# if grid[start_y + freespace][start_x + width + freespace] == 0:
-		# 	isAllowed = True
 
-		# # INW
-		# if grid[start_y + freespace][start_x + freespace] == 0:
-		# 	isAllowed = True
 
-	
+		# # Check every coordinate if there is freespace:
+		# for cor in check_coor:
+			
+		# 	try:
+		# 		# Negative numbers should be ignored:
+		# 		if cor[0] >= 0 and cor[1] >= 0:
+		# 			# Check if position is a valid freespace
+		# 			if grid[cor[0]][cor[1]] not in allowed:
 
+		# 				# It is not possible so we can return.
+		# 				print (cor[0], cor[1])
+		# 				return False
+		# 			else:
+		# 				print ("Coordinate Y={0}, X={1} is correct".format(cor[0],cor[1]))
+		# 	except IndexError:
+		# 		# If there is an index error we can ignore because
+		# 		# space outside the grid doesn't count.
+		# 		print ("Index error")
+
+		# # If everything went fine, return
+		return True
 
 
 	def calcScore(grid):
 
 		# Temp test grid
-		tmp = [[0, 0, 0, 0, 0, 0, 0, 0],
-			   [5, 5, 5, 5, 0, 0, 0, 0],
+		tmp = [[5, 5, 5, 5, 0, 0, 0, 0],
 			   [5, 1, 1, 5, 0, 0, 0, 0],
 			   [5, 1, 1, 5, 0, 0, 0, 0],
 			   [5, 5, 5, 5, 0, 0, 0, 0],
+			   [0, 0, 0, 0, 0, 0, 0, 0],
 			   [0, 0, 0, 5, 5, 5, 5, 5],
 			   [0, 0, 0, 5, 2, 2, 2, 5],
 			   [0, 0, 0, 5, 2, 2, 2, 5],
 			   [0, 0, 0, 5, 5, 5, 5, 5]]
 
+		tmp2 = [[5, 5, 5, 5, 0, 0, 0, 0],
+			    [5, 1, 1, 5, 0, 0, 0, 0],
+			    [5, 1, 1, 5, 0, 0, 0, 0],
+			    [5, 5, 5, 5, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 1, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0]]
+
+
 		# Temp dict with coordinates
-		tmpdict = {"M":[(2,1)], "B": [(4, 6)]}
+		tmpdict = {"M":[(1,1)], "B": [(4, 6)]}
 
 		# For every housetype
 		for housetypes in tmpdict.keys():
@@ -373,7 +364,7 @@ def main():
 
 			# For every coordinate:
 			for coordinates in tmpdict[housetypes]:
-				print (coordinates[0], coordinates[1])
+				print ("Ind tmpdict:" + str(coordinates[0]), str(coordinates[1]))
 
 				#
 				if tmpdict[housetypes] == "M":
@@ -387,9 +378,9 @@ def main():
 
 				allowed = [0, 5, 4]
 
-				check = False
+				check = True
 				distance = 0
-				while not check:
+				while check:
 					check = checkOverlap2(tmp, coordinates[1], coordinates[0], width, length, freespace, allowed)
 					freespace += 1
 					distance += 1
