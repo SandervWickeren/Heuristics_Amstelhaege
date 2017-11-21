@@ -282,6 +282,10 @@ def main():
 		# 			  (y + length + freespace - 1, x - freespace),
 		# 			  (y - freespace, x - freespace)]
 
+		# Define max_y and max_x:
+		max_y = len(grid)
+		max_x = len(grid[0])		
+
 		# print (check_coor)
 
 		# # Draw line between each direction:
@@ -302,41 +306,91 @@ def main():
 		# 	print (check_coor[3][1] + nwne, check_coor[0][1])
 		# return False
 		print (length, width, freespace)
-		NW = ((y - freespace, x - freespace))
+		NW = (y - freespace, x - freespace)
+		NE = (y - freespace, x + width + freespace)
+		SW = (y + length + freespace , x - freespace)
+		SE = (y + length + freespace, x + width + freespace)
 		check_coor = [(NW[0], NW[1]), #NW
-					  (NW[0], NW[1] + width + freespace), #NE
+					  (NW[0], NW[1] + width + 2* freespace), #NE
 					  (NW[0] + length + freespace, NW[1]), #SW
-					  (NW[0] + length + freespace, NW[1] + width + freespace)] #SE
+					  (NW[0] + length + 2 * freespace, NW[1] + width + 2* freespace)] #SE
 		print (check_coor)
 		print ("------------", freespace, "------------")
 
 
 
-		# Checks all points from NW-NE:
-		for x in range(check_coor[0][1], check_coor[1][1]):
-			print ("Checked cor: ", check_coor[0][1], check_coor[0][1] + x)
-			if checkPoint(check_coor[0][0], check_coor[0][1] + x, grid, allowed) == False:
+		# Checks all points from NW-NE (NE_y - NW_y):
+		for x in range(NE[1] - NW[1]):
+			
+			# Set coordinates:
+			point_y = NW[0]
+			point_x = NW[1] + x
+
+			# Check for valid freespace
+			if not checkPoint(point_y, point_x, grid, allowed):
 				return False
+			else:
+
+				# Ignore if outside of map
+				try:
+					if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
+						grid[point_y][point_x] = 6
+				except:
+					pass
 
 		# SW-SE
-		for x in range(check_coor[2][1], check_coor[3][1]):
-			print ("Checked cor: ", check_coor[2][0], check_coor[2][1] + x)
-			if checkPoint(check_coor[2][0], check_coor[2][1] + x, grid, allowed) == False:
-				return False
+		for x in range(SE[1] - SW[1]):
 
-		# Check all Points from NE-SE:
-		for y in range(check_coor[1][0], check_coor[3][0]):
-			print ("Checked cor: ", check_coor[1][0] + y, check_coor[1][1])
-			if checkPoint(check_coor[1][0] + y, check_coor[1][1], grid, allowed) == False:
+			# Set coordinates
+			point_y = SW[0] - 1
+			point_x = SW[1] + x
+			
+			if not checkPoint(point_y, point_x, grid, allowed):
 				return False
+			else:
+				try:
+					if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
+						grid[point_y][point_x] = 7
+				except: 
+					pass
 
-		#NW-SW
-		for y in range(check_coor[0][0], check_coor[2][0]):
-			print ("Checked cor: ", check_coor[0][0] + y, check_coor[0][1])
-			if checkPoint(check_coor[0][0] + y, check_coor[0][1], grid, allowed) == False:
+		# # Check all Points from NE-SE:
+		for y in range(SE[0] - NE[0]):
+
+			# Set coordinates
+			point_y = NE[0] + y 
+			point_x = NE[1] - 1
+			
+			if not checkPoint(check_coor[1][0] + y, check_coor[1][1], grid, allowed):
 				return False
+			else:
+				try:
+					if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
+						grid[point_y][point_x] = 8
+				except:
+					pass
+
+		# #NW-SW
+		for y in range(SW[0] - NW[0]):
+
+			# Set coordinates
+			point_y = NW[0] + y 
+			point_x = NW[1] 
+			
+			if not checkPoint(check_coor[0][0] + y, check_coor[0][1], grid, allowed):
+				return False
+			else:
+				try:
+					if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
+						grid[point_y][point_x] = 9
+				except:
+					pass
 
 		# Check all points from SW-SE:
+		for x in grid:
+			print (x)
+		print (" ")
+
 		return True
 
 
@@ -388,6 +442,34 @@ def main():
 		except:
 			return False
 
+	def Testcalcscore():
+		grid = [[0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 5, 5, 5, 5, 5, 0],
+			    [0, 0, 5, 1, 1, 1, 5, 0],
+			    [0, 0, 5, 1, 1, 1, 5, 0],
+			    [0, 0, 5, 5, 5, 5, 5, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0]]
+
+		y = 3
+		x = 3 
+		w = 3
+		l = 2
+		f = 1
+
+		test = True
+		d = 0
+		while test:
+
+			test = checkOverlap2(grid, y, x, w, l, f, [0, 5, 4, 6, 7, 8, 9])
+			f += 1
+			d += 1
+
+		print (d)
+
+
 
 
 
@@ -408,8 +490,18 @@ def main():
 			    [5, 1, 1, 5, 0, 0, 0, 0],
 			    [5, 1, 1, 5, 0, 0, 0, 0],
 			    [5, 5, 5, 5, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 1, 0, 0, 0],
 			    [0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0]]
+
+		tmp3 = [[0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 0, 0, 0, 0, 0, 0],
+			    [0, 0, 5, 5, 5, 5, 0, 0],
+			    [0, 0, 5, 1, 1, 5, 0, 0],
+			    [0, 0, 5, 1, 1, 5, 0, 0],
+			    [0, 0, 5, 5, 5, 5, 0, 0],
 			    [0, 0, 0, 0, 0, 0, 0, 0],
 			    [0, 0, 0, 0, 0, 0, 0, 0],
 			    [0, 0, 0, 0, 0, 0, 0, 0]]
@@ -597,7 +689,8 @@ def main():
 	#startGeneration(60, 10)
 	#gr = genMap(160, 180)
 	#print (placeWater(gr))
-	calcScore("ja");
+	#calcScore("ja");
+	Testcalcscore()
 	
 
 
