@@ -272,40 +272,11 @@ def main():
 		y and x are furthest north-west corner of the house (not the freespace included!).
 
 		"""
-		# Using a small number of significant points to check how much extra freespace there
-		# is available.
-
-		# Generate list with all coordinates:
-		# Following the order from NE-SE-SW-NW
-		# check_coor = [(y - freespace, x + width + freespace - 2),
-		# 			  (y + length + freespace - 1, x + width + freespace - 1),
-		# 			  (y + length + freespace - 1, x - freespace),
-		# 			  (y - freespace, x - freespace)]
-
 		# Define max_y and max_x:
 		max_y = len(grid)
 		max_x = len(grid[0])		
 
-		# print (check_coor)
-
-		# # Draw line between each direction:
-		# # NE-SE
-		# for nese in range(check_coor[0][0], check_coor[1][0]):
-		# 	print (check_coor[0][0] + nese, check_coor[1][0])
-
-		# # SW-SE
-		# for sezw in range(check_coor[2][1], check_coor[1][1]):
-		# 	print (check_coor[2][1] + sezw, check_coor[1][1])
-
-		# # NW-SW
-		# for swnw in range(check_coor[3][0], check_coor[2][0]):
-		# 	print (check_coor[3][0] + swnw, check_coor[2][0])
-
-		# # NW-NE
-		# for nwne in range(check_coor[3][1], check_coor[0][1]):
-		# 	print (check_coor[3][1] + nwne, check_coor[0][1])
-		# return False
-		print (length, width, freespace)
+		# Generate the compas points
 		NW = (y - freespace, x - freespace)
 		NE = (y - freespace, x + width + freespace)
 		SW = (y + length + freespace , x - freespace)
@@ -314,8 +285,9 @@ def main():
 					  (NW[0], NW[1] + width + 2* freespace), #NE
 					  (NW[0] + length + freespace, NW[1]), #SW
 					  (NW[0] + length + 2 * freespace, NW[1] + width + 2* freespace)] #SE
-		print (check_coor)
+		print (NW, NE, SW, SE)
 		print ("------------", freespace, "------------")
+		print (width, length, freespace)
 
 
 
@@ -326,148 +298,111 @@ def main():
 			point_y = NW[0]
 			point_x = NW[1] + x
 
-			# Check for valid freespace
-			if not checkPoint(point_y, point_x, grid, allowed):
-				return False
-			else:
-
-				# Ignore if outside of map
-				try:
-					if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
-						grid[point_y][point_x] = 6
-				except:
-					pass
+			# Ignore if outside of map
+			try:
+				if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
+					
+					# If the specific point is not a valid
+					# freespace, return false.
+					if grid[point_y][point_x] not in allowed:
+						print ("At p1")
+						return False
+					#else:
+						# For visualisation
+					 	# grid[point_y][point_x] = 8
+			except:
+				pass
 
 		# SW-SE
 		for x in range(SE[1] - SW[1]):
 
 			# Set coordinates
 			point_y = SW[0] - 1
-			point_x = SW[1] + x
+			point_x = SW[1] + x 
 			
-			if not checkPoint(point_y, point_x, grid, allowed):
-				return False
-			else:
-				try:
-					if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
-						grid[point_y][point_x] = 7
-				except: 
-					pass
+			try:
+				if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
+					if grid[point_y][point_x] not in allowed:
+						print ("At p2", grid[point_y][point_x])
+						return False
+					#else:
+					 	# grid[point_y][point_x] = 8
+			except: 
+				pass
 
-		# # Check all Points from NE-SE:
+		# Check all Points from NE-SE:
 		for y in range(SE[0] - NE[0]):
 
 			# Set coordinates
 			point_y = NE[0] + y 
 			point_x = NE[1] - 1
+		
 			
-			if not checkPoint(check_coor[1][0] + y, check_coor[1][1], grid, allowed):
-				return False
-			else:
-				try:
-					if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
-						grid[point_y][point_x] = 8
-				except:
-					pass
+			try:
+				if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
+					if grid[point_y][point_x] not in allowed:
+						print ("At p3", grid[point_y][point_x])
+						return False
+					#else:
+					 	# grid[point_y][point_x] = 8
+			except:
+				pass
 
-		# #NW-SW
+		#NW-SW
 		for y in range(SW[0] - NW[0]):
 
 			# Set coordinates
 			point_y = NW[0] + y 
 			point_x = NW[1] 
 			
-			if not checkPoint(check_coor[0][0] + y, check_coor[0][1], grid, allowed):
-				return False
-			else:
-				try:
-					if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
-						grid[point_y][point_x] = 9
-				except:
-					pass
+			
+			try:
+				if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
+					if grid[point_y][point_x] not in allowed:
+						print ("At p4", grid[point_y][point_x], point_y, point_x)
+						return False
+					#else:
+					 	# grid[point_y][point_x] = 8
+			except:
+				pass
 
 		# Check all points from SW-SE:
-		for x in grid:
-			print (x)
+		printGrid(grid)
 		print (" ")
 
+		# If everything went fine, return
 		return True
 
+	def printGrid(grid):
+		for x in grid:
+			print (x)
 
-
-
-
-
-
-
-
-
-
-
-		# # Check every coordinate if there is freespace:
-		# for cor in check_coor:
-			
-		# 	try:
-		# 		# Negative numbers should be ignored:
-		# 		if cor[0] >= 0 and cor[1] >= 0:
-		# 			# Check if position is a valid freespace
-		# 			if grid[cor[0]][cor[1]] not in allowed:
-
-		# 				# It is not possible so we can return.
-		# 				print (cor[0], cor[1])
-		# 				return False
-		# 			else:
-		# 				print ("Coordinate Y={0}, X={1} is correct".format(cor[0],cor[1]))
-		# 	except IndexError:
-		# 		# If there is an index error we can ignore because
-		# 		# space outside the grid doesn't count.
-		# 		print ("Index error")
-
-		# # If everything went fine, return
-		return True
-
-	def checkPoint(y, x, grid, allowed):
-		try:
-			# Check if selected coordinated is allowed
-			if grid[y][x] in allowed:
-				return True
-			else:
-				return False
-		
-
-		# Out of index errors should be ignored, because the space
-		# outside the grid does count to extra freespace.
-		except IndexError:
-			return True
-		except:
-			return False
 
 	def Testcalcscore():
 		grid = [[0, 0, 0, 0, 0, 0, 0, 0],
 			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 5, 5, 5, 5, 5, 0],
-			    [0, 0, 5, 1, 1, 1, 5, 0],
-			    [0, 0, 5, 1, 1, 1, 5, 0],
-			    [0, 0, 5, 5, 5, 5, 5, 0],
+			    [0, 0, 1, 0, 0, 0, 0, 0],
 			    [0, 0, 0, 0, 0, 0, 0, 0],
 			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0]]
+			    [0, 0, 0, 5, 5, 5, 5, 5],
+			    [0, 0, 0, 5, 1, 1, 1, 5],
+			    [0, 0, 0, 5, 1, 1, 1, 5],
+			    [0, 0, 0, 5, 5, 5, 5, 5]]
 
-		y = 3
-		x = 3 
+		y = 6
+		x = 4
 		w = 3
 		l = 2
-		f = 1
+		f = 0
 
 		test = True
 		d = 0
 		while test:
-
-			test = checkOverlap2(grid, y, x, w, l, f, [0, 5, 4, 6, 7, 8, 9])
 			f += 1
 			d += 1
+			test = checkOverlap2(grid, y, x, w, l, f, [0, 5, 4, 6, 7, 8, 9])
 
-		print (d)
+		print (f)
 
 
 
@@ -511,46 +446,47 @@ def main():
 
 
 		# Temp dict with coordinates
-		tmpdict = {"M":[(1,1)], "B": [(4, 6)]}
+		tmpdict = {"M":[(1,1)], "B": [(6, 4)]}
+
+		total_price = 0
 
 		# For every housetype
 		for housetypes in tmpdict.keys():
 			print (housetypes)
 
+
 			# For every coordinate:
 			for coordinates in tmpdict[housetypes]:
-				print ("Ind tmpdict:" + str(coordinates[0]), str(coordinates[1]))
+				
 
 				#
 				if housetypes == "M":
 					width = 2
 					length = 2
 					freespace = 1
+					price = 610000
+					percentage = 6
 				else:
 					width = 3
 					length = 2
 					freespace = 1
+					price = 399000
+					percentage = 4 
 
 				allowed = [0, 5, 4]
 
 				check = True
 				distance = 0
 				while check:
-					check = checkOverlap2(tmp, coordinates[1], coordinates[0], width, length, freespace, allowed)
-					freespace += 1
 					distance += 1
+					check = checkOverlap2(tmp, coordinates[0], coordinates[1], width, length, freespace + distance, allowed)
+					
 
-				print ("Gevonden afstand {0}".format(distance))
-
-
-
-
-
-				#checkOverlap(tmp, coordinates[1], coordinates[0], width, length, freespace)
-
-
-
-
+				# Calculate house price
+				sell_price = price * (1 + (percentage / 100) * (distance - freespace))
+				total_price += sell_price
+				print ("Gevonden afstand {0} met een prijs van {1}".format(distance, sell_price))
+		print (total_price)
 		return 0
 
 
@@ -689,8 +625,8 @@ def main():
 	#startGeneration(60, 10)
 	#gr = genMap(160, 180)
 	#print (placeWater(gr))
-	#calcScore("ja");
-	Testcalcscore()
+	calcScore("ja");
+	#Testcalcscore()
 	
 
 
