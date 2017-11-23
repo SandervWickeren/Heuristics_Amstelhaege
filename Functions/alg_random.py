@@ -144,14 +144,14 @@ def startGeneration(variant, resolution):
 
 
 		# Calculate score using Placed houses
-		print ("Score of the map is: {0}".format(generic.calculateScore(gr, placed_houses)))
+		name = ("Score: " + str(generic.calculateScore(gr, placed_houses)))
 
 
 		# Visualize the grid
 		print ("Generating map..")
 		# for x in placed_houses:
 		# 	print ("({0},{1})".format(x.y,x.x))
-		generic.visualizeGrid(gr)
+		generic.visualizeGrid(gr, name)
 
 
 def genY(grid, freespace, height):

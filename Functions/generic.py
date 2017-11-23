@@ -17,7 +17,7 @@ def genMap(length, width):
 	return [width * [0] for i in range(length)]
 
 
-def visualizeGrid(grid):
+def visualizeGrid(grid, name):
 	"""
 	Take in a grid and outputs a mapping of
 	the grid using various colors.
@@ -35,6 +35,9 @@ def visualizeGrid(grid):
 	# Make plot
 	fig, ax = plt.subplots()
 	ax.imshow(grid, cmap=colormap, norm=norm)
+
+	# Give name
+	plt.title(name)
 
 	# Show plot
 	plt.show()
