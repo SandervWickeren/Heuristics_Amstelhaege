@@ -242,11 +242,11 @@ def genWater(grid):
 					allowed_surface -= size
 
 					# Randomly switch width and length
-					#
-					#
-					#
-					#
-					water_surfaces.append((w, int(l), round(l / w, 2), size))
+					coinflip = random.randint(1, 2)
+					if coinflip == 1:
+						water_surfaces.append((w, int(l), round(l / w, 2), size))
+					else:
+						water_surfaces.append((int(l), w, round(l / w, 2), size))
 					break
 					
 		if run > 4:
