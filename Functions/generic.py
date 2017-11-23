@@ -41,7 +41,7 @@ def visualizeGrid(grid):
 	return
 
 
-def checkOverlap(grid, start_y, start_x, width, length, freespace):
+def checkOverlap(grid, start_y, start_x, house):
 	"""
 	Takes as input the grid and the information from a house, it outputs
 	true if it can be placed and false if it cannot.
@@ -50,6 +50,9 @@ def checkOverlap(grid, start_y, start_x, width, length, freespace):
 	# Using a small number of significant points to check if overlap
 	# occurs saves instructions.
 	allowed = [0, 4, 5]
+	width = house.width
+	length = house.length
+	freespace = house.freespace
 
 	# Center
 	if grid[start_y + round(length / 2)][start_x  + round(width / 2)] not in allowed:
@@ -110,7 +113,7 @@ def checkOverlap(grid, start_y, start_x, width, length, freespace):
 		return True
 
 
-def placeHouse(ID, width, length, freespace, y_cor, x_cor, grid):
+def placeHouse(grid, house):
 	"""
 	Takes as input:
 	- A unique ID that indicates the house.
@@ -125,42 +128,42 @@ def placeHouse(ID, width, length, freespace, y_cor, x_cor, grid):
 	- Grid with the new house added or false if not possible.
 	"""
 	# Define start coordinates:
-	start_y = y_cor - freespace
-	start_x = x_cor - freespace
+	start_y = house.y - house.freespace
+	start_x = house.x - house.freespace
 
 	# Placement checking
-	if checkOverlap(grid, start_y, start_x, width, length, freespace):
+	if checkOverlap(grid, start_y, start_x, house):
 
 		# Generate the houses.
 		# For every possible Y value
-		for l in range(length + 2 * freespace):
+		for l in range(house.length + 2 * house.freespace):
 
 			# For every possible X value
-			for w in range(width + 2 * freespace):
+			for w in range(house.width + 2 * house.freespace):
 
 				# Try placing the house
 				try:
 
 					# First Y freespace meters and last Y freespace
 					# meters get ID 5.
-					if l < freespace:
+					if l < house.freespace:
 						grid[start_y + l][start_x + w] = 5
-					elif l > (length + freespace - 1) and l < (length + 2 * freespace):
+					elif l > (house.length + house.freespace - 1) and l < (house.length + 2 * house.freespace):
 						grid[start_y + l][start_x + w] = 5
 
 					else:
 
 						# First X freespace meters and last X freespace
 						# meters get ID 5.
-						if w < freespace:
+						if w < house.freespace:
 							grid[start_y + l][start_x + w] = 5
-						elif w > (width + freespace - 1) and w < (width + 2 * freespace):
+						elif w > (house.width + house.freespace - 1) and w < (house.width + 2 * house.freespace):
 							grid[start_y + l][start_x + w] = 5
 						
 						# Otherwise it's part of the house and
 						# gets given ID.
 						else:
-							grid[start_y + l][start_x + w] = ID
+							grid[start_y + l][start_x + w] = house.id
 				except:
 					
 					# When error return previous correct grid.
@@ -170,7 +173,7 @@ def placeHouse(ID, width, length, freespace, y_cor, x_cor, grid):
 		return False
 	return grid
 
-def allowedFreespace(grid, y, x, width, length, freespace, allowed):
+def allowedFreespace(grid, house, allowed):
 	"""
 	Takes as input a list of allowed points, the grid and the information
 	from a house. It returns True if the amount of freespace given is 
@@ -179,7 +182,14 @@ def allowedFreespace(grid, y, x, width, length, freespace, allowed):
 	"""
 	# Define max_y and max_x:
 	max_y = len(grid)
-	max_x = len(grid[0])		
+	max_x = len(grid[0])
+
+	# Define other variables:
+	y = house.y
+	x = house.x
+	width = house.width
+	length = house.length
+	freespace = house.freespace		
 
 	# Generate the compas points
 	NW = (y - freespace, x - freespace)

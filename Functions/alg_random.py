@@ -28,9 +28,9 @@ def startGeneration(variant, resolution):
 			return 
 
 		# House distirbution:
-		familyHome = 0.60 * variant
-		bungalow = 0.25 * variant
-		maison = 0.15 * variant
+		familyHome_count = 0.60 * variant
+		bungalow_count = 0.25 * variant
+		maison_count = 0.15 * variant
 
 		# Initialize Classlist
 		placed_houses = []
@@ -61,7 +61,10 @@ def startGeneration(variant, resolution):
 			# Loop until correctly placed.
 			while W != 1:
 
-				ngrid = genHome(gr, water_parts[part][1], water_parts[part][0], 0, 4)
+				Water = class_house.house(water_parts[part][1], water_parts[part][0], 
+									   0, 0, 0, 4, "W")
+
+				ngrid = genHome(gr, Water)
 
 				# Check for success:
 				if ngrid == False:
@@ -72,11 +75,15 @@ def startGeneration(variant, resolution):
 					W = 1
 
 
-		# # Maisons
+		# Maisons
 		M = 0
-		while M != maison:
+		while M != maison_count:
 
-			ngrid = genHome(gr, mais_length, mais_width, mais_freespace, 1)
+			# Define class instance
+			Maison = class_house.house(mais_length, mais_width, 
+									   mais_freespace, 610000, 6, 1, "M")
+
+			ngrid = genHome(gr, Maison)
 
 			# Check if house succsfully placed:
 			if ngrid == False:
@@ -84,13 +91,22 @@ def startGeneration(variant, resolution):
 			else:
 				print ("Maison {0} placed!".format(M))
 				gr = list(ngrid)
+
+				# Add maison to list
+				placed_houses.append(Maison)
+
+
 				M += 1
 
-		# # Then bungalows
+		# Then bungalows
 		B = 0
-		while B != bungalow:
+		while B != bungalow_count:
 
-			ngrid = genHome(gr, bung_length, bung_width, bung_freespace, 2)
+			# Define class instance
+			Bungalow = class_house.house(bung_length, bung_width, 
+									   bung_freespace, 399000, 4, 2, "B")
+
+			ngrid = genHome(gr, Bungalow)
 
 			# Check for succes:
 			if ngrid == False:
@@ -98,13 +114,21 @@ def startGeneration(variant, resolution):
 			else:
 				print ("Bungalow {0} placed!".format(B))
 				gr = list(ngrid)
+
+				# Add maison to list
+				placed_houses.append(Bungalow)
+
 				B += 1 
 
 		# Then Family homes
 		F = 0
-		while F != familyHome:
+		while F != familyHome_count:
 
-			ngrid = genHome(gr, fam_length, fam_width, fam_freespace, 3)
+			# Define class instance
+			Familyhome = class_house.house(fam_length, fam_width, 
+									   fam_freespace, 285000, 3, 3, "F")
+
+			ngrid = genHome(gr, Familyhome)
 
 			# Check for succes:
 			if ngrid == False:
@@ -112,10 +136,23 @@ def startGeneration(variant, resolution):
 			else:
 				print ("Family home {0} placed!".format(F))
 				gr = list(ngrid)
-				F += 1 
+
+				# Add maison to list
+				placed_houses.append(Familyhome)
+
+				F += 1
+
+
+		# Calculate score using Placed houses
+		#
+		#
+		#
+
 
 		# Visualize the grid
 		print ("Generating map..")
+		# for x in placed_houses:
+		# 	print ("({0},{1})".format(x.y,x.x))
 		generic.visualizeGrid(gr)
 
 
@@ -135,14 +172,16 @@ def genX(grid, freespace, length):
 	"""
 	return random.randint(freespace, len(grid[0]) - freespace - length)
 
-def genHome(grid, length, width, freespace, ID):
+def genHome(grid, house):
 	"""
 	Input is a grid, length, width, freespace and id.
 	It calls placeHouse function using random coordinates.
 	"""
-	y = genY(grid, freespace, length)
-	x = genX(grid, freespace, width)
-	return generic.placeHouse(ID, width, length, freespace, y, x, grid)
+	y = genY(grid, house.freespace, house.length)
+	x = genX(grid, house.freespace, house.width)
+	house.setX(x)
+	house.setY(y)
+	return generic.placeHouse(grid, house)
 
 def genWater(grid):
 	"""

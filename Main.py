@@ -127,12 +127,12 @@ def main(variant, maps, visualization):
 		return 0
 
 
-	#alg_random.startGeneration(60, 10)
+	alg_random.startGeneration(60, 10)
 	#gr = genMap(160, 180)
 	#print (placeWater(gr))
 	#calcScore("ja");
 	#Testcalcscore()
-	TestClasses()
+	#TestClasses()
 	
 
 if __name__ == "__main__":
