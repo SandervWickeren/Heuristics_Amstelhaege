@@ -4,6 +4,17 @@ Contains functions that apply to the random algorithm only.
 import random
 import generic
 import math
+import os
+import sys
+
+# Get current location
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
+# Add custom classes and functions
+sys.path.insert(0, dir_path.split("\\")[-1] + "\Classes")
+
+import class_house
+
 
 def startGeneration(variant, resolution):
 		"""
@@ -20,6 +31,9 @@ def startGeneration(variant, resolution):
 		familyHome = 0.60 * variant
 		bungalow = 0.25 * variant
 		maison = 0.15 * variant
+
+		# Initialize Classlist
+		placed_houses = []
 
 		# Initialize values
 		gr = generic.genMap(180 * resolution, 160 * resolution)

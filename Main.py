@@ -12,6 +12,13 @@ def main(variant, maps, visualization):
 	explain
 	"""
 
+
+	def TestClasses():
+		Maison = class_house.house(10.5, 11, 6, 610000, 6, 3, "M")
+		print (Maison.length)	
+				
+
+
 	def Testcalcscore():
 		grid = [[0, 0, 0, 0, 0, 0, 0, 0],
 			    [0, 0, 0, 0, 0, 0, 0, 0],
@@ -120,11 +127,12 @@ def main(variant, maps, visualization):
 		return 0
 
 
-	alg_random.startGeneration(20, 10)
+	#alg_random.startGeneration(60, 10)
 	#gr = genMap(160, 180)
 	#print (placeWater(gr))
 	#calcScore("ja");
 	#Testcalcscore()
+	TestClasses()
 	
 
 if __name__ == "__main__":
@@ -143,6 +151,7 @@ if __name__ == "__main__":
 
 	import generic
 	import alg_random
+	import class_house
 
 
 	# Choose the variant between 20/40/60
