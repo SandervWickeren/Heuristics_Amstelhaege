@@ -7,12 +7,13 @@ class house:
 	resolution = 1
 
 	# Constructor of the class
-	def __init__(self, length, width, freespace, price, priceimprovement, ID, h_type):
+	def __init__(self, length, width, freespace, price, priceimprovement, ID, h_type, resolution):
 		self.length = length
 		self.width = width
 		self.freespace = freespace
 		self.price = price
 		self.priceimprovement = priceimprovement
+		self.resolution = resolution
 
 		# Used for visualization
 		self.id = ID

@@ -82,47 +82,35 @@ def main(variant, maps, visualization):
 		# (0,0), (0,3), (3,3), (3, 0)
 		# (5, 3), (5, 7), (8, 7), (8, 3)
 
-		# Temp dict with coordinates
-		tmpdict = {"M":[(1,1)], "B": [(6, 4)]}
+		# classes:
+		House1 = class_house.house(2, 2, 1, 610000, 6, 2, "Test")
+		House2 = class_house.house(2, 3, 1, 399000, 4, 3, "Test")
+		House1.setX(1)
+		House1.setY(1)
+		House2.setX(4)
+		House2.setY(6)
+
+		placed_houses = [House1, House2]
 
 		total_price = 0
 
-		# For every housetype
-		for housetypes in tmpdict.keys():
-			print (housetypes)
+		# For every class
+		for x in placed_houses:
 
+			allowed = [0, 5, 4]
 
-			# For every coordinate:
-			for coordinates in tmpdict[housetypes]:
+			check = True
+			distance = 0
+			while check:
+				distance += 1
+				check = generic.allowedFreespace(tmp, x, x.freespace + distance, allowed)
 				
 
-				#
-				if housetypes == "M":
-					width = 2
-					length = 2
-					freespace = 1
-					price = 610000
-					percentage = 6
-				else:
-					width = 3
-					length = 2
-					freespace = 1
-					price = 399000
-					percentage = 4 
+			# Calculate house price
+			sell_price = x.price * (1 + (x.priceimprovement / 100) * (distance - x.freespace))
+			total_price += sell_price
+			print ("Gevonden afstand {0} met een prijs van {1}".format(distance, sell_price))
 
-				allowed = [0, 5, 4]
-
-				check = True
-				distance = 0
-				while check:
-					distance += 1
-					check = generic.allowedFreespace(tmp, coordinates[0], coordinates[1], width, length, freespace + distance, allowed)
-					
-
-				# Calculate house price
-				sell_price = price * (1 + (percentage / 100) * (distance - freespace))
-				total_price += sell_price
-				print ("Gevonden afstand {0} met een prijs van {1}".format(distance, sell_price))
 		print (total_price)
 		return 0
 

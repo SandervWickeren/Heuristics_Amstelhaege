@@ -62,7 +62,7 @@ def startGeneration(variant, resolution):
 			while W != 1:
 
 				Water = class_house.house(water_parts[part][1], water_parts[part][0], 
-									   0, 0, 0, 4, "W")
+									   0, 0, 0, 4, "W", resolution)
 
 				ngrid = genHome(gr, Water)
 
@@ -81,7 +81,7 @@ def startGeneration(variant, resolution):
 
 			# Define class instance
 			Maison = class_house.house(mais_length, mais_width, 
-									   mais_freespace, 610000, 6, 1, "M")
+									   mais_freespace, 610000, 6, 1, "M", resolution)
 
 			ngrid = genHome(gr, Maison)
 
@@ -104,7 +104,7 @@ def startGeneration(variant, resolution):
 
 			# Define class instance
 			Bungalow = class_house.house(bung_length, bung_width, 
-									   bung_freespace, 399000, 4, 2, "B")
+									   bung_freespace, 399000, 4, 2, "B", resolution)
 
 			ngrid = genHome(gr, Bungalow)
 
@@ -126,7 +126,7 @@ def startGeneration(variant, resolution):
 
 			# Define class instance
 			Familyhome = class_house.house(fam_length, fam_width, 
-									   fam_freespace, 285000, 3, 3, "F")
+									   fam_freespace, 285000, 3, 3, "F", resolution)
 
 			ngrid = genHome(gr, Familyhome)
 
@@ -144,9 +144,7 @@ def startGeneration(variant, resolution):
 
 
 		# Calculate score using Placed houses
-		#
-		#
-		#
+		print ("Score of the map is: {0}".format(generic.calculateScore(gr, placed_houses)))
 
 
 		# Visualize the grid

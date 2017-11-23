@@ -2,6 +2,7 @@
 Contains generic functions that apply to all of the algorithms used.
 """
 
+import math
 print ("Generic imported")
 
 def genMap(length, width):
@@ -173,7 +174,9 @@ def placeHouse(grid, house):
 		return False
 	return grid
 
-def allowedFreespace(grid, house, allowed):
+
+
+def allowedFreespace(grid, house, freespace, allowed):
 	"""
 	Takes as input a list of allowed points, the grid and the information
 	from a house. It returns True if the amount of freespace given is 
@@ -188,8 +191,7 @@ def allowedFreespace(grid, house, allowed):
 	y = house.y
 	x = house.x
 	width = house.width
-	length = house.length
-	freespace = house.freespace		
+	length = house.length	
 
 	# Generate the compas points
 	NW = (y - freespace, x - freespace)
@@ -200,9 +202,9 @@ def allowedFreespace(grid, house, allowed):
 				  (NW[0], NW[1] + width + 2* freespace), #NE
 				  (NW[0] + length + freespace, NW[1]), #SW
 				  (NW[0] + length + 2 * freespace, NW[1] + width + 2* freespace)] #SE
-	print (NW, NE, SW, SE)
-	print ("------------", freespace, "------------")
-	print (width, length, freespace)
+	# print (NW, NE, SW, SE)
+	# print ("------------", freespace, "------------")
+	# print (width, length, freespace)
 
 
 
@@ -220,7 +222,7 @@ def allowedFreespace(grid, house, allowed):
 				# If the specific point is not a valid
 				# freespace, return false.
 				if grid[point_y][point_x] not in allowed:
-					print ("At p1")
+					#print ("At p1")
 					return False
 				#else:
 					# For visualisation
@@ -238,7 +240,7 @@ def allowedFreespace(grid, house, allowed):
 		try:
 			if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
 				if grid[point_y][point_x] not in allowed:
-					print ("At p2", grid[point_y][point_x])
+					#print ("At p2", grid[point_y][point_x])
 					return False
 		except: 
 			pass
@@ -254,7 +256,7 @@ def allowedFreespace(grid, house, allowed):
 		try:
 			if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
 				if grid[point_y][point_x] not in allowed:
-					print ("At p3", grid[point_y][point_x])
+					#print ("At p3", grid[point_y][point_x])
 					return False
 		except:
 			pass
@@ -270,17 +272,41 @@ def allowedFreespace(grid, house, allowed):
 		try:
 			if 0 <= point_x <= max_x and 0 <= point_y <= max_y:
 				if grid[point_y][point_x] not in allowed:
-					print ("At p4", grid[point_y][point_x], point_y, point_x)
+					#print ("At p4", grid[point_y][point_x], point_y, point_x)
 					return False
 		except:
 			pass
 
 	# Check all points from SW-SE:
-	printGrid(grid)
-	print (" ")
+	# printGrid(grid)
+	# print (" ")
 
 	# If everything went fine, return
 	return True
+
+def calculateScore(grid, placed_houses):
+	total_price = 0
+
+	for h in placed_houses:
+
+		allowed = [0, 5, 4]
+
+		check = True
+		distance = 0
+		while check:
+			distance += 1
+			check = allowedFreespace(grid, h, h.freespace + distance, allowed)
+			
+
+		# Calc extra meters rounding to lowest integer.
+		extra_meters = math.floor((distance - h.freespace) / h.resolution)
+
+		# Calculate the price
+		sell_price = h.price * (1 + (h.priceimprovement / 100) * extra_meters)
+		total_price += sell_price
+		# print ("Gevonden afstand {0} met een prijs van {1}".format(distance, sell_price))
+
+	return total_price
 
 # Helper functions
 def printGrid(grid):
