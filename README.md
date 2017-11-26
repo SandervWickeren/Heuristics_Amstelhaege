@@ -40,6 +40,9 @@ Week 3:
 Week 4:
 - Score functie werkende.
 - Tweede presentatie uitgevoerd.
+- Scorefunctie gekoppeld aan gegenereerde kaart.
+- Alles omgezet naar classes.
+- Functies en algoritmes eigen bestanden met functies.
 
 # Planning:
 Week 5:
