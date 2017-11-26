@@ -35,7 +35,7 @@ Week 2:
 Week 3:
 - Werken aan score functie.
 - Eerste algoritme werkende: random generatie van huizen en water.
-- Literatuur/ideeën voor tweede en derde algoritme: Hill Climbing & Simulated Enhealing
+- Literatuur/ideeën voor tweede en derde algoritme: Hill Climbing & Simulated Annealing
 
 Week 4:
 - Score functie werkende.
@@ -52,7 +52,7 @@ Week 5:
 - Experiment: Optimaliseren van algoritme 1: het vaststellen van de plekken van de maisons, water en andere huizen random generalisatie.
 
 Week 6:
-- Derde algoritme: Simulated Enhealing?
+- Derde algoritme: Simulated Annealing?
 - Experiment: vergelijken algoritme 2 met algoritme 3.
 - Experiment: vergelijken drie algoritmen.
 - Experiment: optimaliseren algoritme 2.
