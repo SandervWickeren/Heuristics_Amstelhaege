@@ -8,7 +8,7 @@ binnen GitHub waarin we kunnen reageren op elkaars problemen of bugs. Ook staat 
 Datastructuur:
 Aantal punten: 3
 We hebben een grid die bestaat uit een lijst van lijsten waarin we getallen hebben staan die representeren wat een cel is.
-Zo heb je de volgende id's 0 = vrije ruimte, 1 = eengezinswoning, 2 = bungalow, 3 = maison, 4 = water en 5 = verplichte vrije ruimte. Deze informatie wordt ook gebruikt om een visualisatie te genereren. Er wordt nu ook gebruik gemaakt van classes. Er is een class houses toegevoegd, voor de verschillende soorten huizen waarin onderscheid gemaakt moet worden in de case.
+Zo heb je de volgende id's 0 = vrije ruimte, 1 = eengezinswoning, 2 = bungalow, 3 = maison, 4 = water en 5 = verplichte vrije ruimte. Deze informatie wordt ook gebruikt om een visualisatie te genereren. Er wordt nu ook gebruik gemaakt van classes. Alles is nu omgezet naar classes. Er is onder andere een class houses toegevoegd, voor de verschillende soorten huizen waarin onderscheid gemaakt moet worden in de case. Functies en algoritmes hebben nu eigen bestanden met functies.
 
 Algoritme:
 Aantal punten: 1
