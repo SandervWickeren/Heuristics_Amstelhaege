@@ -50,7 +50,9 @@ Week 5:
 
 Week 6:
 - Derde algoritme: Simulated Enhealing?
+- Experiment: vergelijken algoritme 2 met algoritme 3.
 - Experiment: vergelijken drie algoritmen.
-- Experiment
+- Experiment: optimaliseren algoritme 2.
+- Experiment: optimaliseren algoritme 3.
 
 
