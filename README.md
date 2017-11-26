@@ -1,39 +1,41 @@
 # Heuristics_Amstelhaege
-Project of the course heuristics, trying to solve the Amstelhaege project. Goal of the project is to plan a residential area in way which delivers the most money. 
+Project van het vak Heuristieken aan de UvA, de Amstelhaege case. Doel van het project is het zo optimaal mogelijk indelen van het gebied waarbij het meeste geld kan worden opgeleverd.
 
 # Contributors:
 - Tom Dekker (11031735)
 - Laura Geerars (11007699)
 - Sander van Wickeren (11060999)
 
-# Progression:
+# Indeling GitHub:
+
+# Progressie:
 Week 1:
-- Initial try with pygame, and random generation of houses.
+- Eerste pogingen met pygame, random generatie van huizen.
 
 Week 2:
-- Now using matplotlib package for visualization.
-- Layed the basis functions like; house generation, map generation,
-random number generation.
-- Transformation to python 3.
-- Call the program from one function with variant(20/40/60) as input.
-
-# Planning:
-Week 2:
-- Presentation preparation.
-- Processing feedback into code (resolution x10).
-- Random water parts generated into code.
+- Er wordt gebruik gemaakt van de matplotlib package voor de visualisatie van het gebied.
+- Basisfuncties werkende zoals; het genereren van huizen, map generatie,random nummer generatie.
+- Transformatie naar python 3.
+- Het aanroepen van een functie met varianten (20/40/60) als input.
+- Eerste presentatie uitgevoerd.
+- Resolutie grid aangepast x10.
 
 Week 3:
-- Finding literature for remaining algorithms.
-- Score function.
-- First algorithm: all at random.
+- Werken aan score functie.
+- Eerste algoritme werkende: random generatie van huizen en water.
+- Literatuur/ideeën voor tweede en derde algoritme: Hill Climbing & Simulated Enhealing
 
 Week 4:
+- Score functie werkende.
+- Tweede presentatie uitgevoerd.
+
+
+# Planning:
+
+Week 5:
 - Saving results from algorithms (scores).
 - Second algorithm.
 - Experiment: comparing first with second algorithm.
-- Presentation preparation.
-- Processing feedback from presentation.
 
 Week 5:
 - Third algorithm.
