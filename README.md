@@ -20,6 +20,8 @@ _Toestandsruimte_: In deze map staat tot nu toe een file voor het kunnen bereken
 
 _docs_: In deze map komt alle documentatie/literatuur te staan die van belang is bij de case. 
 
+Om de visualisatie van het eerste algoritme te runnen, kan dit door middel van het runnen van Main.py.
+
 # Progressie:
 Week 1:
 - Eerste pogingen met pygame, random generatie van huizen.
