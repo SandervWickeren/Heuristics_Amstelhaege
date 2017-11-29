@@ -34,9 +34,12 @@ def startGeneration(variant, resolution):
 
 		# Initialize Classlist
 		placed_houses = []
+		placed_water = []
 
 		# Initialize values
 		gr = generic.genMap(180 * resolution, 160 * resolution)
+
+
 
 		fam_length = int(resolution * 8)
 		fam_width = int(resolution * 8)
@@ -52,7 +55,7 @@ def startGeneration(variant, resolution):
 
 		# Water
 		# Generate water parts
-		water_parts = genWater(gr)
+		water_parts = genWater(gr, resolution)
 
 		# Place water parts in grid:
 		for part in range(len(water_parts)):
@@ -72,6 +75,10 @@ def startGeneration(variant, resolution):
 				else:
 					print ("Water {0} placed!".format(W))
 					gr = list(ngrid)
+
+					# Add water to list
+					placed_houses.append(Water)
+					
 					W = 1
 
 
@@ -94,7 +101,6 @@ def startGeneration(variant, resolution):
 
 				# Add maison to list
 				placed_houses.append(Maison)
-
 
 				M += 1
 
@@ -181,7 +187,7 @@ def genHome(grid, house):
 	house.setY(y)
 	return generic.placeHouse(grid, house)
 
-def genWater(grid):
+def genWater(grid, resolution):
 	"""
 	Current problems:
 	 - Priemgetallen zorgen voor extra loops 
@@ -205,7 +211,7 @@ def genWater(grid):
 	water_surfaces = []
 
 	# Min size of one water piece.
-	min_single_size = 4
+	min_single_size = 4 * resolution
 
 	run = 0
 

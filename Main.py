@@ -115,7 +115,7 @@ def main(variant, maps, visualization):
 		return 0
 
 
-	alg_random.startGeneration(60, 10)
+	alg_random.startGeneration(20, 10)
 	#gr = genMap(160, 180)
 	#print (placeWater(gr))
 	#calcScore("ja");
@@ -134,8 +134,8 @@ if __name__ == "__main__":
 	dir_path = os.path.dirname(os.path.realpath(__file__))
 
 	# Add custom classes and functions
-	sys.path.insert(0, dir_path + "\Functions")
-	sys.path.insert(0, dir_path + "\Classes")
+	sys.path.insert(0, dir_path + "/Functions")
+	sys.path.insert(0, dir_path + "/Classes")
 
 	import generic
 	import alg_random

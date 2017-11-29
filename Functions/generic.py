@@ -288,6 +288,11 @@ def allowedFreespace(grid, house, freespace, allowed):
 	return True
 
 def calculateScore(grid, placed_houses):
+	## Should ignore water types W
+
+
+
+
 	total_price = 0
 
 	for h in placed_houses:
@@ -319,3 +324,13 @@ def printGrid(grid):
 	"""
 	for x in grid:
 		print (x)
+
+def transformtoGrid(placed_houses, resolution):
+	"""
+	Converts a list of instances of the class house
+	into a grid
+	"""
+
+	
+
+	
