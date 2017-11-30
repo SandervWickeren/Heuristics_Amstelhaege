@@ -7,115 +7,14 @@ Names and StudentID:
 Description:
 """
 
-def main(variant, maps, visualization):
+def main(variant, maps, visualization, algorithm):
 	"""
 	explain
 	"""
+	if algorithm == 1:
+		alg_random.startGeneration(variant, 10)
 
-
-	def TestClasses():
-		Maison = class_house.house(10.5, 11, 6, 610000, 6, 3, "M")
-		print (Maison.length)	
-				
-
-
-	def Testcalcscore():
-		grid = [[0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 1, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 5, 5, 5, 5, 5],
-			    [0, 0, 0, 5, 1, 1, 1, 5],
-			    [0, 0, 0, 5, 1, 1, 1, 5],
-			    [0, 0, 0, 5, 5, 5, 5, 5]]
-
-		y = 6
-		x = 4
-		w = 3
-		l = 2
-		f = 0
-
-		test = True
-		d = 0
-		while test:
-			f += 1
-			d += 1
-			test = generic.allowedFreespace(grid, y, x, w, l, f, [0, 5, 4, 6, 7, 8, 9])
-
-		print (f)
-
-
-	def calcScore(grid):
-
-		# Temp test grid
-		tmp = [[5, 5, 5, 5, 0, 0, 0, 0],
-			   [5, 1, 1, 5, 0, 0, 0, 0],
-			   [5, 1, 1, 5, 0, 0, 0, 0],
-			   [5, 5, 5, 5, 0, 0, 0, 0],
-			   [0, 0, 0, 0, 0, 0, 0, 0],
-			   [0, 0, 0, 5, 5, 5, 5, 5],
-			   [0, 0, 0, 5, 2, 2, 2, 5],
-			   [0, 0, 0, 5, 2, 2, 2, 5],
-			   [0, 0, 0, 5, 5, 5, 5, 5]]
-
-		tmp2 = [[5, 5, 5, 5, 0, 0, 0, 0],
-			    [5, 1, 1, 5, 0, 0, 0, 0],
-			    [5, 1, 1, 5, 0, 0, 0, 0],
-			    [5, 5, 5, 5, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0]]
-
-		tmp3 = [[0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 5, 5, 5, 5, 0, 0],
-			    [0, 0, 5, 1, 1, 5, 0, 0],
-			    [0, 0, 5, 1, 1, 5, 0, 0],
-			    [0, 0, 5, 5, 5, 5, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0],
-			    [0, 0, 0, 0, 0, 0, 0, 0]]
-
-		# (0,0), (0,3), (3,3), (3, 0)
-		# (5, 3), (5, 7), (8, 7), (8, 3)
-
-		# classes:
-		House1 = class_house.house(2, 2, 1, 610000, 6, 2, "Test")
-		House2 = class_house.house(2, 3, 1, 399000, 4, 3, "Test")
-		House1.setX(1)
-		House1.setY(1)
-		House2.setX(4)
-		House2.setY(6)
-
-		placed_houses = [House1, House2]
-
-		total_price = 0
-
-		# For every class
-		for x in placed_houses:
-
-			allowed = [0, 5, 4]
-
-			check = True
-			distance = 0
-			while check:
-				distance += 1
-				check = generic.allowedFreespace(tmp, x, x.freespace + distance, allowed)
-				
-
-			# Calculate house price
-			sell_price = x.price * (1 + (x.priceimprovement / 100) * (distance - x.freespace))
-			total_price += sell_price
-			print ("Gevonden afstand {0} met een prijs van {1}".format(distance, sell_price))
-
-		print (total_price)
-		return 0
-
-
-	alg_random.startGeneration(20, 10)
+	#alg_random.startGeneration(20, 10)
 	#gr = genMap(160, 180)
 	#print (placeWater(gr))
 	#calcScore("ja");
@@ -153,4 +52,10 @@ if __name__ == "__main__":
 	# best one after the final map is generated.
 	visualization = 1
 
-	main(variant, maps, visualization)
+	# Choose the algorithm
+	# Random algorithm = 1
+	# Hill climbing algorithm = 2
+	# Simulated Annealing = 3
+	algorithm = 1
+
+	main(variant, maps, visualization, algorithm)
