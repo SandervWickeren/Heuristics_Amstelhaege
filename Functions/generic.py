@@ -357,6 +357,10 @@ def transformtoGrid(placed_houses, resolution):
 
 	for obj in placed_houses:
 		grid = placeHouse(grid, obj);
+		
+		# Return false if it isn't a valid map.
+		if grid == False:
+			return False
 
 	return grid
 	
