@@ -58,63 +58,67 @@ def checkOverlap(grid, start_y, start_x, house):
 	length = house.length
 	freespace = house.freespace
 
-	# Center
-	if grid[start_y + round(length / 2)][start_x  + round(width / 2)] not in allowed:
-		return False
+	try:
+		# Center
+		if grid[start_y + round(length / 2)][start_x  + round(width / 2)] not in allowed:
+			return False
 
-	# North-west
-	if grid[start_y][start_x] not in allowed:
-		return False
+		# North-west
+		if grid[start_y][start_x] not in allowed:
+			return False
 
-	# North-east
-	elif grid[start_y][start_x + freespace + width] not in allowed:
-		return False
+		# North-east
+		elif grid[start_y][start_x + freespace + width] not in allowed:
+			return False
 
-	# South-east
-	elif grid[start_y + length + freespace][start_x + width + freespace] not in allowed:
-		return False
+		# South-east
+		elif grid[start_y + length + freespace][start_x + width + freespace] not in allowed:
+			return False
 
-	# North
-	elif grid[start_y][start_x + freespace + round(width / 2)] not in allowed:
-		return False
+		# North
+		elif grid[start_y][start_x + freespace + round(width / 2)] not in allowed:
+			return False
 
-	# South-west
-	elif grid[start_y + length + freespace][start_x] not in allowed:
-		return False
+		# South-west
+		elif grid[start_y + length + freespace][start_x] not in allowed:
+			return False
 
-	# East
-	elif grid[start_y + round(length / 2)][start_x + freespace + width] not in allowed:
-		return False
+		# East
+		elif grid[start_y + round(length / 2)][start_x + freespace + width] not in allowed:
+			return False
 
-	# South
-	elif grid[start_y + length + freespace][start_x + round(width / 2)] not in allowed:
-		return False
+		# South
+		elif grid[start_y + length + freespace][start_x + round(width / 2)] not in allowed:
+			return False
 
-	# West
-	elif grid[start_y + round(length / 2)][start_x] not in allowed:
-		return False
+		# West
+		elif grid[start_y + round(length / 2)][start_x] not in allowed:
+			return False
 
-	# Because there are differen sizes of freespace it is possible that part of a new house is
-	# in the freespace of a bigger house. By checking the inner SW, SE, NE and NW it 
-	# can be prevented
-	# ISW
-	elif grid[start_y + length + freespace][start_x + freespace] != 0:
-		return False
+		# Because there are differen sizes of freespace it is possible that part of a new house is
+		# in the freespace of a bigger house. By checking the inner SW, SE, NE and NW it 
+		# can be prevented
+		# ISW
+		elif grid[start_y + length + freespace][start_x + freespace] != 0:
+			return False
 
-	# ISE
-	elif grid[start_y + length + freespace][start_x + width + freespace] != 0:
-		return False
+		# ISE
+		elif grid[start_y + length + freespace][start_x + width + freespace] != 0:
+			return False
 
-	# INE
-	elif grid[start_y + freespace][start_x + width + freespace] != 0:
-		return False
+		# INE
+		elif grid[start_y + freespace][start_x + width + freespace] != 0:
+			return False
 
-	# INW
-	elif grid[start_y + freespace][start_x + freespace] != 0:
-		return False
+		# INW
+		elif grid[start_y + freespace][start_x + freespace] != 0:
+			return False
 
-	else:
-		return True
+		else:
+			return True
+	except IndexError:
+		print ("Index Error")
+		return False
 
 
 def placeHouse(grid, house):
@@ -177,7 +181,24 @@ def placeHouse(grid, house):
 		return False
 	return grid
 
+def removeHouse(grid, house):
+	
+	# Define start coordinates:
+	start_y = house.y - house.freespace
+	start_x = house.x - house.freespace
 
+	#print ("Length: {0}, Width: {1}, freespace: {2}, Housetype: {3}".format(house.length, house.width, house.freespace, house.h_type))
+
+	# Remove house
+	for y in range(0, house.freespace * 2 + house.length):
+		for x in range(0, house.freespace * 2 + house.width):
+			try:
+				grid[start_y + y][start_x + x] = 0
+			except Exception as e:
+				print (e)
+				
+
+	return grid
 
 def allowedFreespace(grid, house, freespace, allowed):
 	"""
@@ -331,6 +352,16 @@ def transformtoGrid(placed_houses, resolution):
 	into a grid
 	"""
 
+	# Generate grid
+	grid = genMap(180 * resolution, 160 * resolution)
+
+	for obj in placed_houses:
+		grid = placeHouse(grid, obj);
+
+	return grid
 	
+
+
+
 
 	

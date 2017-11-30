@@ -1,6 +1,7 @@
 """
 Contains functions that apply to the random algorithm only.
 """
+import alg_hillclimb
 import random
 import generic
 import math
@@ -65,7 +66,7 @@ def startGeneration(variant, resolution):
 			while W != 1:
 
 				Water = class_house.house(water_parts[part][1], water_parts[part][0], 
-									   0, 0, 0, 4, "W", resolution)
+									   1, 0, 0, 4, "W", resolution)
 
 				ngrid = genHome(gr, Water)
 
@@ -157,7 +158,11 @@ def startGeneration(variant, resolution):
 		print ("Generating map..")
 		# for x in placed_houses:
 		# 	print ("({0},{1})".format(x.y,x.x))
+		#generic.transformtoGrid(placed_houses, 10)
+		
 		generic.visualizeGrid(gr, name)
+		alg_hillclimb.start_hillclimb(gr, placed_houses, 0)
+
 
 
 def genY(grid, freespace, height):

@@ -43,6 +43,20 @@ class house:
 	def setMultiplier(self, newM):
 		self.multiplier = newM
 
+	def reduceY(self, reduces):
+		if self.y - reduces - self.freespace >= 0:
+			self.y = self.y - reduces
+
+	def increaseY(self, increases):
+		self.y = self.y + increases
+
+	def reduceX(self, reduces):
+		if self.x - reduces - self.freespace >= 0:
+			self.x = self.x - reduces
+
+	def increaseX(self, increases):
+		self.x = self.x + increases
+
 	def calcPrice(self):
 		if self.multiplier > 0:
 			return self.price
