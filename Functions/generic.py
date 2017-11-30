@@ -1,5 +1,11 @@
 """
-Contains generic functions that apply to all of the algorithms used.
+Uitleg:
+
+Dit bestand bevat alle functies die voor alle
+algoritme nodig zijn. Onder andere voor het 
+maken van de visualisatie of het berekenen
+van de score. Uitleg over deze functies
+staat onder de functie zelf.
 """
 
 import math
@@ -19,13 +25,13 @@ def genMap(length, width):
 
 def visualizeGrid(grid, name):
 	"""
-	Take in a grid and outputs a mapping of
-	the grid using various colors.
+	Takes in a grid and outputs a mapping of
+	the grid using various colors using matplotlib.
 	"""
 	import matplotlib.pyplot as plt
 	from matplotlib import colors
 
-	# Define colors [Background, House1, freespace]
+	# Define colors [Background, house1, house2, house3, water, etc.]
 	colormap = colors.ListedColormap(["#FFFFFF", "#F9A825", "#8BC34A", "#D66EFF", "#2196F3", "#424242", "#9E9E9E"])
 	
 	# 0-1: white, 1-5: red etc.
@@ -49,6 +55,11 @@ def checkOverlap(grid, start_y, start_x, house):
 	"""
 	Takes as input the grid and the information from a house, it outputs
 	true if it can be placed and false if it cannot.
+
+	The way it works is quite simple. It checks al outside points based on 
+	a compass. It check all eight furthes corners (from the freespace) and the 
+	four corners of the house. Doing it this way is enough to prevent any
+	overlap without checking every point.
 	"""
 	
 	# Using a small number of significant points to check if overlap
@@ -123,17 +134,10 @@ def checkOverlap(grid, start_y, start_x, house):
 
 def placeHouse(grid, house):
 	"""
-	Takes as input:
-	- A unique ID that indicates the house.
-	- Length of the house in meters
-	- Width of the house in meters
-	- The amount of freespace in meters
-	- y_cor from where it should be generated
-	- x_cor from where it should be generated
-	- The current grid
-
-	Output:
-	- Grid with the new house added or false if not possible.
+	Takes as input the grid and an instance of the house class.
+	It tries to place the house on the coordinates given from the
+	house. When succesfull it 'll return the grid with the house
+	placed, otherwise it 'll return false.
 	"""
 	# Define start coordinates:
 	start_y = house.y - house.freespace
@@ -182,6 +186,11 @@ def placeHouse(grid, house):
 	return grid
 
 def removeHouse(grid, house):
+	"""
+	Takes as input the grid and an instance of the
+	house class. It returns a grid with the house
+	removed.
+	"""
 	
 	# Define start coordinates:
 	start_y = house.y - house.freespace
@@ -309,15 +318,27 @@ def allowedFreespace(grid, house, freespace, allowed):
 	return True
 
 def calculateScore(grid, placed_houses):
+	"""
+	It takes as input the grid and placed_houses.
+	Using the allowedFreespace function it can
+	determine the maximum amount of extra freespace the
+	current house can have. Important to note here is that
+	the extra space outside of the map is counted as infinity
+	so when a house is placed at the left border and the 
+	nearest house is 5 extra meters further it 'll count 5
+	extra meters freespace. Based on the price of the
+	house and its price increase per meter it 'll add 
+	the amount to the total price. Finally it returns
+	the value or the score of the grid.
+	"""
+
 	## Should ignore water types W
-
-
-
 
 	total_price = 0
 
 	for h in placed_houses:
 
+		# Points that are allowed as extra freespace (water)
 		allowed = [0, 5, 4]
 
 		check = True

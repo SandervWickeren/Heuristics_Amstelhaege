@@ -4,7 +4,9 @@ Names and StudentID:
 - Laura Geerars (11007699)
 - Sander van Wickeren (11060999)
 
-Description:
+Beschrijving:
+Het programma werkt als volgt:
+
 """
 
 def main(variant, maps, visualization, algorithm):
@@ -12,6 +14,8 @@ def main(variant, maps, visualization, algorithm):
 	explain
 	"""
 	if algorithm == 1:
+
+		# Second number is resolution and is by default 10.
 		alg_random.startGeneration(variant, 10)
 
 	#alg_random.startGeneration(20, 10)

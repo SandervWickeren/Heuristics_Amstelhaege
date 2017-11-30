@@ -1,5 +1,62 @@
 """
-Contains functions that apply to the random algorithm only.
+Uitleg:
+
+Het algoritme werkt in een aantal stappen om een willekeurige kaart
+te genereren. 
+
+
+1. De basis functie
+'startGeneration' wordt aangeroepen met de variabele
+variant; die aangeeft of er 20, 40 of 60 huizen moeten worden gegenereerd
+en resolution; wat gebruikt is om de resolutie van de kaart groter te maken.
+De kaart wordt groter gemaakt om ervoor te zorgen dat we minder ruimte 
+verliezen doordat de vierkante hoeken nu minder vierkant worden (er kunnen
+meer 'pixels' gebruikt worden om een ronding te creëren). We hebben de 
+keuze gemaakt om dit te doen ipv rond hoeken omdat we vonden dat het 
+niet een groot genoegen impact zal hebben op de score. Wel resulteert
+dit in dat we onze beste uitkomst nooit de allerbeste kunnen noemen.
+
+2. Water genereren
+Water generatie is de eerste stap in het algoritme. Er is bekend dat
+20 procent van het totale oppervlak bestaat uit water en dat het uit
+maximaal 4 lichamen mag bestaan die een verhouding hebben van 1 tot 4.
+Er word een willekeurige oppervlakte gekozen tussen 4 * resolutie en
+het totale wateroppervlakte. Aan de hand van dit oppervlakte wordt 
+gezocht naar de juiste lengte en breedte maten die erbij passen.
+Om dichter bij een vierkant uit te komen wordt eerst de wortel
+van de oppervlakte uitgerekend en vanaf daar gezocht naar hele 
+getallen waarbij Oppervlakte MOD lengte = 0 
+--> wanneer gevonden hebben we een breedte. En wordt de verhouding
+gecontroleerd
+--> wanneer niet gevonden wordt dit oppervlakte niet opgeslagen
+en begint het opnieuw
+
+Om te voldoen aan het maximale aantal waterlichamen wordt de laatste
+oppervlakte mogelijk bepaald door de andere 3 lichamen die al gemaakt 
+zijn, namelijk de oppervlakte die over is. Nu kan het zo zijn dat 
+het oppervlakte dat over is niet kan worden voorzien van lengte
+of breedte maat (bv als oppervlakte een priemgetal is). In dit
+geval worden de laatste twee oppervlaktes gedropt en begint het
+algoritme opnieuw. Op deze wijze zal er nooit een endless loop
+onstaan en altijd voldoende water gegenereerd worden. Ten slotte
+worden lengte en breedte willekeurig omgedraaid zodat er geen vlakke
+onstaan die altijd dezelfde kant op wijzen.
+
+De gevonden oppervlakten worden op willekeurige coordinaten geplaatst
+zodat deze correct binnen de kaart vallen
+
+3. Huizen
+De huizen worden na het water gegenereerd. Ze krijgen ook een willekeurige
+coordinaten. Waarbij het plaatsen alleen voltooid wordt wanneer het
+voldoet aan de contraints dat verplichte vrije ruimte binnen de kaart
+moet vallen en dat ze niet mogen overlappen. Ze worden van groot naar
+klein op de kaart gezet. Beginnend bij Maisons dan bungalows en tenslotte
+eengezinswoninngen.
+
+Alle huizen en de wateroppervlakten kijgen eigen instanties van de 
+'house' class. Deze worden toegevoegd aan een lijst zodat ze makkelijk
+bereikbaar zijn voor andere functies.
+
 """
 import alg_hillclimb
 import random
@@ -15,7 +72,6 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, dir_path.split("\\")[-1] + "\Classes")
 
 import class_house
-
 
 def startGeneration(variant, resolution):
 		"""
@@ -40,8 +96,7 @@ def startGeneration(variant, resolution):
 		# Initialize values
 		gr = generic.genMap(180 * resolution, 160 * resolution)
 
-
-
+		# Set length and width based on resultion.
 		fam_length = int(resolution * 8)
 		fam_width = int(resolution * 8)
 		fam_freespace = int(resolution * 2) 
@@ -65,6 +120,7 @@ def startGeneration(variant, resolution):
 			# Loop until correctly placed.
 			while W != 1:
 
+				# Define class instance
 				Water = class_house.house(water_parts[part][1], water_parts[part][0], 
 									   1, 0, 0, 4, "W", resolution)
 
@@ -255,6 +311,8 @@ def genWater(grid, resolution):
 					# Randomly switch width and length
 					coinflip = random.randint(1, 2)
 					if coinflip == 1:
+
+						# Adds a tuple wich contains (width, length, ratio, surface)
 						water_surfaces.append((w, int(l), round(l / w, 2), size))
 					else:
 						water_surfaces.append((int(l), w, round(l / w, 2), size))
