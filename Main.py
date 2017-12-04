@@ -9,14 +9,46 @@ Het programma werkt als volgt:
 
 """
 
-def main(variant, maps, visualization, algorithm):
+def main(variant, algorithm, filename, loops, visualization):
 	"""
-	explain
+	All algorithms save automatically the best scores.
 	"""
+
+	# Random algorithm
 	if algorithm == 1:
 
 		# Second number is resolution and is by default 10.
-		alg_random.startGeneration(variant, 10, 100)
+		new_grid, houses, score = alg_random.startGeneration(variant, 10, loops)	
+
+
+	# Hill climbing
+	elif algorithm == 2:
+
+		if filename == "":
+			grid, houses, score = alg_random.startGeneration(variant, 10, 1)
+			new_grid, score = alg_hillclimb.start_hillclimb(grid, houses, loops)
+
+		# Use the filename
+		else:
+			houses = read_write.read(filename)
+
+			# Check if succesfull:
+			if houses != False:
+
+				# Retrieve score and make grid
+				score = filename.split(" ")[-1]
+				grid = generic.transformtoGrid(houses, 10)
+
+				# Call hill climb
+				new_grid, score = alg_hillclimb.start_hillclimb(grid, houses, loops)
+
+
+	# Only show visualization if asked for.
+	if visualization == 1:
+		print ("Generating map..")
+		generic.visualizeGrid(new_grid, score)
+
+
 
 	#alg_random.startGeneration(20, 10)
 	#gr = genMap(160, 180)
@@ -46,6 +78,7 @@ if __name__ == "__main__":
 
 	import generic
 	import alg_random
+	import alg_hillclimb
 	import class_house
 	import read_write
 
@@ -53,18 +86,31 @@ if __name__ == "__main__":
 	# Choose the variant between 20/40/60
 	variant = 20
 
-	# Choose the amount of maps it should generate.
-	maps = 1
-
-	# Choose if you want a visualization (1 = yes, 0 = no)
-	# If you generate multiple maps it 'll only show the 
-	# best one after the final map is generated.
-	visualization = 1
-
-	# Choose the algorithm
+	# Choose the algorithm / Function
 	# Random algorithm = 1
 	# Hill climbing algorithm = 2
 	# Simulated Annealing = 3
+	# Open File and create visualization = 4
 	algorithm = 1
 
-	main(variant, maps, visualization, algorithm)
+	# The filename can be used for 2, 3 and 4:
+	# 2: Applies hill climbing on teh grid from the 
+	# given file.
+	# 3: Applies Simulated Annealing on the grid
+	# from the given file
+	# 4: Shows a visualization from grid
+	# Leaving it empty causes it to use
+	# a random valid grid.
+	filename = ""
+
+	# Select the amount of maps you want to generate
+	# only used by algorithm 1
+	loops = 1
+
+	# Choose if you want a visualization (1 = yes, 0 = no)
+	# If you generate multiple maps it 'll only show the 
+	# last one.
+	visualization = 1
+
+	# Start program
+	main(variant, algorithm, filename, loops, visualization) 
