@@ -75,7 +75,7 @@ import class_house
 sys.path.insert(0, dir_path.split("\\")[-1] + "\Results")
 import read_write
 
-def startGeneration(variant, resolution):
+def startGeneration(variant, resolution, loops):
 		"""
 		Variant is the number of houses that has
 		to be placed, resolution changes the size
@@ -91,140 +91,144 @@ def startGeneration(variant, resolution):
 		bungalow_count = 0.25 * variant
 		maison_count = 0.15 * variant
 
-		# Initialize Classlist
-		placed_houses = []
-		placed_water = []
+		for loops in range(loops):
 
-		# Initialize values
-		gr = generic.genMap(180 * resolution, 160 * resolution)
+			# Initialize Classlist
+			placed_houses = []
+			placed_water = []
 
-		# Set length and width based on resultion.
-		fam_length = int(resolution * 8)
-		fam_width = int(resolution * 8)
-		fam_freespace = int(resolution * 2) 
+			# Initialize values
+			gr = generic.genMap(180 * resolution, 160 * resolution)
 
-		bung_length = int(resolution * 7.5)
-		bung_width = int(resolution * 10)
-		bung_freespace = int(resolution * 3) 
+			# Set length and width based on resultion.
+			fam_length = int(resolution * 8)
+			fam_width = int(resolution * 8)
+			fam_freespace = int(resolution * 2) 
 
-		mais_length = int(resolution * 10.5)
-		mais_width = int(resolution * 11)
-		mais_freespace = int(resolution * 6)
+			bung_length = int(resolution * 7.5)
+			bung_width = int(resolution * 10)
+			bung_freespace = int(resolution * 3) 
 
-		# Water
-		# Generate water parts
-		water_parts = genWater(gr, resolution)
+			mais_length = int(resolution * 10.5)
+			mais_width = int(resolution * 11)
+			mais_freespace = int(resolution * 6)
 
-		# Place water parts in grid:
-		for part in range(len(water_parts)):
-			W = 0
+			# Water
+			# Generate water parts
+			water_parts = genWater(gr, resolution)
 
-			# Loop until correctly placed.
-			while W != 1:
+			# Place water parts in grid:
+			for part in range(len(water_parts)):
+				W = 0
+
+				# Loop until correctly placed.
+				while W != 1:
+
+					# Define class instance
+					Water = class_house.house(water_parts[part][1], water_parts[part][0], 
+										   1, 0, 0, 4, "W", resolution)
+
+					ngrid = genHome(gr, Water)
+
+					# Check for success:
+					if ngrid == False:
+						print ("No succesfull placement Water")
+					else:
+						print ("Water {0} placed!".format(W))
+						gr = list(ngrid)
+
+						# Add water to list
+						placed_houses.append(Water)
+						
+						W = 1
+
+
+			# Maisons
+			M = 0
+			while M != maison_count:
 
 				# Define class instance
-				Water = class_house.house(water_parts[part][1], water_parts[part][0], 
-									   1, 0, 0, 4, "W", resolution)
+				Maison = class_house.house(mais_length, mais_width, 
+										   mais_freespace, 610000, 6, 1, "M", resolution)
 
-				ngrid = genHome(gr, Water)
+				ngrid = genHome(gr, Maison)
 
-				# Check for success:
+				# Check if house succsfully placed:
 				if ngrid == False:
-					print ("No succesfull placement Water")
+					print ("No succesfull placement Maison")
 				else:
-					print ("Water {0} placed!".format(W))
+					print ("Maison {0} placed!".format(M))
 					gr = list(ngrid)
 
-					# Add water to list
-					placed_houses.append(Water)
-					
-					W = 1
+					# Add maison to list
+					placed_houses.append(Maison)
+
+					M += 1
+
+			# Then bungalows
+			B = 0
+			while B != bungalow_count:
+
+				# Define class instance
+				Bungalow = class_house.house(bung_length, bung_width, 
+										   bung_freespace, 399000, 4, 2, "B", resolution)
+
+				ngrid = genHome(gr, Bungalow)
+
+				# Check for succes:
+				if ngrid == False:
+					print ("No succesfull placement Bungalow")
+				else:
+					print ("Bungalow {0} placed!".format(B))
+					gr = list(ngrid)
+
+					# Add maison to list
+					placed_houses.append(Bungalow)
+
+					B += 1 
+
+			# Then Family homes
+			F = 0
+			while F != familyHome_count:
+
+				# Define class instance
+				Familyhome = class_house.house(fam_length, fam_width, 
+										   fam_freespace, 285000, 3, 3, "F", resolution)
+
+				ngrid = genHome(gr, Familyhome)
+
+				# Check for succes:
+				if ngrid == False:
+					print ("No succesfull placement Family Home")
+				else:
+					print ("Family home {0} placed!".format(F))
+					gr = list(ngrid)
+
+					# Add maison to list
+					placed_houses.append(Familyhome)
+
+					F += 1
 
 
-		# Maisons
-		M = 0
-		while M != maison_count:
-
-			# Define class instance
-			Maison = class_house.house(mais_length, mais_width, 
-									   mais_freespace, 610000, 6, 1, "M", resolution)
-
-			ngrid = genHome(gr, Maison)
-
-			# Check if house succsfully placed:
-			if ngrid == False:
-				print ("No succesfull placement Maison")
-			else:
-				print ("Maison {0} placed!".format(M))
-				gr = list(ngrid)
-
-				# Add maison to list
-				placed_houses.append(Maison)
-
-				M += 1
-
-		# Then bungalows
-		B = 0
-		while B != bungalow_count:
-
-			# Define class instance
-			Bungalow = class_house.house(bung_length, bung_width, 
-									   bung_freespace, 399000, 4, 2, "B", resolution)
-
-			ngrid = genHome(gr, Bungalow)
-
-			# Check for succes:
-			if ngrid == False:
-				print ("No succesfull placement Bungalow")
-			else:
-				print ("Bungalow {0} placed!".format(B))
-				gr = list(ngrid)
-
-				# Add maison to list
-				placed_houses.append(Bungalow)
-
-				B += 1 
-
-		# Then Family homes
-		F = 0
-		while F != familyHome_count:
-
-			# Define class instance
-			Familyhome = class_house.house(fam_length, fam_width, 
-									   fam_freespace, 285000, 3, 3, "F", resolution)
-
-			ngrid = genHome(gr, Familyhome)
-
-			# Check for succes:
-			if ngrid == False:
-				print ("No succesfull placement Family Home")
-			else:
-				print ("Family home {0} placed!".format(F))
-				gr = list(ngrid)
-
-				# Add maison to list
-				placed_houses.append(Familyhome)
-
-				F += 1
+			# Calculate score using Placed houses
+			sc = generic.calculateScore(gr, placed_houses)
+			name = ("Score: " + str(sc))
 
 
-		# Calculate score using Placed houses
-		name = ("Score: " + str(generic.calculateScore(gr, placed_houses)))
+			# Visualize the grid
+			print ("Generating map..")
+			# for x in placed_houses:
+			# 	print ("({0},{1})".format(x.y,x.x))
+			#generic.transformtoGrid(placed_houses, 10)
+			
+			#generic.visualizeGrid(gr, name)
+
+			# Test read write
+			print ("Writing to file..")
+			fname = "Type{0} - {1}".format(variant, sc)
+			read_write.write(fname, placed_houses)
 
 
-		# Visualize the grid
-		print ("Generating map..")
-		# for x in placed_houses:
-		# 	print ("({0},{1})".format(x.y,x.x))
-		#generic.transformtoGrid(placed_houses, 10)
-		
-		#generic.visualizeGrid(gr, name)
-
-		# Test read write
-		fname = "Type{0} - {1}".format(variant, generic.calculateScore(gr, placed_houses))
-		read_write.write(fname, placed_houses)
-
-		
 
 
 

@@ -13,10 +13,10 @@ def main(variant, maps, visualization, algorithm):
 	"""
 	explain
 	"""
-	#if algorithm == 1:
+	if algorithm == 1:
 
 		# Second number is resolution and is by default 10.
-		#alg_random.startGeneration(variant, 10)
+		alg_random.startGeneration(variant, 10, 10)
 
 	#alg_random.startGeneration(20, 10)
 	#gr = genMap(160, 180)
@@ -24,7 +24,9 @@ def main(variant, maps, visualization, algorithm):
 	#calcScore("ja");
 	#Testcalcscore()
 	#TestClasses()
-	read_write.read_and_visualize("Type20 - 7665810.0")
+
+
+	#read_write.read_and_visualize("Type20 - 7665810.0")
 	
 
 if __name__ == "__main__":
