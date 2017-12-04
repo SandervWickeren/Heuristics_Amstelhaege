@@ -70,8 +70,10 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # Add custom classes and functions
 sys.path.insert(0, dir_path.split("\\")[-1] + "\Classes")
-
 import class_house
+
+sys.path.insert(0, dir_path.split("\\")[-1] + "\Results")
+import read_write
 
 def startGeneration(variant, resolution):
 		"""
@@ -216,8 +218,18 @@ def startGeneration(variant, resolution):
 		# 	print ("({0},{1})".format(x.y,x.x))
 		#generic.transformtoGrid(placed_houses, 10)
 		
-		generic.visualizeGrid(gr, name)
-		alg_hillclimb.start_hillclimb(gr, placed_houses, 0)
+		#generic.visualizeGrid(gr, name)
+
+		# Test read write
+		fname = "Type{0} - {1}".format(variant, generic.calculateScore(gr, placed_houses))
+		read_write.write(fname, placed_houses)
+
+		
+
+
+
+
+		#alg_hillclimb.start_hillclimb(gr, placed_houses, 0)
 
 
 
