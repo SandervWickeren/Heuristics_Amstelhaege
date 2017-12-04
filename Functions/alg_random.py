@@ -86,6 +86,10 @@ def startGeneration(variant, resolution, loops):
 			print ("Resolution should be an even integer.")
 			return 
 
+		# Set high score:
+		if variant == 20:
+			high_score = 9932670
+
 		# House distirbution:
 		familyHome_count = 0.60 * variant
 		bungalow_count = 0.25 * variant
@@ -226,7 +230,12 @@ def startGeneration(variant, resolution, loops):
 			# Test read write
 			print ("Writing to file..")
 			fname = "Type{0} - {1}".format(variant, sc)
-			read_write.write(fname, placed_houses)
+
+			if sc > high_score:
+				read_write.write(fname, placed_houses)
+				high_score = sc
+				print ("New high score ({0}) in loop: {1}".format(sc, loops))
+
 
 
 

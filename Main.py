@@ -16,7 +16,7 @@ def main(variant, maps, visualization, algorithm):
 	if algorithm == 1:
 
 		# Second number is resolution and is by default 10.
-		alg_random.startGeneration(variant, 10, 10)
+		alg_random.startGeneration(variant, 10, 100)
 
 	#alg_random.startGeneration(20, 10)
 	#gr = genMap(160, 180)
