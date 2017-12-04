@@ -52,21 +52,30 @@ Totaal:  1489,5 m^2 (Huizen) + 5.780 m^2 (Water) = 7.269,5 m^2 (25,2%)
 Totaal: 2.979 m^2 (Huizen) + 5.780 m^2 (Water) = 8.759 m^2 (30,4%)
 
 60 huizen variant:
-Totaal: 4.468,5 m^2 (Huizen) + 5.780 m^2 (Water) = 20.248,5 m^2 (35,5%)
+Totaal: 4.468,5 m^2 (Huizen) + 5.780 m^2 (Water) = 10.248,5 m^2 (35,5%)
 
 Upperbound:
 20 huizen variant:
-20 huizen, 28.800 mogelijkheden ( 20 boven 28.800 ) (2.948926e+37)
+20 huizen, 28.800 mogelijkheden ( 28.800 boven 20 ) (6.29 x 10^70 )
 
 40 huizen variant:
-40 huizen, 28.800 mogelijkheden ( 40 boven 28.800 ) (1.3782492e+46)
+40 huizen, 28.800 mogelijkheden ( 28.800 boven 40 ) (2.83 x 10^130 )
 
 60 huizen variant:
-60 huizen, 28.800 mogelijkheden (60 boven 28.800 ) ("Infinity")
+60 huizen, 28.800 mogelijkheden (28.800 boven 60 ) (4.14 x 10^185 )
 
 Lowerbound:
 20 huizen variant:
+20 huizen die 1489,5 m^2 (dus blokjes) innemen, 5.780 m^2 (dus blokjes) aan water, 28.800 mogelijkheden.
+7.269,5 m^2 --> 7.269,5 blokjes, 28.800 mogelijkheden.
+( 28.800 boven 7.270 (0.5 in berekening niet mogelijk, afgerond naar boven) ) ( 2.78 x 10^7064 )
 
 40 huizen variant:
+40 huizen die 2.979 m^2 (dus blokjes) innemen, 5.780 m^2 (dus blokjes) aan water, 28.800 mogelijkheden.
+8.759 m^2 --> 8.759 blokjes, 28.800 mogelijkheden.
+( 28.800 boven 8.759 )  ( 3.06 x 10^7681 )
 
 60 huizen variant:
+60 huizen die 4.468,5 m^2 (dus blokjes) innemen, 5.780 m^2 (dus blokjes) aan water, 28.800 mogelijkheden.
+10.248,5 m^2 --> 10.248,5 blokjes, 28.800 mogelijkheden.
+( 28.800 boven 10.249 (0.5 in berekening niet mogelijk, afgerond naar boven) ) ( 1.73 x 10^8140 )
