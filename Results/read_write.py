@@ -24,16 +24,16 @@ import generic
 
 def read(filename):
 
-	
 	# Get current location
 	dir_path = os.path.dirname(os.path.realpath(__file__))
 
 	# Open new file
-	with open(dir_path + "\\" + filename + ".pickle", "rb") as load_file:
-		houses = pickle.load(load_file)
-		return houses
-	
-	return False
+	try:
+		with open(dir_path + "\\" + filename + ".pickle", "rb") as load_file:
+			houses = pickle.load(load_file)
+			return houses
+	except:
+		return False
 
 def write(filename, houses):
 

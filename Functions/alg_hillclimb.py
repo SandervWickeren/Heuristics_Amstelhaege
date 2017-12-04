@@ -34,9 +34,6 @@ def start_hillclimb(grid, placed_houses, rounds):
 	score = generic.calculateScore(grid, placed_houses)
 	f_score = score
 
-	for s in range(4):
-		print (s)
-
 	for side in range(4):
 		for h in placed_houses:
 			print ("Checking house {0}/{1}".format(placed_houses.index(h), len(placed_houses)))
@@ -147,4 +144,6 @@ def start_hillclimb(grid, placed_houses, rounds):
 				print ("Old score: {0}, New score: {1}".format(f_score, score))
 				print ("X: {0}, Y: {1}".format(h.x, h.y))
 
-	generic.visualizeGrid(old_grid, score)
+	
+	# generic.visualizeGrid(old_grid, score)
+	return old_grid, score

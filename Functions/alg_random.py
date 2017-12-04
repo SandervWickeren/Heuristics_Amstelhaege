@@ -213,36 +213,20 @@ def startGeneration(variant, resolution, loops):
 
 					F += 1
 
-
 			# Calculate score using Placed houses
 			sc = generic.calculateScore(gr, placed_houses)
 			name = ("Score: " + str(sc))
 
-
-			# Visualize the grid
-			print ("Generating map..")
-			# for x in placed_houses:
-			# 	print ("({0},{1})".format(x.y,x.x))
-			#generic.transformtoGrid(placed_houses, 10)
-			
-			#generic.visualizeGrid(gr, name)
-
-			# Test read write
-			print ("Writing to file..")
+			# Only save to file when new record.
 			fname = "Type{0} - {1}".format(variant, sc)
 
 			if sc > high_score:
 				read_write.write(fname, placed_houses)
 				high_score = sc
 				print ("New high score ({0}) in loop: {1}".format(sc, loops))
+				print ("Writing to file..")
 
-
-
-
-
-
-
-		#alg_hillclimb.start_hillclimb(gr, placed_houses, 0)
+		return gr, placed_houses, sc
 
 
 
