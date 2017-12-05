@@ -42,6 +42,20 @@ def main(variant, algorithm, filename, loops, visualization):
 				# Call hill climb
 				new_grid, score = alg_hillclimb.start_hillclimb(grid, houses, loops)
 
+	elif algorithm == 3:
+		print ("moet nog")
+
+	elif algorithm == 4:
+		houses = read_write.read(filename)
+
+		if houses != False:
+
+				# Retrieve score and make grid
+				score = filename.split(" ")[-1]
+				grid = generic.transformtoGrid(houses, 10)
+
+				generic.visualizeGrid(grid, score)
+
 
 	# Only show visualization if asked for.
 	if visualization == 1:
@@ -91,7 +105,7 @@ if __name__ == "__main__":
 	# Hill climbing algorithm = 2
 	# Simulated Annealing = 3
 	# Open File and create visualization = 4
-	algorithm = 1
+	algorithm = 4
 
 	# The filename can be used for 2, 3 and 4:
 	# 2: Applies hill climbing on teh grid from the 
@@ -101,16 +115,16 @@ if __name__ == "__main__":
 	# 4: Shows a visualization from grid
 	# Leaving it empty causes it to use
 	# a random valid grid.
-	filename = ""
+	filename = "Type20HC - 11165430.0"
 
 	# Select the amount of maps you want to generate
 	# only used by algorithm 1
-	loops = 1
+	loops = 25
 
 	# Choose if you want a visualization (1 = yes, 0 = no)
 	# If you generate multiple maps it 'll only show the 
 	# last one.
-	visualization = 1
+	visualization = 0
 
 	# Start program
 	main(variant, algorithm, filename, loops, visualization) 

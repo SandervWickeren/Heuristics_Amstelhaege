@@ -33,6 +33,7 @@ def read(filename):
 			houses = pickle.load(load_file)
 			return houses
 	except:
+		print ("Failed")
 		return False
 
 def write(filename, houses):

@@ -20,6 +20,15 @@ def start_hillclimb(grid, placed_houses, rounds):
 	"""
 	import random
 	import generic
+	import sys
+	import os
+
+	# Get current location
+	dir_path = os.path.dirname(os.path.realpath(__file__))
+
+	sys.path.insert(0, dir_path.split("\\")[-1] + "\Results")
+	import read_write
+
 
 	# Check if grid is given
 	if grid == False:
@@ -36,16 +45,11 @@ def start_hillclimb(grid, placed_houses, rounds):
 
 	for side in range(4):
 		for h in placed_houses:
-			print ("Checking house {0}/{1}".format(placed_houses.index(h), len(placed_houses)))
-			if h.h_type != "W":
-
-				# TEST GRIDGEN
+			print ("Checking house {0}/{1} - Side: {2}/4".format(placed_houses.index(h), len(placed_houses), side + 1))
+			if h.h_type != "Q":
 
 				# Counts the amount of times the same score is produced
 				same_score_count = 0
-
-				# Choose a random side
-				# side = random.randint(0, 4)
 				
 				# Used to break the for loop.
 				abort = False
@@ -145,5 +149,10 @@ def start_hillclimb(grid, placed_houses, rounds):
 				print ("X: {0}, Y: {1}".format(h.x, h.y))
 
 	
-	# generic.visualizeGrid(old_grid, score)
+	# Save result
+	variant = 20
+	fname = "Type{0}HC - {1}".format(variant, score)
+	read_write.write(fname, placed_houses)
+	print ("Writing to file..")
+
 	return old_grid, score
