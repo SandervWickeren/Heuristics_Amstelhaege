@@ -15,10 +15,10 @@ import sys
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-print(dir_path.split("\\")[-2] + "\Functions")
+print(dir_path.split("/")[-2] + "/Functions")
 
 # Add custom functions
-sys.path.insert(0, dir_path.split("\\")[-2] + "\Functions")
+sys.path.insert(0, dir_path.split("/")[-2] + "/Functions")
 import generic
 
 
@@ -29,7 +29,7 @@ def read(filename):
 
 	# Open new file
 	try:
-		with open(dir_path + "\\" + filename + ".pickle", "rb") as load_file:
+		with open(dir_path + "/" + filename + ".pickle", "rb") as load_file:
 			houses = pickle.load(load_file)
 			return houses
 	except:
@@ -42,7 +42,7 @@ def write(filename, houses):
 	dir_path = os.path.dirname(os.path.realpath(__file__))
 
 	# Open new file
-	with open(dir_path + "\\" + filename + ".pickle", "wb") as new_file:
+	with open(dir_path + "/" + filename + ".pickle", "wb") as new_file:
 
 		print (dir_path + filename)
 
@@ -68,6 +68,3 @@ def read_and_visualize(filename):
 		return generic.visualizeGrid(grid, "test")
 
 	return False
-
-
-

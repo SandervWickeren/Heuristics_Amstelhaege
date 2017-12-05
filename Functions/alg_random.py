@@ -2,17 +2,17 @@
 Uitleg:
 
 Het algoritme werkt in een aantal stappen om een willekeurige kaart
-te genereren. 
+te genereren.
 
 
 1. De basis functie
 'startGeneration' wordt aangeroepen met de variabele
 variant; die aangeeft of er 20, 40 of 60 huizen moeten worden gegenereerd
 en resolution; wat gebruikt is om de resolutie van de kaart groter te maken.
-De kaart wordt groter gemaakt om ervoor te zorgen dat we minder ruimte 
+De kaart wordt groter gemaakt om ervoor te zorgen dat we minder ruimte
 verliezen doordat de vierkante hoeken nu minder vierkant worden (er kunnen
-meer 'pixels' gebruikt worden om een ronding te creëren). We hebben de 
-keuze gemaakt om dit te doen ipv rond hoeken omdat we vonden dat het 
+meer 'pixels' gebruikt worden om een ronding te creëren). We hebben de
+keuze gemaakt om dit te doen ipv rond hoeken omdat we vonden dat het
 niet een groot genoegen impact zal hebben op de score. Wel resulteert
 dit in dat we onze beste uitkomst nooit de allerbeste kunnen noemen.
 
@@ -21,19 +21,19 @@ Water generatie is de eerste stap in het algoritme. Er is bekend dat
 20 procent van het totale oppervlak bestaat uit water en dat het uit
 maximaal 4 lichamen mag bestaan die een verhouding hebben van 1 tot 4.
 Er word een willekeurige oppervlakte gekozen tussen 4 * resolutie en
-het totale wateroppervlakte. Aan de hand van dit oppervlakte wordt 
+het totale wateroppervlakte. Aan de hand van dit oppervlakte wordt
 gezocht naar de juiste lengte en breedte maten die erbij passen.
 Om dichter bij een vierkant uit te komen wordt eerst de wortel
-van de oppervlakte uitgerekend en vanaf daar gezocht naar hele 
-getallen waarbij Oppervlakte MOD lengte = 0 
+van de oppervlakte uitgerekend en vanaf daar gezocht naar hele
+getallen waarbij Oppervlakte MOD lengte = 0
 --> wanneer gevonden hebben we een breedte. En wordt de verhouding
 gecontroleerd
 --> wanneer niet gevonden wordt dit oppervlakte niet opgeslagen
 en begint het opnieuw
 
 Om te voldoen aan het maximale aantal waterlichamen wordt de laatste
-oppervlakte mogelijk bepaald door de andere 3 lichamen die al gemaakt 
-zijn, namelijk de oppervlakte die over is. Nu kan het zo zijn dat 
+oppervlakte mogelijk bepaald door de andere 3 lichamen die al gemaakt
+zijn, namelijk de oppervlakte die over is. Nu kan het zo zijn dat
 het oppervlakte dat over is niet kan worden voorzien van lengte
 of breedte maat (bv als oppervlakte een priemgetal is). In dit
 geval worden de laatste twee oppervlaktes gedropt en begint het
@@ -53,7 +53,7 @@ moet vallen en dat ze niet mogen overlappen. Ze worden van groot naar
 klein op de kaart gezet. Beginnend bij Maisons dan bungalows en tenslotte
 eengezinswoninngen.
 
-Alle huizen en de wateroppervlakten kijgen eigen instanties van de 
+Alle huizen en de wateroppervlakten kijgen eigen instanties van de
 'house' class. Deze worden toegevoegd aan een lijst zodat ze makkelijk
 bereikbaar zijn voor andere functies.
 
@@ -69,22 +69,22 @@ import sys
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # Add custom classes and functions
-sys.path.insert(0, dir_path.split("\\")[-1] + "\Classes")
+sys.path.insert(0, dir_path.split("/")[-1] + "/Classes")
 import class_house
 
-sys.path.insert(0, dir_path.split("\\")[-1] + "\Results")
+sys.path.insert(0, dir_path.split("/")[-1] + "/Results")
 import read_write
 
 def startGeneration(variant, resolution, loops):
 		"""
 		Variant is the number of houses that has
 		to be placed, resolution changes the size
-		of the map.	
+		of the map.
 		"""
 		# Check for valid resolution
 		if resolution % 2 != 0:
 			print ("Resolution should be an even integer.")
-			return 
+			return
 
 		# Set high score:
 		if variant == 20:
@@ -111,11 +111,11 @@ def startGeneration(variant, resolution, loops):
 			# Set length and width based on resultion.
 			fam_length = int(resolution * 8)
 			fam_width = int(resolution * 8)
-			fam_freespace = int(resolution * 2) 
+			fam_freespace = int(resolution * 2)
 
 			bung_length = int(resolution * 7.5)
 			bung_width = int(resolution * 10)
-			bung_freespace = int(resolution * 3) 
+			bung_freespace = int(resolution * 3)
 
 			mais_length = int(resolution * 10.5)
 			mais_width = int(resolution * 11)
@@ -133,7 +133,7 @@ def startGeneration(variant, resolution, loops):
 				while W != 1:
 
 					# Define class instance
-					Water = class_house.House(water_parts[part][1], water_parts[part][0], 
+					Water = class_house.House(water_parts[part][1], water_parts[part][0],
 										   1, 0, 0, 4, "W", resolution)
 
 					ngrid = genHome(gr, Water)
@@ -147,7 +147,7 @@ def startGeneration(variant, resolution, loops):
 
 						# Add water to list
 						placed_houses.append(Water)
-						
+
 						W = 1
 
 
@@ -156,7 +156,7 @@ def startGeneration(variant, resolution, loops):
 			while M != maison_count:
 
 				# Define class instance
-				Maison = class_house.House(mais_length, mais_width, 
+				Maison = class_house.House(mais_length, mais_width,
 										   mais_freespace, 610000, 6, 1, "M", resolution)
 
 				ngrid = genHome(gr, Maison)
@@ -178,7 +178,7 @@ def startGeneration(variant, resolution, loops):
 			while B != bungalow_count:
 
 				# Define class instance
-				Bungalow = class_house.House(bung_length, bung_width, 
+				Bungalow = class_house.House(bung_length, bung_width,
 										   bung_freespace, 399000, 4, 2, "B", resolution)
 
 				ngrid = genHome(gr, Bungalow)
@@ -193,14 +193,14 @@ def startGeneration(variant, resolution, loops):
 					# Add maison to list
 					placed_houses.append(Bungalow)
 
-					B += 1 
+					B += 1
 
 			# Then Family homes
 			F = 0
 			while F != familyHome_count:
 
 				# Define class instance
-				Familyhome = class_house.House(fam_length, fam_width, 
+				Familyhome = class_house.House(fam_length, fam_width,
 										   fam_freespace, 285000, 3, 3, "F", resolution)
 
 				ngrid = genHome(gr, Familyhome)
@@ -244,7 +244,7 @@ def genHome(grid, house):
 def genWater(grid, resolution):
 	"""
 	Current problems:
-	 - Priemgetallen zorgen voor extra loops 
+	 - Priemgetallen zorgen voor extra loops
 	 	--> misschien eerst testen?
 	 - Als eerste getal groot is heb je veel loops
 	 - Functie is nog wat rommelig.
@@ -280,17 +280,17 @@ def genWater(grid, resolution):
 		if len(water_surfaces) < 3 and min_single_size != allowed_surface and allowed_surface > 5:
 			size = random.randint(min_single_size, allowed_surface)
 
-		
+
 		# Otherwise the size is the allowed surface
 		else:
 			size = allowed_surface
 
-		
+
 		# Shouldn't go below 0
 		if allowed_surface - size >= 0:
-		
+
 			# Calculate width and length if possible.
-			# Starting from the square root causes the part to 
+			# Starting from the square root causes the part to
 			# be more square instead of a straight line.
 			init = round(math.sqrt(size))
 			for i in range(init, 1, -1):
@@ -310,7 +310,7 @@ def genWater(grid, resolution):
 					else:
 						water_surfaces.append((int(l), w, round(l / w, 2), size))
 					break
-					
+
 		if run > 4:
 			# Drop last try and remake the surface.
 			print ("Drop")
