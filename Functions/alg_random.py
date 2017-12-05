@@ -64,15 +64,26 @@ import generic
 import math
 import os
 import sys
+import platform
+
+# Get current os
+os_name = platform.system()
+
+if os_name == "Windows":
+	sp = "\\"
+	i = -2
+elif os_name == "Darwin":
+	sp = "/"
+	i = -1
 
 # Get current location
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # Add custom classes and functions
-sys.path.insert(0, dir_path.split("/")[-1] + "/Classes")
+sys.path.insert(0, dir_path.split(sp)[i] + "/Classes")
 import class_house
 
-sys.path.insert(0, dir_path.split("/")[-1] + "/Results")
+sys.path.insert(0, dir_path.split(sp)[i] + "/Results")
 import read_write
 
 def startGeneration(variant, resolution, loops):

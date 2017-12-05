@@ -12,13 +12,24 @@ Type20 - 9034500.pickle
 import pickle
 import os
 import sys
+import platform
+
+# Get current os
+os_name = platform.system()
+
+if os_name == "Windows":
+	sp = "\\"
+	i = -2
+elif os_name == "Darwin":
+	sp = "/"
+	i = -2
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-print(dir_path.split("/")[-2] + "/Functions")
+print(dir_path.split(sp)[i] + "/Functions")
 
 # Add custom functions
-sys.path.insert(0, dir_path.split("/")[-2] + "/Functions")
+sys.path.insert(0, dir_path.split(sp)[i] + "/Functions")
 import generic
 
 
