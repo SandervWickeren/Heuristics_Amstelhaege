@@ -74,19 +74,19 @@ def start_hillclimb(grid, placed_houses, rounds):
 					# Check which side it has to move to:
 					if side == 0:
 						# Reduce y to move to the north.
-						h.reduceY(step)
+						h.reduce_y(step)
 
 					elif side == 1:
 						# Increase x to move to the east
-						h.increaseX(step)
+						h.increase_x(step)
 
 					elif side == 2:
 						# Increase y to move to the south
-						h.increaseY(step)
+						h.increase_y(step)
 
 					elif side == 3:
 						# Decrease x to move to the west
-						h.reduceX(step)
+						h.reduce_x(step)
 					
 					#print ("After --- X: {0} , Y: {1}".format(h.x, h.y))
 
@@ -136,8 +136,8 @@ def start_hillclimb(grid, placed_houses, rounds):
 
 
 				# Give back the best coordinates
-				h.setX(old_x)
-				h.setY(old_y)
+				h.set_x(old_x)
+				h.set_y(old_y)
 
 				# Visualize change
 				print ("In {0} loops".format(loops))

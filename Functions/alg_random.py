@@ -129,7 +129,7 @@ def startGeneration(variant, resolution, loops):
 				while W != 1:
 
 					# Define class instance
-					Water = class_house.house(water_parts[part][1], water_parts[part][0], 
+					Water = class_house.House(water_parts[part][1], water_parts[part][0], 
 										   1, 0, 0, 4, "W", resolution)
 
 					ngrid = genHome(gr, Water)
@@ -152,7 +152,7 @@ def startGeneration(variant, resolution, loops):
 			while M != maison_count:
 
 				# Define class instance
-				Maison = class_house.house(mais_length, mais_width, 
+				Maison = class_house.House(mais_length, mais_width, 
 										   mais_freespace, 610000, 6, 1, "M", resolution)
 
 				ngrid = genHome(gr, Maison)
@@ -174,7 +174,7 @@ def startGeneration(variant, resolution, loops):
 			while B != bungalow_count:
 
 				# Define class instance
-				Bungalow = class_house.house(bung_length, bung_width, 
+				Bungalow = class_house.House(bung_length, bung_width, 
 										   bung_freespace, 399000, 4, 2, "B", resolution)
 
 				ngrid = genHome(gr, Bungalow)
@@ -196,7 +196,7 @@ def startGeneration(variant, resolution, loops):
 			while F != familyHome_count:
 
 				# Define class instance
-				Familyhome = class_house.house(fam_length, fam_width, 
+				Familyhome = class_house.House(fam_length, fam_width, 
 										   fam_freespace, 285000, 3, 3, "F", resolution)
 
 				ngrid = genHome(gr, Familyhome)
@@ -228,33 +228,13 @@ def startGeneration(variant, resolution, loops):
 
 		return gr, placed_houses, sc
 
-
-
-def genY(grid, freespace, height):
-	"""
-	Input is a grid, the amount of freespace and the
-	height of the dedicated house.
-	Output a random Y value from the grid.
-	"""
-	return random.randint(freespace, len(grid) - freespace - height)
-
-def genX(grid, freespace, length):
-	"""
-	Input is a grid, the amount of freespace and the
-	length of the dedicated house.
-	Output a random Y value from the grid.
-	"""
-	return random.randint(freespace, len(grid[0]) - freespace - length)
-
 def genHome(grid, house):
 	"""
 	Input is a grid, length, width, freespace and id.
 	It calls placeHouse function using random coordinates.
 	"""
-	y = genY(grid, house.freespace, house.length)
-	x = genX(grid, house.freespace, house.width)
-	house.setX(x)
-	house.setY(y)
+	house.random_x(grid)
+	house.random_y(grid)
 	return generic.placeHouse(grid, house)
 
 def genWater(grid, resolution):

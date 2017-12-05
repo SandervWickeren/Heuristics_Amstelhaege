@@ -1,6 +1,7 @@
 print ("Succesfully imported class_house")
+import random
 
-class house:
+class House:
 
 	# Class variable
 	num_of_houses = 0
@@ -27,37 +28,43 @@ class house:
 		self.multiplier = 0
 
 		# Adds house to class variable
-		house.num_of_houses += 1
+		House.num_of_houses += 1
 
 	# Class instance function applies (and uses) only values from
 	# an instance of the class. 
 	def surface(self):
 		return width * length
 
-	def setX(self, newX):
+	def set_x(self, newX):
 		self.x = newX
 
-	def setY(self, newY):
+	def set_y(self, newY):
 		self.y = newY
 
-	def setMultiplier(self, newM):
+	def set_multiplier(self, newM):
 		self.multiplier = newM
 
-	def reduceY(self, reduces):
+	def random_y(self, grid):
+		self.y = random.randint(self.freespace, len(grid) - self.freespace - self.length)
+
+	def random_x(self, grid):
+		self.x = random.randint(self.freespace, len(grid[0]) - self.freespace - self.width)
+
+	def reduce_y(self, reduces):
 		if self.y - reduces - self.freespace >= 0:
 			self.y = self.y - reduces
 
-	def increaseY(self, increases):
+	def increase_y(self, increases):
 		self.y = self.y + increases
 
-	def reduceX(self, reduces):
+	def reduce_x(self, reduces):
 		if self.x - reduces - self.freespace >= 0:
 			self.x = self.x - reduces
 
-	def increaseX(self, increases):
+	def increase_x(self, increases):
 		self.x = self.x + increases
 
-	def calcPrice(self):
+	def calc_price(self):
 		if self.multiplier > 0:
 			return self.price
 		else:
