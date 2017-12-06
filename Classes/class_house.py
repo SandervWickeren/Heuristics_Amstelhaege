@@ -1,4 +1,4 @@
-print ("Succesfully imported class_house")
+print ("class_house imported")
 import random
 
 class House:

@@ -65,6 +65,7 @@ import math
 import os
 import sys
 import platform
+print ("alg_random imported")
 
 # Get current os
 os_name = platform.system()
@@ -101,9 +102,9 @@ def startGeneration(variant, resolution, loops):
 		if variant == 20:
 			high_score = 9932670
 		if variant == 40:
-			high_score = 15215280
+			high_score = 16240050
 		if variant == 60:
-			high_score = 20820030
+			high_score = 21198930
 
 		# House distirbution:
 		familyHome_count = 0.60 * variant
@@ -289,7 +290,10 @@ def genWater(grid, resolution):
 
 		# Only generate random if we have more then 1 option left.
 		if len(water_surfaces) < 3 and min_single_size != allowed_surface and allowed_surface > 5:
-			size = random.randint(min_single_size, allowed_surface)
+			try:
+				size = random.randint(min_single_size, allowed_surface)
+			except ValueError as e:
+				print ("Error occured: {0} using variables min: {1} and allowed_surface: {2}".format(e, min_single_size, allowed_surface))
 
 
 		# Otherwise the size is the allowed surface

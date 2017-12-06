@@ -13,6 +13,7 @@ import pickle
 import os
 import sys
 import platform
+print ("read_write imported")
 
 # Get current os
 os_name = platform.system()
@@ -25,8 +26,6 @@ elif os_name == "Darwin":
 	i = -2
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
-
-print(dir_path.split(sp)[i] + "/Functions")
 
 # Add custom functions
 sys.path.insert(0, dir_path.split(sp)[i] + "/Functions")

@@ -23,6 +23,7 @@ def start_hillclimb(grid, placed_houses, rounds):
 	import sys
 	import os
 	import platform
+	print ("alg_hillclimb imported")
 
 	# Get current os
 	os_name = platform.system()
@@ -164,7 +165,7 @@ def start_hillclimb(grid, placed_houses, rounds):
 
 	
 	# Save result
-	variant = 20
+	variant = 60
 	fname = "Type{0}HC - {1}".format(variant, score)
 	read_write.write(fname, placed_houses)
 	print ("Writing to file..")
