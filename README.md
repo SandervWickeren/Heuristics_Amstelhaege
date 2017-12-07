@@ -8,9 +8,9 @@ Project van het vak Heuristieken aan de UvA, de Amstelhaege case. Doel van het p
 
 # Indeling GitHub:
 ### Mappen
-_Classes_: In deze map staan de classes die zijn opgesteld. Hierin staat nu de class House die gemaakt is om de verschillende soorten huizen uiteindelijk makkelijker te kunnen genereren.
+_Classes_: In deze map staan de classes die zijn opgesteld. Hierin staat nu de class House die gemaakt is om de verschillende soorten huizen (waarbij ook water een instantie is van de class House) uiteindelijk makkelijker te kunnen genereren.
 
-_Functions_: In deze map staan de verschillende functies die zijn opgesteld. Hierin staan nu de files voor het algemene gedeelte (generic.py) van de functies dus die voor verschillende files de basis is. Ook staat de file voor het eerste algoritme in deze map. Hier zullen de andere twee algoritmes ook komen te staan.
+_Functions_: In deze map staan de verschillende functies die zijn opgesteld. Hierin staan nu de files voor het algemene gedeelte (generic.py) van de functies dus die voor verschillende files de basis is. Ook staat de file voor het eerste algoritme, het random algoritme, in deze map (alg_random.py). Hieraan is de file voor het tweede algoritme, het Hill Climbing algoritme, toegevoegd (alg_hillclimb.py). Hieraan moet het derde algoritme nog worden toegevoegd. 
 
 _Info_: In deze map staan informatieve files, dus een algemene file met een aantal git commands en de file voor het bijhouden van de argumentatie voor de IDEA punten. Deze is als het goed is tijdelijk.
 
@@ -20,7 +20,9 @@ _Toestandsruimte_: In deze map staat tot nu toe een file voor het kunnen bereken
 
 _docs_: In deze map komt alle documentatie/literatuur te staan die van belang is bij de case. 
 
-Om de visualisatie van het eerste algoritme te runnen, kan dit door middel van het runnen van Main.py.
+_Results_: In deze map wordt alle nuttige/toepasbare informatie opgeslagen. In deze map staat de file read_write.py, die functies bevat voor het lezen en creëren van de visualisaties, wanneer deze een betere versie is dan die er bestaan, worden deze resultaten opgeslagen in de map Results. Een voorbeeld van een filename is "Type20HC - 11165430.0", dus variant 20, algoritme Hill Climber, met de verbeterde score van 11165430.0. 
+
+Om de visualisatie van de algoritmes te kunnen runnen, kan dit door middel van het runnen van Main.py. In deze file kan de variant worden aangepast, dus de 20-, 40- of 60-huizen variant, het algoritme, deze hebben ieder een nummer gekregen. Deze toelichting staat ook in de comments boven het aanroepen van het algoritme. Ook kan in deze file de filename en het aantal loops worden aangepast. 
 
 # Progressie:
 Week 1:
@@ -46,15 +48,22 @@ Week 4:
 - Alles omgezet naar classes.
 - Functies en algoritmes eigen bestanden met functies.
 
-# Planning:
 Week 5:
-- Tweede algoritme: Hill Climbing.
-- Toestandsruimte: Upper / Lower bound opstellen.
-- Experiment: vergelijken algoritme 1 met algoritme 2.
-- Experiment: Optimaliseren van algoritme 1: het vaststellen van de plekken van de maisons, water en andere huizen random generalisatie.
+- Tweede algoritme werkende: Hill Climbing.
+- Upper / Lower bound zijn opgesteld.
+- Experiment uitgevoerd: heeft het zin om water ook te verplaatsen bij Hill Climbing algoritme?
+- Experiment uitgevoerd: heeft het zin om meerdere iteraties uit te voeren bij 
 
 Week 6:
-- Derde algoritme: Simulated Annealing?
+- Opslaan van alleen nuttige/toepasbare informatie.
+
+# Planning:
+Week 6:
+- Derde algoritme: Simulated Annealing
+
+Week 7:
+- Experiment: Optimaliseren van algoritme 1: het vaststellen van de plekken van de maisons, water en andere huizen random generalisatie.
+- Experiment: vergelijken algoritme 1 met algoritme 2.
 - Experiment: vergelijken algoritme 2 met algoritme 3.
 - Experiment: vergelijken drie algoritmen.
 - Experiment: optimaliseren algoritme 2.
