@@ -56,6 +56,7 @@ Week 5:
 
 Week 6:
 - Opslaan van alleen nuttige/toepasbare informatie.
+- Derde presentatie uitgevoerd.
 
 # Planning:
 Week 6:
