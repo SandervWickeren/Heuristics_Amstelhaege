@@ -165,7 +165,7 @@ def start_hillclimb(grid, placed_houses, rounds):
 
 	
 	# Save result
-	variant = 40
+	variant = 20
 	fname = "Type{0}HC - {1}".format(variant, score)
 	read_write.write(fname, placed_houses)
 	print ("Writing to file..")
