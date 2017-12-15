@@ -4,8 +4,8 @@ Names and StudentID:
 - Laura Geerars (11007699)
 - Sander van Wickeren (11060999)
 
-Beschrijving:
-Het programma werkt als volgt:
+Description:
+
 
 """
 
@@ -128,7 +128,7 @@ if __name__ == "__main__":
 	# Hill climbing algorithm = 2
 	# Simulated Annealing = 3
 	# Open File and create visualization = 4
-	algorithm = 4
+	algorithm = 3
 
 	# The filename can be used for 2, 3 and 4:
 	# 2: Applies hill climbing on teh grid from the 
