@@ -44,7 +44,25 @@ def main(variant, algorithm, filename, loops, visualization):
 
 	# sim
 	elif algorithm == 3:
-		print ("moet nog")
+		
+		if filename == "":
+			grid, houses, score = alg_random.startGeneration(variant, 10, loops)
+			new_grid, score = alg_simannealing.start_simannealing(grid, houses)
+
+		# Use filename
+		else:
+			houses = read_write.read(filename)
+
+			# Check for succes
+			if houses != False:
+
+				# Retrieve score and make grid
+				score = filename.split(" ")[-1]
+				grid = generic.transformtoGrid(houses, 10)
+
+				# Call hill climb
+				new_grid, score = alg_simannealing.start_simannealing(grid, houses)
+
 
 
 	elif algorithm == 4:
@@ -95,6 +113,7 @@ if __name__ == "__main__":
 	sys.path.insert(0, dir_path + "/Results")
 
 	import generic
+	import alg_simannealing
 	import alg_random
 	import alg_hillclimb
 	import class_house
@@ -102,14 +121,14 @@ if __name__ == "__main__":
 
 
 	# Choose the variant between 20/40/60
-	variant = 40
+	variant = 20
 
 	# Choose the algorithm / Function
 	# Random algorithm = 1
 	# Hill climbing algorithm = 2
 	# Simulated Annealing = 3
 	# Open File and create visualization = 4
-	algorithm = 2
+	algorithm = 4
 
 	# The filename can be used for 2, 3 and 4:
 	# 2: Applies hill climbing on teh grid from the 
@@ -119,7 +138,7 @@ if __name__ == "__main__":
 	# 4: Shows a visualization from grid
 	# Leaving it empty causes it to use
 	# a random valid grid.
-	filename = "Type40HC - 17070150.0"
+	filename = ""
 
 	# Select the amount of maps you want to generate
 	# only used by algorithm 1
