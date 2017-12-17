@@ -54,7 +54,7 @@ Totaal: 2.979 m^2 (Huizen) + 5.780 m^2 (Water) = 8.759 m^2 (30,4%)
 60 huizen variant:
 Totaal: 4.468,5 m^2 (Huizen) + 5.780 m^2 (Water) = 10.248,5 m^2 (35,5%)
 
-Upperbound:
+Upperbound oppervlakte:
 20 huizen variant:
 20 huizen, 28.800 mogelijkheden ( 28.800 boven 20 ) (6.29 x 10^70 )
 
@@ -64,7 +64,7 @@ Upperbound:
 60 huizen variant:
 60 huizen, 28.800 mogelijkheden (28.800 boven 60 ) (4.14 x 10^185 )
 
-Lowerbound:
+Lowerbound oppervlakte:
 20 huizen variant:
 20 huizen die 1489,5 m^2 (dus blokjes) innemen, 5.780 m^2 (dus blokjes) aan water, 28.800 mogelijkheden.
 7.269,5 m^2 --> 7.269,5 blokjes, 28.800 mogelijkheden.
@@ -79,3 +79,27 @@ Lowerbound:
 60 huizen die 4.468,5 m^2 (dus blokjes) innemen, 5.780 m^2 (dus blokjes) aan water, 28.800 mogelijkheden.
 10.248,5 m^2 --> 10.248,5 blokjes, 28.800 mogelijkheden.
 ( 28.800 boven 10.249 (0.5 in berekening niet mogelijk, afgerond naar boven) ) ( 1.73 x 10^8140 )
+
+Scorefunctie waarde van oppervlakte:
+Ieder huis levert sowieso een bepaalde waarde op. Deze waarde zal stijgen als de extra vrije ruimte per soort huis toeneemt.
+De lowerbound zal dan de minimale waarde zijn die de wijk zal gaan opleveren. Deze lowerbound verschilt per variant.
+
+Lowerbound scorefunctie:
+20 huizen variant:
+12 eensgezinswoningen, 5 bungalows en 3 maisons.
+12 x 285.000€ + 5 x 399.000€ + 3 x 610.000€ = 3.420.000€ + 1.995.000€ + 1.830.000€ = 7.245.000€
+
+40 huizen variant:
+24 eensgezinswoningen, 10 bungalows en 6 maisons.
+24 x 285.000€ + 10 x 399.000€ + 6 x 610.000€ = 6.840.000€ + 3.990.000€ + 3.660.000€ = 14.490.000€
+
+60 huizen variant:
+36 eensgezinswoningen, 15 bungalows en 9 maisons.
+36 x 285.000€ + 15 x 399.000€ + 9 x 610.000€ = 10.260.000€ + 5.985.000€ + 5.490.000€ = 21.735.000€
+
+Upperbound scorefunctie:
+
+
+
+
+
