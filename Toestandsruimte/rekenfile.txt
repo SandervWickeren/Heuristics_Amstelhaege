@@ -98,7 +98,11 @@ Lowerbound scorefunctie:
 36 x 285.000€ + 15 x 399.000€ + 9 x 610.000€ = 10.260.000€ + 5.985.000€ + 5.490.000€ = 21.735.000€
 
 Upperbound scorefunctie:
-Het lijkt ons logisch dat het hoogste bedrag wat opgeleverd kan worden met het bouwen van de nieuwbouwwijk is, wanneer de extra vrije ruimte voor een maison (iedere extra meter levert een prijsverbetering op van 6%) het hoogst is. We zullen dan dus als upperbound stellen, dat wanneer alle huizen (met hun verplichte vrije ruimte) en het water zijn ingedeeld op de oppervlakte, de rest van vrije ruimte als extra vrije ruimte voor een maison zal worden gezien. Dit is niet haalbaar, maar zal wel een upperbound geven, dus een maximale waarde die de wijk zal gaan opleveren. Hierbij zal de verplichte vrijstand van ieder soort huis meegerekend worden in de lengte in de breedte, vrijstand geldt voor rondom de gehele woning, dus kan x2 bij de lengte en bij de breedte worden opgeteld. 
+Het lijkt ons logisch dat het hoogste bedrag wat opgeleverd kan worden met het bouwen van de nieuwbouwwijk is, wanneer de
+extra vrije ruimte voor een maison (iedere extra meter levert een prijsverbetering op van 6%) het hoogst is. 
+We zullen dan dus als upperbound stellen, dat wanneer alle huizen (met hun verplichte vrije ruimte) en het water zijn ingedeeld op de oppervlakte, de rest van vrije ruimte als extra vrije ruimte voor een maison zal worden gezien. 
+Dit is niet haalbaar, maar zal wel een upperbound geven, dus een maximale waarde die de wijk zal gaan opleveren. 
+Hierbij zal de verplichte vrijstand van ieder soort huis meegerekend worden in de lengte in de breedte, vrijstand geldt voor rondom de gehele woning, dus kan x2 bij de lengte en bij de breedte worden opgeteld. 
 Een eengezinswoning van 8x8m heeft een verplichte vrijstand van 2m --> 12x12m(beide kanten lengte +2, beide kanten breedte +2)
 Een bungalow van 10x7.5m heeft een verplichte vrijstand van 3m --> 16x13.5m(beide kanten lengte +3, beide kanten breedte +3)
 Een maison van 11x10.5m heeft een verplichte vrijstand van 6m --> 23x22.5m(beide kanten lengte +6, beide kanten breedte +6)
