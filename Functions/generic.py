@@ -57,7 +57,7 @@ def checkOverlap(grid, start_y, start_x, house):
 	true if it can be placed and false if it cannot.
 
 	The way it works is quite simple. It checks al outside points based on 
-	a compass. It check all eight furthes corners (from the freespace) and the 
+	a compass. It checks all eight furthest corners (from the freespace) and the 
 	four corners of the house. Doing it this way is enough to prevent any
 	overlap without checking every point.
 	"""
@@ -70,6 +70,18 @@ def checkOverlap(grid, start_y, start_x, house):
 	freespace = house.freespace
 
 	try:
+		# Check if not below zero
+		if start_y < 0 or start_x < 0:
+			return False
+
+		# Check if correctly inside map (y)
+		if start_y + 2 * freespace + length > len(grid):
+			return False
+
+		# Check if correctly in map (x)
+		if start_x + 2 * freespace + width > len(grid[0]):
+			return False
+
 		# Center
 		if grid[start_y + round(length / 2)][start_x  + round(width / 2)] not in allowed:
 			return False
@@ -331,30 +343,28 @@ def calculateScore(grid, placed_houses):
 	the amount to the total price. Finally it returns
 	the value or the score of the grid.
 	"""
-
-	## Should ignore water types W
-
 	total_price = 0
 
 	for h in placed_houses:
+		if h.h_type != "W":
 
-		# Points that are allowed as extra freespace (water)
-		allowed = [0, 5, 4]
+			# Points that are allowed as extra freespace (water)
+			allowed = [0, 5, 4]
 
-		check = True
-		distance = 0
-		while check:
-			distance += 1
-			check = allowedFreespace(grid, h, h.freespace + distance, allowed)
-			
+			check = True
+			distance = 0
+			while check:
+				distance += 1
+				check = allowedFreespace(grid, h, h.freespace + distance, allowed)				
 
-		# Calc extra meters rounding to lowest integer.
-		extra_meters = math.floor((distance - h.freespace) / h.resolution)
+			# Calc extra meters rounding to lowest integer.
+			extra_meters = math.floor(distance / h.resolution)
 
-		# Calculate the price
-		sell_price = h.price * (1 + (h.priceimprovement / 100) * extra_meters)
-		total_price += sell_price
-		# print ("Gevonden afstand {0} met een prijs van {1}".format(distance, sell_price))
+			# Calculate the price
+			sell_price = h.price * (1 + (h.priceimprovement / 100) * extra_meters)
+
+			total_price += sell_price
+			# print ("Gevonden afstand {0} met een prijs van {1}".format(distance, sell_price))
 
 	return total_price
 
