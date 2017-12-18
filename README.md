@@ -1,5 +1,11 @@
-# Heuristics_Amstelhaege
+# Amstelhaege case 
+## Heuristieken
 Project van het vak Heuristieken aan de UvA, de Amstelhaege case. Er moet een wijk (van 160 bij 180 meter) worden ingedeeld met woningen. Er zijn drie varianten mogelijk qua indeling: de 20 huizen, 40 huizen en 60 huizen variant. Het aantal woningen in de wijk bestaat hierbij voor iedere variant voor 60% uit eengezinswoningen, 25% uit bungalows en 15% uit maisons.  Ieder soort huis heeft een andere verplichte vrijstand en een standaard waarde wat het oplevert. Iedere meter extra vrijstand kan zorgen voor een prijsverbetering. Doel van het project is het zo optimaal mogelijk indelen van de wijk, waarbij het meeste geld kan worden opgeleverd.
+
+### Gemaakt door:
+- Tom Dekker (11031735)
+- Laura Geerars (11007699)
+- Sander van Wickeren (11060999)
 
 ### Vereisten
 De volgende installaties moeten uitgevoerd worden om de code correct te kunnen runnen. 
@@ -54,13 +60,6 @@ Bij het Hill Climber algoritme gaat het om het aantal keer dat alle zijdes worde
 	# Used by algorithm 1 and 2.
 	loops = 4
 ```	
-
-
-### Contributors:
-- Tom Dekker (11031735)
-- Laura Geerars (11007699)
-- Sander van Wickeren (11060999)
-
 
 
 ### Indeling GitHub:
