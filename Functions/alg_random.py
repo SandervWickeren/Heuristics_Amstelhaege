@@ -100,11 +100,11 @@ def startGeneration(variant, resolution, loops):
 
 		# Set high score:
 		if variant == 20:
-			high_score = 9932670
+			high_score = 11036070
 		if variant == 40:
-			high_score = 16240050
+			high_score = 18446850
 		if variant == 60:
-			high_score = 21198930
+			high_score = 24130230
 
 		# House distirbution:
 		familyHome_count = 0.60 * variant

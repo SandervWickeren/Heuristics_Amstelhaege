@@ -112,7 +112,7 @@ def main(variant, algorithm, filename, loops, visualization):
 
 				# Write new file
 				fname = "Type{0}RECALC - {1}".format(variant, score)
-				read_write.write(name, houses)
+				read_write.write(fname, houses)
 
 
 	# Only show visualization if asked for.
@@ -175,11 +175,11 @@ if __name__ == "__main__":
 	# 4: Shows a visualization from grid
 	# Leaving it empty causes it to use
 	# a random valid grid.
-	filename = ""
+	filename = "Type60 - 20820030.0"
 
 	# Select the amount of maps you want to generate
 	# only used by algorithm 1
-	loops = 1
+	loops = 500
 
 	# Choose if you want a visualization (1 = yes, 0 = no)
 	# If you generate multiple maps it 'll only show the 
