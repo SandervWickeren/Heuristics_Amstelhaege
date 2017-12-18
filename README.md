@@ -3,8 +3,8 @@ Project van het vak Heuristieken aan de UvA, de Amstelhaege case. Er moet een wi
 
 ### Vereisten
 De volgende installaties moeten uitgevoerd worden om de code correct te kunnen runnen.
-[Installeer Python 3.6](https://www.python.org/downloads/release/python-360/)
-[Installeer matplotlib 2.1](https://matplotlib.org/2.1.0/users/installing.html)
+- [Installeer Python 3.6](https://www.python.org/downloads/release/python-360/)
+- [Installeer matplotlib 2.1](https://matplotlib.org/2.1.0/users/installing.html)
 
 ### Runnen van de algoritmen
 
