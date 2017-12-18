@@ -62,7 +62,7 @@ Bij het Hill Climber algoritme gaat het om het aantal keer dat alle zijdes worde
 ```	
 
 
-### Indeling GitHub:
+### Indeling GitHub
 #### Mappen
 _Classes_: In deze map staat de class die is opgesteld. Hierin staat de class House die gemaakt is om de verschillende soorten huizen (waarbij ook water een instantie is van de class House) makkelijker te kunnen genereren.
 
