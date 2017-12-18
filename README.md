@@ -13,18 +13,48 @@ Om de verschillende algoritmen te runnen, kan dit met behulp van de Main.py file
 
 Eerst kan er een variant uitgekozen worden. Dit kunnen 20, 40 of 60 huizen zijn.
 '''
+
 	# Choose the variant between 20/40/60
 	variant = 60
 '''
 
+Vervolgens kan er een algoritme uitgekozen worden. Ieder algoritme heeft een nummer toegekend gekregen die ingevuld kan worden.
 '''
 
+	# Choose the algorithm / Function
 	# Random algorithm = 1
 	# Hill climbing algorithm = 2
-	# Simulated Annealing = 3
+	# Simulated Annealing (Directions) = 3
 	# Open File and create visualization = 4
+	# Simulated Annealing v2 (Switch) = 5
 	algorithm = 3
 '''
+
+Ook kan er een visualisatie worden gegenereerd uit de Results map door hier de bestandsnaam in te vullen. Om een Hill Climber
+of Simulated Annealing algoritme te runnen, moet dit op basis van een eerdere file die in de Results map staat. 
+'''
+
+	# The filename can be used for 2, 3 and 4:
+	# 2, 3, 5: Applies hill climbing on the grid from the 
+	# given file.
+	# 4: Shows a visualization from grid
+	# Leaving it empty causes it to use
+	# a random valid grid.
+	filename = "Type20HC - 27142740.0"
+
+'''
+
+Vervolgens kan het aantal loops worden geselecteerd. Bij het random algoritme gaat het om het aantal kaarten dat wordt gegenereerd, genereer bijvoorbeeld 1000 kaarten (dus 1000 loops), als er een betere score uitkomt dan al eerder is opgeslagen in de map Results, zal hij deze opslaan. 
+Bij het Hill Climber algoritme gaat het om het aantal keer dat alle zijdes worden gecheckt voor alle huizen, bij een al eerder gegenereerde kaart. Als er uiteindelijk een betere score uitkomt dan al eerder is opgeslagen in de map Results, zal hij deze opslaan.
+
+
+'''
+
+	# Select the amount of loops you want to execute.
+	# Used by algorithm 1 and 2.
+	loops = 4
+'''	
+
 
 ### Contributors:
 - Tom Dekker (11031735)
