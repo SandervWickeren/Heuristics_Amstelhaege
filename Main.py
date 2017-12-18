@@ -6,6 +6,9 @@ Names and StudentID:
 
 Description:
 
+The main file, containing all options to run the program. 
+by changing 
+
 
 """
 
@@ -42,7 +45,7 @@ def main(variant, algorithm, filename, loops, visualization):
 				# Call hill climb
 				new_grid, score = alg_hillclimb.start_hillclimb(grid, houses, loops)
 
-	# sim
+	# Simulated Annealing using directions
 	elif algorithm == 3:
 		
 		if filename == "":
@@ -63,8 +66,7 @@ def main(variant, algorithm, filename, loops, visualization):
 				# Call hill climb
 				new_grid, score = alg_simannealing.start_simannealing(grid, houses)
 
-
-
+    # Show a plot of a file
 	elif algorithm == 4:
 		houses = read_write.read(filename)
 
@@ -78,7 +80,7 @@ def main(variant, algorithm, filename, loops, visualization):
 
 				generic.visualizeGrid(grid, title)
 
-	# sim with switch
+	# Simulated Annealing using switching
 	elif algorithm == 5:
 		
 		if filename == "":
@@ -99,6 +101,7 @@ def main(variant, algorithm, filename, loops, visualization):
 				# Call hill climb
 				new_grid, score = alg_simannealing_switch.start_simannealing(grid, houses)
 
+    # Recalculate score
 	elif algorithm == 6:
 
 		if filename != "":
@@ -120,18 +123,6 @@ def main(variant, algorithm, filename, loops, visualization):
 		print ("Generating map..")
 		generic.visualizeGrid(new_grid, score)
 
-
-
-	#alg_random.startGeneration(20, 10)
-	#gr = genMap(160, 180)
-	#print (placeWater(gr))
-	#calcScore("ja");
-	#Testcalcscore()
-	#TestClasses()
-
-
-	#read_write.read_and_visualize("Type20 - 7665810.0")
-	
 
 if __name__ == "__main__":
 	import random
@@ -163,23 +154,22 @@ if __name__ == "__main__":
 	# Choose the algorithm / Function
 	# Random algorithm = 1
 	# Hill climbing algorithm = 2
-	# Simulated Annealing = 3
+	# Simulated Annealing (Directions) = 3
 	# Open File and create visualization = 4
-	algorithm = 1
+	# Simulated Annealing v2 (Switch) = 5
+	algorithm = 4
 
 	# The filename can be used for 2, 3 and 4:
-	# 2: Applies hill climbing on teh grid from the 
+	# 2, 3, 5: Applies hill climbing on the grid from the 
 	# given file.
-	# 3: Applies Simulated Annealing on the grid
-	# from the given file
 	# 4: Shows a visualization from grid
 	# Leaving it empty causes it to use
 	# a random valid grid.
-	filename = "Type60 - 20820030.0"
+	filename = "Type20SASWITCH--HC - 13565370.0"
 
-	# Select the amount of maps you want to generate
-	# only used by algorithm 1
-	loops = 500
+	# Select the amount of loops you want to execute.
+	# Used by algorithm 1 and 2.
+	loops = 4
 
 	# Choose if you want a visualization (1 = yes, 0 = no)
 	# If you generate multiple maps it 'll only show the 

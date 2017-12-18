@@ -105,9 +105,6 @@ def start_simannealing(grid, placed_houses):
 		# Regenerate the grid
 		grid = generic.transformtoGrid(placed_houses, 10)
 
-
-
-		
 		# Check if valid positioned
 		if grid != False:
 
