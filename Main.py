@@ -101,23 +101,6 @@ def main(variant, algorithm, filename, loops, visualization):
 				# Call hill climb
 				new_grid, score = alg_simannealing_switch.start_simannealing(grid, houses)
 
-    # Recalculate score
-	elif algorithm == 6:
-
-		if filename != "":
-			houses = read_write.read(filename)
-
-			# Check for succes
-			if houses != False:
-
-				grid = generic.transformtoGrid(houses, 10)
-				score = generic.calculateScore(grid, houses)
-
-				# Write new file
-				fname = "Type{0}RECALC - {1}".format(variant, score)
-				read_write.write(fname, houses)
-
-
 	# Only show visualization if asked for.
 	if visualization == 1:
 		print ("Generating map..")
@@ -149,7 +132,7 @@ if __name__ == "__main__":
 
 
 	# Choose the variant between 20/40/60
-	variant = 60
+	variant = 20
 
 	# Choose the algorithm / Function
 	# Random algorithm = 1
@@ -157,7 +140,7 @@ if __name__ == "__main__":
 	# Simulated Annealing (Directions) = 3
 	# Open File and create visualization = 4
 	# Simulated Annealing v2 (Switch) = 5
-	algorithm = 4
+	algorithm = 5
 
 	# The filename can be used for 2, 3 and 4:
 	# 2, 3, 5: Applies hill climbing on the grid from the 
@@ -165,16 +148,16 @@ if __name__ == "__main__":
 	# 4: Shows a visualization from grid
 	# Leaving it empty causes it to use
 	# a random valid grid.
-	filename = "Type20SASWITCH--HC - 13565370.0"
+	filename = ""
 
 	# Select the amount of loops you want to execute.
 	# Used by algorithm 1 and 2.
-	loops = 4
+	loops = 1
 
 	# Choose if you want a visualization (1 = yes, 0 = no)
 	# If you generate multiple maps it 'll only show the 
 	# last one.
-	visualization = 0
+	visualization = 1
 
 	# Start program
 	main(variant, algorithm, filename, loops, visualization) 

@@ -7,9 +7,7 @@ maken van de visualisatie of het berekenen
 van de score. Uitleg over deze functies
 staat onder de functie zelf.
 """
-
 import math
-print ("Generic imported")
 
 
 def genMap(length, width):
@@ -380,3 +378,5 @@ def transformtoGrid(placed_houses, resolution):
             return False
 
     return grid
+
+print ("Generic imported")

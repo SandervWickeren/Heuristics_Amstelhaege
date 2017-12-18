@@ -1,11 +1,17 @@
 """
 Uitleg:
 
-Dit algoritme werkt als een variant op onze hill climb. Er wordt
-in eerst instantie een random huis gepakt. Vervolgens wordt
-er een willekeurige kant gepakt
-
+In dit algoritme worden twee willekeurige huizen
+gepakt en de coordinaten van deze huizen worden
+verwisseld zo mogelijk. Hierbij wordt geled op het
+feit dat de huizen niet hetzelfde zijn en dat er
+niet met water wordt verwisseld. Er geldt dat wanneer
+de score verbetert, de map wordt aangenomen en wanneer 
+deze verslechtert er aan de hand van de temperatuur
+functie wordt gekeken of hij moet worden aangenomen of
+worden verworpen.
 """
+
 
 def start_simannealing(grid, placed_houses):
 	"""
@@ -21,6 +27,7 @@ def start_simannealing(grid, placed_houses):
 	import os
 	import platform
 	import math
+	import alg_simannealing
 
     # Get current os
 	os_name = platform.system()
@@ -117,7 +124,7 @@ def start_simannealing(grid, placed_houses):
 					score, new_score, new_score - score))
 
 			# Check if grid 'll be accepted
-			prob = acceptance_probability(score, new_score, temperature)
+			prob = alg_simannealing.acceptance_probability(score, new_score, temperature)
 			chance = random.uniform(0, 1)
 			print ("Prob: {0}, R: {1}".format(prob, chance))
 			if prob > chance:
@@ -157,17 +164,4 @@ def start_simannealing(grid, placed_houses):
 	print("found score: {0}".format(best_score))
 	return generic.transformtoGrid(best_layout, 10), best_score
 
-
-def acceptance_probability(old_score, new_score, temperature):
-	import math
-
-
-	# If solution is better accept it
-	if new_score > old_score:
-		return 1
-
-	# If solution is worse calculate acceptance probability
-	# Find a good function that returns a value between 0-1
-	# increase and decrease is from minimal 8550 --> (36600+)
-	print ("Differnce: {0}".format(new_score - old_score))
-	return math.exp(((new_score - old_score) / temperature))
+print ("alg_simannealing_switch imported")

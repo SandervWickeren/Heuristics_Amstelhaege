@@ -3,9 +3,13 @@ Uitleg:
 
 Dit algoritme werkt als een variant op onze hill climb. Er wordt
 in eerst instantie een random huis gepakt. Vervolgens wordt
-er een willekeurige kant gepakt
-
+er een willekeurige kant gepakt en het huis een aantal stappen
+die kant op geplaatst. De score wordt berekend en bij een verbetering
+of gelijke score wordt de kaart gehouden. Wanneer er een verslechtering
+optreedt wordt er aan de hand van een temperatuursfunctie gekeken
+of deze verslechtering moet worden aangenomen of niet.
 """
+
 
 def start_simannealing(grid, placed_houses):
 	"""
@@ -109,7 +113,6 @@ def start_simannealing(grid, placed_houses):
 				# Decrease x to move to the west
 				h.reduce_x(step)
 
-
 			# Regenerate the grid
 			grid = generic.transformtoGrid(placed_houses, 10)
 			
@@ -169,8 +172,12 @@ def start_simannealing(grid, placed_houses):
 
 
 def acceptance_probability(old_score, new_score, temperature):
+	"""
+	Takes in the old score, the new score and temperature.
+	It return as output a value between 0-1 which represents
+	the chance of acceptance.
+	"""
 	import math
-
 
 	# If solution is better accept it
 	if new_score > old_score:
@@ -179,5 +186,7 @@ def acceptance_probability(old_score, new_score, temperature):
 	# If solution is worse calculate acceptance probability
 	# Find a good function that returns a value between 0-1
 	# increase and decrease is from minimal 8550 --> (36600+)
-	print ("Differnce: {0}".format(new_score - old_score))
+	print ("Difference: {0}".format(new_score - old_score))
 	return math.exp(((new_score - old_score) / temperature))
+
+print ("alg_simannealing imported")

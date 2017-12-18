@@ -88,166 +88,168 @@ import read_write
 
 
 def startGeneration(variant, resolution, loops):
-        """
-        Variant is the number of houses that has
-        to be placed, resolution changes the size
-        of the map.
-        """
-        # Check for valid resolution
-        if resolution % 2 != 0:
-            print ("Resolution should be an even integer.")
-            return
+    """
+    Variant is the number of houses that has
+    to be placed, resolution changes the size
+    of the map and loops is the amount of
+    rounds the algorithm shoud look for a
+    better solution
+    """
+    # Check for valid resolution
+    if resolution % 2 != 0:
+        print ("Resolution should be an even integer.")
+        return
 
-        # Set high score:
-        if variant == 20:
-            high_score = 11365950
-        if variant == 40:
-            high_score = 17858670
-        if variant == 60:
-            high_score = 24239310
+    # Set high score:
+    if variant == 20:
+        high_score = 11365950
+    if variant == 40:
+        high_score = 17858670
+    if variant == 60:
+        high_score = 24239310
 
-        # House distirbution:
-        familyHome_count = 0.60 * variant
-        bungalow_count = 0.25 * variant
-        maison_count = 0.15 * variant
+    # House distirbution:
+    familyHome_count = 0.6 * variant
+    bungalow_count = 0.25 * variant
+    maison_count = 0.15 * variant
 
-        for loops in range(loops):
+    for loops in range(loops):
 
-            # Initialize Classlist
-            placed_houses = []
-            placed_water = []
+        # Initialize Classlist
+        placed_houses = []
+        placed_water = []
 
-            # Initialize values
-            gr = generic.genMap(180 * resolution, 160 * resolution)
+        # Initialize values
+        gr = generic.genMap(180 * resolution, 160 * resolution)
 
-            # Set length and width based on resultion.
-            fam_length = int(resolution * 8)
-            fam_width = int(resolution * 8)
-            fam_freespace = int(resolution * 2)
+        # Set length and width based on resultion.
+        fam_length = int(resolution * 8)
+        fam_width = int(resolution * 8)
+        fam_freespace = int(resolution * 2)
 
-            bung_length = int(resolution * 7.5)
-            bung_width = int(resolution * 10)
-            bung_freespace = int(resolution * 3)
+        bung_length = int(resolution * 7.5)
+        bung_width = int(resolution * 10)
+        bung_freespace = int(resolution * 3)
 
-            mais_length = int(resolution * 10.5)
-            mais_width = int(resolution * 11)
-            mais_freespace = int(resolution * 6)
+        mais_length = int(resolution * 10.5)
+        mais_width = int(resolution * 11)
+        mais_freespace = int(resolution * 6)
 
-            # Water
-            # Generate water parts
-            water_parts = genWater(gr, resolution)
+        # Water
+        # Generate water parts
+        water_parts = genWater(gr, resolution)
 
-            # Place water parts in grid:
-            for part in range(len(water_parts)):
-                W = 0
+        # Place water parts in grid:
+        for part in range(len(water_parts)):
+            W = 0
 
-                # Loop until correctly placed.
-                while W != 1:
-
-                    # Define class instance
-                    Water = class_house.House(water_parts[part][1], water_parts[part][0],
-                                           1, 0, 0, 4, "W", resolution)
-
-                    ngrid = genHome(gr, Water)
-
-                    # Check for success:
-                    if ngrid == False:
-                        print ("No succesfull placement Water")
-                    else:
-                        print ("Water {0} placed!".format(W))
-                        gr = list(ngrid)
-
-                        # Add water to list
-                        placed_houses.append(Water)
-
-                        W = 1
-
-
-            # Maisons
-            M = 0
-            while M != maison_count:
+            # Loop until correctly placed.
+            while W != 1:
 
                 # Define class instance
-                Maison = class_house.House(mais_length, mais_width,
-                                           mais_freespace, 610000, 6, 1, "M", resolution)
+                Water = class_house.House(water_parts[part][1], water_parts[part][0],
+                                       1, 0, 0, 4, "W", resolution)
 
-                ngrid = genHome(gr, Maison)
+                ngrid = genHome(gr, Water)
 
-                # Check if house succsfully placed:
+                # Check for success:
                 if ngrid == False:
-                    print ("No succesfull placement Maison")
+                    print ("No succesfull placement Water")
                 else:
-                    print ("Maison {0} placed!".format(M))
+                    print ("Water {0} placed!".format(W))
                     gr = list(ngrid)
 
-                    # Add maison to list
-                    placed_houses.append(Maison)
+                    # Add water to list
+                    placed_houses.append(Water)
 
-                    M += 1
+                    W = 1
 
-            # Then bungalows
-            B = 0
-            while B != bungalow_count:
+        # Maisons
+        M = 0
+        while M != maison_count:
 
-                # Define class instance
-                Bungalow = class_house.House(bung_length, bung_width,
-                                           bung_freespace, 399000, 4, 2, "B", resolution)
+            # Define class instance
+            Maison = class_house.House(mais_length, mais_width,
+                                       mais_freespace, 610000, 6, 1, "M", resolution)
 
-                ngrid = genHome(gr, Bungalow)
+            ngrid = genHome(gr, Maison)
 
-                # Check for succes:
-                if ngrid == False:
-                    print ("No succesfull placement Bungalow")
-                else:
-                    print ("Bungalow {0} placed!".format(B))
-                    gr = list(ngrid)
+            # Check if house succsfully placed:
+            if ngrid == False:
+                print ("No succesfull placement Maison")
+            else:
+                print ("Maison {0} placed!".format(M))
+                gr = list(ngrid)
 
-                    # Add maison to list
-                    placed_houses.append(Bungalow)
+                # Add maison to list
+                placed_houses.append(Maison)
 
-                    B += 1
+                M += 1
 
-            # Then Family homes
-            F = 0
-            while F != familyHome_count:
+        # Then bungalows
+        B = 0
+        while B != bungalow_count:
 
-                # Define class instance
-                Familyhome = class_house.House(fam_length, fam_width,
-                                           fam_freespace, 285000, 3, 3, "F", resolution)
+            # Define class instance
+            Bungalow = class_house.House(bung_length, bung_width,
+                                       bung_freespace, 399000, 4, 2, "B", resolution)
 
-                ngrid = genHome(gr, Familyhome)
+            ngrid = genHome(gr, Bungalow)
 
-                # Check for succes:
-                if ngrid == False:
-                    print ("No succesfull placement Family Home")
-                else:
-                    print ("Family home {0} placed!".format(F))
-                    gr = list(ngrid)
+            # Check for succes:
+            if ngrid == False:
+                print ("No succesfull placement Bungalow")
+            else:
+                print ("Bungalow {0} placed!".format(B))
+                gr = list(ngrid)
 
-                    # Add maison to list
-                    placed_houses.append(Familyhome)
+                # Add maison to list
+                placed_houses.append(Bungalow)
 
-                    F += 1
+                B += 1
 
-            # Calculate score using Placed houses
-            sc = generic.calculateScore(gr, placed_houses)
-            name = ("Score: " + str(sc))
+        # Then Family homes
+        F = 0
+        while F != familyHome_count:
 
-            # Only save to file when new record.
-            fname = "Type{0} - {1}".format(variant, sc)
+            # Define class instance
+            Familyhome = class_house.House(fam_length, fam_width,
+                                       fam_freespace, 285000, 3, 3, "F", resolution)
 
-            if sc > high_score:
-                read_write.write(fname, placed_houses)
-                high_score = sc
-                print ("New high score ({0}) in loop: {1}".format(sc, loops))
-                print ("Writing to file..")
+            ngrid = genHome(gr, Familyhome)
 
-        return gr, placed_houses, sc
+            # Check for succes:
+            if ngrid == False:
+                print ("No succesfull placement Family Home")
+            else:
+                print ("Family home {0} placed!".format(F))
+                gr = list(ngrid)
+
+                # Add maison to list
+                placed_houses.append(Familyhome)
+
+                F += 1
+
+        # Calculate score using Placed houses
+        sc = generic.calculateScore(gr, placed_houses)
+        name = ("Score: " + str(sc))
+
+        # Only save to file when new record.
+        fname = "Type{0} - {1}".format(variant, sc)
+
+
+        if sc > high_score:
+            #read_write.write(fname, placed_houses)
+            high_score = sc
+            print ("New high score ({0}) in loop: {1}".format(sc, loops))
+            print ("Writing to file..")
+
+    return gr, placed_houses, sc
 
 
 def genHome(grid, house):
     """
-    Input is a grid, length, width, freespace and id.
+    Input is a grid and an instance of the house class.
     It calls placeHouse function using random coordinates.
     """
     house.random_x(grid)
@@ -257,17 +259,10 @@ def genHome(grid, house):
 
 def genWater(grid, resolution):
     """
-    Current problems:
-     - Priemgetallen zorgen voor extra loops
-        --> misschien eerst testen?
-     - Als eerste getal groot is heb je veel loops
-     - Functie is nog wat rommelig.
-
-     Takes as input a grid and outputs a list containing
-     tuples of max 4 water spaces using the following layout:
-     (width, length, ratio, size), where the water takes
-     20 percent of the total surface.
-
+    Takes as input a grid and outputs a list containing
+    tuples of max 4 water spaces using the following layout:
+    (width, length, ratio, size), where the water takes
+    20 percent of the total surface.
     """
 
     grid_surface = len(grid) * len(grid[0])

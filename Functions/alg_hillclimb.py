@@ -1,29 +1,44 @@
+"""
+Uitleg:
+
+Het hillclimb algoritme werkt in een aantal 
+	stappen:
+
+	1. Voor elke windrichting / kant: Noord, oost, zuid
+	en west voer stap 2 uit
+	2. Voor elk huis in de grid voer stap 3-5 uit
+
+	3. Verplaats het huis naar de gegeven richting
+	4. Check de score
+	5. Bij verbetering of gelijke score, verplaatst het
+	huis verder naar de gegeven richting. Bij een daling
+	laat je het huis staan op de plek voor de daling.
+
+We hebben gekozen om het voor elke kant doen omdat
+dit beter garandeert dat alle huizen zo ver mogelijk
+uit elkaar worden gedreven. Stappen van 5 worden gekozen,
+omdat er slechts per meter een prijsstijging plaastvindt
+en het grid in decimeters werkt, waardoor verplaatsing per
+meter in het slechtse geval maximaal na 10 berekeningen
+pas verbetert, waardoor het een heel langzaam algoritme
+wordt.
+"""
+
+
 def start_hillclimb(grid, placed_houses, rounds):
 	"""
-	Takes as input the list placed_houses which contains
-	instances from the house class from a valid map.
+	Takes as input the grid, a list of instances from
+	the house Class (placed_houses) and the number of 
+	full rounds it should do.
 
-	Takes an integer rounds which represents the amount
-	of things it should move.
-
-	1. Loop door lijst met huizen
-	2. Choose randomly one of the sides
-	3. Change the coordinate accordingly to the random side chosen.
-	4. Calculate the score
-	5. Minimaal 10x loopen om te kijken of iets verberterd
-	6. Zodra verbeterd door naar volgende huis met geupdate kaart
-	7. Wanneer niet verbeterd, niks aanpassen en door naar volgende huis.
-	8. 100 of 1000 rounds proberen.
-
-	Minimum aantal loops van 10, maximaal aantal loops totdat hij niet
-	meer verbetert.
+	It saves the found grid to a file and returns the
+	new grid and updated placed_houses list.
 	"""
 	import random
 	import generic
 	import sys
 	import os
 	import platform
-	print ("alg_hillclimb imported")
 
 	# Get current os
 	os_name = platform.system()
@@ -82,14 +97,6 @@ def start_hillclimb(grid, placed_houses, rounds):
 						else:
 							old_grid = list(grid)
 
-
-						# Debug
-						#print ("Before --- X: {0} , Y: {1}".format(h.x, h.y))
-
-						# Remove the house from the grid
-						# newgrid = generic.removeHouse(grid, h)
-
-
 						# Check which side it has to move to:
 						if side == 0:
 							# Reduce y to move to the north.
@@ -107,10 +114,8 @@ def start_hillclimb(grid, placed_houses, rounds):
 							# Decrease x to move to the west
 							h.reduce_x(step)
 						
-						#print ("After --- X: {0} , Y: {1}".format(h.x, h.y))
 
 						# Try to place the house with the new changed coordinate
-						#grid = generic.placeHouse(newgrid, h)
 						grid = generic.transformtoGrid(placed_houses, 10)
 						if grid == False:
 							print ("Returned False")
@@ -171,3 +176,5 @@ def start_hillclimb(grid, placed_houses, rounds):
 	print ("Writing to file..")
 
 	return old_grid, score
+
+print ("alg_hillclimb imported")
