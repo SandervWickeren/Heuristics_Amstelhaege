@@ -2,11 +2,18 @@
 Project van het vak Heuristieken aan de UvA, de Amstelhaege case. Er moet een wijk (van 160 bij 180 meter) worden ingedeeld met woningen. Er zijn drie varianten mogelijk qua indeling: de 20 huizen, 40 huizen en 60 huizen variant. Het aantal woningen in de wijk bestaat hierbij voor iedere variant voor 60% uit eengezinswoningen, 25% uit bungalows en 15% uit maisons.  Ieder soort huis heeft een andere verplichte vrijstand en een standaard waarde wat het oplevert. Iedere meter extra vrijstand kan zorgen voor een prijsverbetering. Doel van het project is het zo optimaal mogelijk indelen van de wijk, waarbij het meeste geld kan worden opgeleverd.
 
 ### Vereisten
-De volgende installaties moeten uitgevoerd worden om de code correct te kunnen runnen.
+De volgende installaties moeten uitgevoerd worden om de code correct te kunnen runnen. 
+Hierbij is het het makkelijkst om Anaconda te gebruiken.
+- [Installeer Anaconda](https://conda.io/docs/user-guide/install/index.html)
 - [Installeer Python 3.6](https://www.python.org/downloads/release/python-360/)
 - [Installeer matplotlib 2.1](https://matplotlib.org/2.1.0/users/installing.html)
 
 ### Runnen van de algoritmen
+Om de verschillende algoritmen te runnen, kan dit met behulp van de Main.py file. In deze file kan er precies worden gekozen welk algoritme er gerund moet worden, welke variant, een eerder grid waarop een Hill Climber algoritme of Simmulated Annealing algoritme op toegepast kan worden, het aantal loops die uitgevoerd moeten worden en of er een visualisatie moet komen of niet.
+'''
+# Choose the variant between 20/40/60
+	variant = 60
+'''
 
 ### Contributors:
 - Tom Dekker (11031735)
