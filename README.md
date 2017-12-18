@@ -65,20 +65,20 @@ Bij het Hill Climber algoritme gaat het om het aantal keer dat alle zijdes worde
 
 ### Indeling GitHub:
 #### Mappen
-_Classes_: In deze map staan de classes die zijn opgesteld. Hierin staat nu de class House die gemaakt is om de verschillende soorten huizen (waarbij ook water een instantie is van de class House) uiteindelijk makkelijker te kunnen genereren.
+_Classes_: In deze map staat de class die is opgesteld. Hierin staat de class House die gemaakt is om de verschillende soorten huizen (waarbij ook water een instantie is van de class House) makkelijker te kunnen genereren.
 
-_Functions_: In deze map staan de verschillende functies die zijn opgesteld. Hierin staan nu de files voor het algemene gedeelte (generic.py) van de functies dus die voor verschillende files de basis is. Ook staat de file voor het eerste algoritme, het random algoritme, in deze map (alg_random.py). Hieraan is de file voor het tweede algoritme, het Hill Climbing algoritme, toegevoegd (alg_hillclimb.py). Hieraan moet het derde algoritme nog worden toegevoegd. 
+_Functions_: In deze map staan de verschillende functies die zijn opgesteld. Hierin staan de files voor het algemene gedeelte (generic.py) van de functies, dus de functies die voor verschillende files de basis zijn. Ook staan de files voor de algoritmen in deze map. Het random algoritme (alg_random.py), het Hill Climber algoritme (alg_hillclimb.py), het Simulated 
+Annealing algoritme (als_simannealing.py) en een extra variant op het Simulated Annealing algoritme, het wisselen van huizen
+(alg_simannealing_switch.py). Deze files kunnen worden aangeroepen in de Main.py om de algoritmen te runnen.
 
-_Info_: In deze map staan informatieve files, dus een algemene file met een aantal git commands en de file voor het bijhouden van de argumentatie voor de IDEA punten. Deze is als het goed is tijdelijk.
+_Timing_: In deze map staan een aantal files voor het kunnen berekenen van de snelheid van de algoritmen. 
+Er kan hierin getest worden hoe lang het duurt om een functie te runnen.
 
-_Timing_: In deze map staan een aantal files voor het kunnen berekenen van de snelheid ...
+_Toestandsruimte_: In deze map staat een file voor de berekening voor de upper- en lowerbound van de scorefunctie.
 
-_Toestandsruimte_: In deze map staat tot nu toe een file voor het kunnen berekenen van de toestandsruimte. Deze zal tijdelijk zijn, maar voor nu is het fijn om die apart te hebben staan.
-
-_docs_: In deze map komt alle documentatie/literatuur te staan die van belang is bij de case. 
+_IDEA_: In deze map staat de laatste IDEA aanvraag, voor extra punten voor algoritmen en experimenten. 
 
 _Results_: In deze map wordt alle nuttige/toepasbare informatie opgeslagen. In deze map staat de file read_write.py, die functies bevat voor het lezen en creëren van de visualisaties, wanneer deze een betere versie is dan die er bestaan, worden deze resultaten opgeslagen in de map Results. Een voorbeeld van een filename is "Type20HC - 11165430.0", dus variant 20, algoritme Hill Climber, met de verbeterde score van 11165430.0. 
 
-Om de visualisatie van de algoritmes te kunnen runnen, kan dit door middel van het runnen van Main.py. In deze file kan de variant worden aangepast, dus de 20-, 40- of 60-huizen variant, het algoritme, deze hebben ieder een nummer gekregen. Deze toelichting staat ook in de comments boven het aanroepen van het algoritme. Ook kan in deze file de filename en het aantal loops worden aangepast. 
 
 
