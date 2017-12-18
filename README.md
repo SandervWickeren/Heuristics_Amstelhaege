@@ -10,9 +10,20 @@ Hierbij is het het makkelijkst om Anaconda te gebruiken.
 
 ### Runnen van de algoritmen
 Om de verschillende algoritmen te runnen, kan dit met behulp van de Main.py file. In deze file kan er precies worden gekozen welk algoritme er gerund moet worden, welke variant, een eerder grid waarop een Hill Climber algoritme of Simmulated Annealing algoritme op toegepast kan worden, het aantal loops die uitgevoerd moeten worden en of er een visualisatie moet komen of niet.
+
+Eerst kan er een variant uitgekozen worden. Dit kunnen 20, 40 of 60 huizen zijn.
 '''
-# Choose the variant between 20/40/60
+	# Choose the variant between 20/40/60
 	variant = 60
+'''
+
+'''
+
+	# Random algorithm = 1
+	# Hill climbing algorithm = 2
+	# Simulated Annealing = 3
+	# Open File and create visualization = 4
+	algorithm = 3
 '''
 
 ### Contributors:
